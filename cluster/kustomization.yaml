@@ -1,0 +1,36 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: kustomization
+  namespace: gpu-serving
+
+resources:
+  # Base / Infraestructura
+  - namespace.yaml
+
+  # Motores de Inferencia (SGLang)
+  - sglang/config.yaml
+  - sglang/worker-0.yaml
+  - sglang/worker-1.yaml
+  - sglang/services.yaml
+
+  # Gateway / Router (LiteLLM)
+  - litellm/config.yaml
+  - litellm/secret.yaml
+  - litellm/deployment.yaml
+  - litellm/service.yaml
+
+  # Monitoreo
+  - monitoring/prometheus-config.yaml
+  - monitoring/prometheus.yaml
+  - monitoring/grafana.yaml
+  - monitoring/services.yaml
+
+# Evita que Kustomize intente recribir el Namespace dentro de sí mismo
+#
+#configurations:
+#  - |-
+#    nameReference:
+#    - kind: Namespace
+#      fieldSpecs:
+#      - path: metadata/name

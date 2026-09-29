@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sglang-worker-0
+  namespace: gpu-serving
+  labels:
+    app.kubernetes.io/name: sglang
+    app.kubernetes.io/component: worker
+    serving.gpu-worker: "0"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sglang
+      serving.gpu-worker: "0"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sglang
+        app.kubernetes.io/component: worker
+        serving.gpu-worker: "0"
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: sglang
+          # Pin this to the exact SGLang release after we select it.
+          image: lmsysorg/sglang:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - python
+            - -m
+            - sglang.launch_server
+          args:
+            - --model-path
+            - $(MODEL_NAME)
+            - --host
+            - 0.0.0.0
+            - --port
+            - "30000"
+            - --context-length
+            - $(MAX_MODEL_LEN)
+            - --max-running-requests
+            - $(MAX_NUM_SEQS)
+            - --chunked-prefill-size 
+            - "4096"     
+            - --reasoning-parser 
+            - "qwen3"     
+            - --tool-call-parser 
+            - "qwen3_coder" 
+            - --enable-metrics 
+            - --kv-cache-dtype 
+            - "fp8_e4m3"  
+            - --mem-fraction-static 
+            - $(MAX_MEM_FRAC)   
+            - --enable-priority-scheduling     
+          envFrom:
+            - configMapRef:
+                name: sglang-config
+          env:
+            - name: HF_HOME
+              value: /models/huggingface
+          ports:
+            - name: http
+              containerPort: 30000
+              protocol: TCP
+          resources:
+            requests:
+              cpu: "8"
+              memory: 32Gi
+              nvidia.com/gpu: "1"
+            limits:
+              cpu: "16"
+              memory: 64Gi
+              nvidia.com/gpu: "1"
+          volumeMounts:
+            - name: model-cache
+              mountPath: /models
+          startupProbe:
+            tcpSocket:
+              port: http
+            periodSeconds: 10
+            failureThreshold: 60
+          readinessProbe:
+            tcpSocket:
+              port: http
+            periodSeconds: 10
+            failureThreshold: 6
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 120
+            periodSeconds: 30
+            failureThreshold: 5
+      volumes:
+        - name: model-cache
+          hostPath:
+            path: /var/lib/gpu-serving/huggingface
+            type: DirectoryOrCreate

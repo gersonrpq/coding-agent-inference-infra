@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: litellm-config
+  namespace: gpu-serving
+data:
+  config.yaml: |
+    model_list:
+      - model_name: qwen-coding-local
+        litellm_params:
+          model: openai/Qwen/Qwen3.6-27B-FP8
+          api_base: http://sglang-worker-0:30000/v1
+          api_key: local-worker-0
+
+      - model_name: qwen-coding-local
+        litellm_params:
+          model: openai/Qwen/Qwen3.6-27B-FP8
+          api_base: http://sglang-worker-1:30000/v1
+          api_key: local-worker-1
+
+    general_settings:
+      master_key: os.environ/LITELLM_MASTER_KEY
+
+
+      allow_requests_on_db_unavailable: true
+      # Makes LiteLLM enforce the user identity where applicable. (when true)
+      enforce_user_param: false
+
+    litellm_settings:
+      drop_params: true
+      callbacks: 
+        - prometheus
+        - security_inspect.security_inspect
+      success_callback: ["prometheus"]
+      failure_callback: ["prometheus"]
+
+      upperbound_key_generate_params:
+        max_tokens: 4096
+
+    router_settings:
+      routing_strategy: simple-shuffle
+      num_retries: 0
+      timeout: 120
+      default_max_parallel_requests: 22
+
+    telemetry:
+      enabled: true
+      
