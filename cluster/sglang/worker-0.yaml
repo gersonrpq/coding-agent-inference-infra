@@ -78,6 +78,8 @@ spec:
             # Los dos workers aportarían ~32 GiB en total.
             - --hicache-storage-backend-extra-config
             - '{"master_server_address":"mooncake-master:50051","metadata_server":"http://mooncake-master:8080/metadata","protocol":"rdma","device_name":"mlx5_0","global_segment_size":"16gb","tenant_id":"sglang"}'
+            - --radix-eviction-policy 
+            -lfu
           envFrom:
             - configMapRef:
                 name: sglang-config

@@ -38,7 +38,13 @@ spec:
                   name: litellm-secrets
                   key: SUPERLINKED_API_KEY
             - name: PYTHONPATH
-              value: /app/security
+              value: /app/security 
+            - name: SGLANG_REPLICA_URLS
+              value: "http://sglang-worker-0:30000,http://sglang-worker-1:30001"
+            - name: LITELLM_WORKER_STARTUP_HOOKS
+              value: "security.admission:litellm_worker_startup"
+            - name: FLEET_LOG_DEBUG
+              value: "true"
           ports:
             - name: http
               containerPort: 4000

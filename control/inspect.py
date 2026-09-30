@@ -434,8 +434,6 @@ async def inspect(
 
         security_inspect
             ->
-        tenant
-            ->
         should_shed
             ->
         LiteLLM router
@@ -534,6 +532,9 @@ class SecurityInspectHook(CustomLogger):
             return data
 
         identity = _caller_id(user_api_key_dict)
+
+        if data.get('priority') is None:
+            data['priority'] = 5 # Default priority if not provided
 
         try:
             return await inspect(

@@ -111,6 +111,24 @@ data:
           max_tokens: 65536
           max_input_tokens: 65536
           max_output_tokens: 4096
+      
+      # ==========================================================================
+      # Superlinked Overflow Server
+      # ==========================================================================
+      - model_name: qwen-coding-overflow
+        litellm_params:
+          model: openai/Qwen/Qwen3.8-27B-FP8
+          api_base: https://api.superlinked.com/v1
+          api_key: os.environ/SUPERLINKED_API_KEY
+
+        model_info:
+          mode: chat
+          max_tokens: 65536
+          max_input_tokens: 65536
+          max_output_tokens: 4096
+          model_info:
+          input_cost_per_token: 0.00000072     # Cost per input token in USD (e.g., $3.00 per 1M tokens)
+          output_cost_per_token: 0.00000072 # Cost per output token in USD (e.g., $15.00 per 1M tokens)
 
 
     # ============================================================================
@@ -138,6 +156,10 @@ data:
       # with tenant/user identity rather than forcing OpenAI clients to provide
       # a specific field.
       enforce_user_param: false
+
+      # Cacel stream requests when the client disconnects.
+      cancel_on_disconnect: true
+
 
 
       # Prevent LiteLLM from retrying a request merely because a deployment has
@@ -169,7 +191,6 @@ data:
       # actual backend implementation may not support every OpenAI parameter.
       drop_params: false
 
-
       # Callbacks that participate in the general LiteLLM callback lifecycle.
       #
       # prometheus:
@@ -183,8 +204,7 @@ data:
       callbacks:
         - prometheus
         - security_inspect.security_inspect
-        # - tenant.tenant
-        # - should_shed.should_shed
+        - admission.admission_handler
 
 
       # Explicit success callback list.
@@ -236,7 +256,7 @@ data:
       #
       # This is intentionally much larger than a normal API timeout because
       # coding-agent requests can involve large contexts and long generations.
-      timeout: 120
+      timeout: 10
 
 
       # Safety/default concurrency limit for deployments that do not explicitly

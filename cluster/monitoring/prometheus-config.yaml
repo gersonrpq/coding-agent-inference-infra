@@ -20,6 +20,11 @@ data:
           credentials_file: /etc/prometheus/secrets/litellm-master-key
         static_configs:
           - targets: ['litellm:4000']
+        metric_relabel_configs:
+        - source_labels: [__name__]
+          target_label: __name__
+          regex: '(.*)'
+          replacement: 'litellm_$1'
 
       # ----------------------------
       # SGLang worker 0
@@ -28,6 +33,11 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets: ['sglang-worker-0:30000']
+        metric_relabel_configs:
+        - source_labels: [__name__]
+          target_label: __name__
+          regex: '(.*)'
+          replacement: 'sglang_0_$1'
 
       # ----------------------------
       # SGLang worker 1
@@ -36,6 +46,11 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets: ['sglang-worker-1:30001']
+        metric_relabel_configs:
+        - source_labels: [__name__]
+          target_label: __name__
+          regex: '(.*)'
+          replacement: 'sglang_1_$1'
 
       # ----------------------------
       # Mooncake master
@@ -44,6 +59,11 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets: ['mooncake-master:9003']
+        metric_relabel_configs:
+        - source_labels: [__name__]
+          target_label: __name__
+          regex: '(.*)'
+          replacement: 'mooncake_$1'
 
       # ----------------------------
       # Kubernetes API
@@ -62,3 +82,8 @@ data:
               - __meta_kubernetes_endpoint_port_name
             action: keep
             regex: default;kubernetes;https
+        metric_relabel_configs:
+        - source_labels: [__name__]
+          target_label: __name__
+          regex: '(.*)'
+          replacement: 'cp_$1'

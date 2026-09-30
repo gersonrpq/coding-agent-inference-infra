@@ -13,6 +13,9 @@ envsubst < cluster/litellm/secret.yaml | kubectl apply -f -
 kubectl create configmap litellm-security \
   -n gpu-serving \
   --from-file=security_inspect.py=control/inspect.py \
+  --from-file=admission.py=control/admission.py \
+  --from-file=fleet_state.py=control/fleet_state.py \
+  --from-file=__init__.py=control/__init__.py \
   --dry-run=client \
   -o yaml | kubectl apply -f -
 
