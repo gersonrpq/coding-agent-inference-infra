@@ -20,22 +20,23 @@ spec:
         app.kubernetes.io/component: worker
         serving.gpu-worker: "1"
     spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       terminationGracePeriodSeconds: 60
       containers:
         - name: sglang
           image: lmsysorg/sglang:latest
           imagePullPolicy: IfNotPresent
           command:
-            - python
-            - -m
-            - sglang.launch_server
+            - sglang
+            - serve
           args:
             - --model-path
             - $(MODEL_NAME)
             - --host
             - 0.0.0.0
             - --port
-            - "30000"
+            - "30001"
             - --context-length
             - $(MAX_MODEL_LEN)
             - --max-running-requests
@@ -51,7 +52,32 @@ spec:
             - "fp8_e4m3"  
             - --mem-fraction-static 
             - $(MAX_MEM_FRAC)   
-            - --enable-priority-scheduling      
+            - --enable-priority-scheduling
+            # Activa la jerarquía L1 GPU → L2 host RAM → L3 Mooncake.
+            - --enable-hierarchical-cache
+
+            # Muestra en las respuestas/métricas cuántos tokens vienen de GPU,
+            # RAM y storage; nos servirá para medir si realmente funciona.
+            - --enable-cache-report
+
+            # Reserva 32 GiB de RAM del nodo como L2 por instancia SGLang.
+            # Empezamos conservadores y luego lo aumentamos si el spike lo requiere.
+            - --hicache-size
+            - "32"
+
+            # Mantiene el KV en L2 y lo escribe hacia L3 cuando corresponde,
+            # evitando hacer una escritura remota por cada actualización.
+            - --hicache-write-policy
+            - "write_back"
+
+            # Usa Mooncake como almacenamiento L3 compartido.
+            - --hicache-storage-backend
+            - mooncake
+
+            # Hace que cada SGLang aporte 16 GiB al pool Mooncake compartido.
+            # Los dos workers aportarían ~32 GiB en total.
+            - --hicache-storage-backend-extra-config
+            - '{"master_server_address":"mooncake-master:50051","metadata_server":"http://mooncake-master:8080/metadata","protocol":"rdma","device_name":"mlx5_0","global_segment_size":"16gb","tenant_id":"sglang"}'
           envFrom:
             - configMapRef:
                 name: sglang-config
@@ -60,7 +86,7 @@ spec:
               value: /models/huggingface
           ports:
             - name: http
-              containerPort: 30000
+              containerPort: 30001
               protocol: TCP
           resources:
             requests:
@@ -74,11 +100,13 @@ spec:
           volumeMounts:
             - name: model-cache
               mountPath: /models
+            - name: infiniband 
+              mountPath: /dev/infiniband
           startupProbe:
             tcpSocket:
               port: http
             periodSeconds: 10
-            failureThreshold: 60
+            failureThreshold: 200
           readinessProbe:
             tcpSocket:
               port: http
@@ -90,8 +118,14 @@ spec:
             initialDelaySeconds: 120
             periodSeconds: 30
             failureThreshold: 5
+          securityContext: 
+            privileged: true
       volumes:
         - name: model-cache
           hostPath:
             path: /var/lib/gpu-serving/huggingface
             type: DirectoryOrCreate
+        - name: infiniband 
+          hostPath:
+            path: /dev/infiniband
+            type: Directory

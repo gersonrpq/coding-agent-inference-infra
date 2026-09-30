@@ -20,6 +20,9 @@ kubectl apply -f cluster/litellm/config.yaml
 kubectl apply -f cluster/litellm/deployment.yaml
 kubectl apply -f cluster/litellm/service.yaml
 
+echo "=================== Deploying Mooncake... ==================="
+kubectl apply -f cluster/mooncake/master.yaml
+
 echo "=================== Deploying SGLang... ==================="
 kubectl apply -f cluster/sglang/config.yaml
 kubectl apply -f cluster/sglang/services.yaml

@@ -5,44 +5,275 @@ metadata:
   namespace: gpu-serving
 data:
   config.yaml: |
+    # ============================================================================
+    # LiteLLM Proxy Configuration
+    # ============================================================================
+    #
+    # Architecture:
+    #
+    #   Client
+    #      |
+    #      v
+    #   LiteLLM
+    #      |
+    #      +--> security_inspect   (application security policy)
+    #      |
+    #      +--> tenant             (future request enrichment)
+    #      |
+    #      +--> should_shed        (future admission control)
+    #      |
+    #      v
+    #   LiteLLM Router
+    #      |
+    #      +--> sglang-worker-0    (H100 #0, max 22 concurrent requests)
+    #      |
+    #      +--> sglang-worker-1    (H100 #1, max 22 concurrent requests)
+    #      |
+    #      v
+    #   Qwen3.6-27B-FP8
+    #
+    # Important design principle:
+    #
+    # LiteLLM is responsible for generic gateway concerns such as routing,
+    # deployment concurrency limits, context-window checks, authentication,
+    # retries and observability.
+    #
+    # Custom callbacks should only implement policies that are specific to
+    # this platform and cannot be expressed cleanly through LiteLLM configuration.
+    # ============================================================================
+
+
     model_list:
+
+      # ==========================================================================
+      # SGLang worker 0
+      # ==========================================================================
+
       - model_name: qwen-coding-local
         litellm_params:
+
           model: openai/Qwen/Qwen3.6-27B-FP8
           api_base: http://sglang-worker-0:30000/v1
           api_key: local-worker-0
 
+          # IMPORTANT:
+          #
+          # This is the maximum number of requests LiteLLM will allow to execute
+          # concurrently against THIS deployment.
+          #
+          # The value represents the physical capacity of this SGLang/H100 worker.
+          #
+          # Keeping this limit on the deployment is preferable to implementing
+          # another semaphore inside a custom callback because LiteLLM's router
+          # already understands deployment concurrency and can route around a
+          # saturated deployment.
+          #
+          # With two deployments at 22 each, the theoretical fleet-wide
+          # LiteLLM concurrency is 44 requests.
+          max_parallel_requests: 22
+
+        model_info:
+
+          # Tells LiteLLM that this deployment is a chat-capable model.
+          mode: chat
+
+          # Maximum context size advertised for this deployment.
+          max_tokens: 65536
+
+          # Explicitly documents the maximum input context supported by the
+          # deployment.
+          #
+          # Keeping this metadata explicit allows the router/pre-call checks to
+          # reason about the model's actual context capacity instead of relying
+          # on provider/model metadata discovery.
+          max_input_tokens: 65536
+
+          # Application policy currently limits generated output to 4096 tokens.
+          #
+          # This is model metadata and documents the deployment capability.
+          # The request-level enforcement remains in security_inspect so that
+          # clients cannot request a larger output.
+          max_output_tokens: 4096
+
+
+      # ==========================================================================
+      # SGLang worker 1
+      # ==========================================================================
       - model_name: qwen-coding-local
         litellm_params:
           model: openai/Qwen/Qwen3.6-27B-FP8
           api_base: http://sglang-worker-1:30000/v1
           api_key: local-worker-1
+          max_parallel_requests: 22
+
+        model_info:
+          mode: chat
+          max_tokens: 65536
+          max_input_tokens: 65536
+          max_output_tokens: 4096
+
+
+    # ============================================================================
+    # General LiteLLM Proxy Settings
+    # ============================================================================
 
     general_settings:
+
+      # Master key is obtained from the Kubernetes environment variable.
       master_key: os.environ/LITELLM_MASTER_KEY
 
 
+      # Allow requests to continue when the database is temporarily unavailable
+      # for virtual-key verification.
+      #
+      # Keep this only if availability during DB outages is an intentional
+      # requirement for this deployment.
       allow_requests_on_db_unavailable: true
-      # Makes LiteLLM enforce the user identity where applicable. (when true)
+
+
+      # Do not require every OpenAI-compatible request to explicitly contain
+      # the "user" parameter.
+      #
+      # This remains false because the custom tenant layer is expected to deal
+      # with tenant/user identity rather than forcing OpenAI clients to provide
+      # a specific field.
       enforce_user_param: false
 
+
+      # Prevent LiteLLM from retrying a request merely because a deployment has
+      # reached its max_parallel_requests limit.
+      #
+      # This is important for this architecture:
+      #
+      #   worker full
+      #       |
+      #       +--> do NOT retry the same admission decision
+      #       |
+      #       +--> let routing/admission control make the decision
+      #
+      # In particular, this prevents concurrency saturation from turning into
+      # unnecessary retry traffic.
+      disable_retry_on_max_parallel_request_limit_error: true
+
+
+    # ============================================================================
+    # LiteLLM Core Settings
+    # ============================================================================
+
     litellm_settings:
-      drop_params: true
-      callbacks: 
+
+      # LiteLLM may remove unsupported parameters before forwarding the request
+      # to SGLang.
+      #
+      # This is useful because the external API is OpenAI-compatible while the
+      # actual backend implementation may not support every OpenAI parameter.
+      drop_params: false
+
+
+      # Callbacks that participate in the general LiteLLM callback lifecycle.
+      #
+      # prometheus:
+      #   Observability/metrics.
+      #
+      # security_inspect.security_inspect:
+      #   Custom application security policy executed before the model call.
+      #
+      # tenant.tenant and should_shed.should_shed are intentionally commented
+      # until those modules exist.
+      callbacks:
         - prometheus
         - security_inspect.security_inspect
-      success_callback: ["prometheus"]
-      failure_callback: ["prometheus"]
+        # - tenant.tenant
+        # - should_shed.should_shed
 
-      upperbound_key_generate_params:
-        max_tokens: 4096
+
+      # Explicit success callback list.
+      #
+      # Prometheus remains responsible for successful-request metrics.
+      success_callback:
+        - prometheus
+
+
+      # Explicit failure callback list.
+      #
+      # Prometheus remains responsible for failed-request metrics.
+      failure_callback:
+        - prometheus
+
+
+    # ============================================================================
+    # Router Settings
+    # ============================================================================
 
     router_settings:
-      routing_strategy: simple-shuffle
+
+      # Choose the least busy deployment belonging to the same
+      # model group.
+      #
+      # With the current two-worker topology this provides simple distribution
+      # between:
+      #
+      #   qwen-coding-local -> worker 0
+      #   qwen-coding-local -> worker 1
+      #
+      # The per-deployment max_parallel_requests=22 remains the hard concurrency
+      # boundary for each H100 worker.
+      routing_strategy: least-busy
+
+
+      # Do not retry failed requests at the router level.
+      #
+      # This is deliberately conservative for a local two-H100 coding fleet.
+      #
+      # A future should_shed admission layer will make an explicit admission
+      # decision based on fleet state, so blind retries should not create
+      # additional load.
       num_retries: 0
+
+
+      # Maximum time LiteLLM should allow a request to remain in the model-call
+      # path before timing out.
+      #
+      # This is intentionally much larger than a normal API timeout because
+      # coding-agent requests can involve large contexts and long generations.
       timeout: 120
-      default_max_parallel_requests: 22
+
+
+      # Safety/default concurrency limit for deployments that do not explicitly
+      # define max_parallel_requests.
+      default_max_parallel_requests: 44
+
+
+      # Ask LiteLLM to perform model context-window checks before sending the
+      # request to the deployment.
+      #
+      # This removes the need for security_inspect to implement its own tokenizer
+      # and context-window calculation.
+      #
+      # Therefore security_inspect should NOT duplicate:
+      #
+      #   - token counting
+      #   - input context estimation
+      #   - context-window enforcement
+      #
+      # Those concerns belong to LiteLLM's router/model metadata layer.
+      enable_pre_call_checks: true
+
+
+    # ============================================================================
+    # Telemetry
+    # ============================================================================
 
     telemetry:
-      enabled: true
+
+      # Disable LiteLLM telemetry.
+      #
+      # This is independent from the Prometheus callback above. Prometheus is
+      # explicitly enabled as application observability while LiteLLM telemetry
+      # remains disabled.
+      enabled: false
       
+
+
+
+     

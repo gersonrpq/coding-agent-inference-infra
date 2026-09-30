@@ -34,6 +34,6 @@ spec:
     serving.gpu-worker: "1"
   ports:
     - name: http
-      port: 30000
+      port: 30001
       targetPort: http
       protocol: TCP

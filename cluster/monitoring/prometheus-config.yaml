@@ -35,7 +35,15 @@ data:
       - job_name: 'sglang-worker-1'
         metrics_path: /metrics
         static_configs:
-          - targets: ['sglang-worker-1:30000']
+          - targets: ['sglang-worker-1:30001']
+
+      # ----------------------------
+      # Mooncake master
+      # ----------------------------
+      - job_name: 'mooncake-master'
+        metrics_path: /metrics
+        static_configs:
+          - targets: ['mooncake-master:9003']
 
       # ----------------------------
       # Kubernetes API

@@ -15,4 +15,5 @@ if [[ ! -r "$KUBECONFIG" ]]; then
 fi
 
 echo "== NVIDIA DEAMONSET =="
+kubectl apply -f cluster/nvidia/config.yaml
 kubectl apply -f cluster/nvidia/device-plugin.yaml

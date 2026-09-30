@@ -4,11 +4,11 @@ metadata:
   name: sglang-config
   namespace: gpu-serving
 data:
-  MODEL_NAME: "Qwen/Qwen3-8B-FP8" # "Qwen/Qwen3.6-27B-FP8"
+  MODEL_NAME: "Qwen/Qwen3-0.6B-FP8" # "Qwen/Qwen3.6-27B-FP8"
 
   # Deliberadamente conservadores al principio.
   # Estos NO son todavía los valores finales del proyecto.
-  MAX_MODEL_LEN: "40960" #"65536" #  https://arxiv.org/pdf/2608.00101 by median they use this length, but we can go higher with Qwen3.6-27B-FP8
+  MAX_MODEL_LEN: "32768" #"65536" #  https://arxiv.org/pdf/2608.00101 by median they use this length, but we can go higher with Qwen3.6-27B-FP8
   MAX_NUM_SEQS: "22" 
 
   MAX_MEM_FRAC: "0.485"
