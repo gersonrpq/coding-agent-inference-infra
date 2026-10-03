@@ -57,8 +57,8 @@ flowchart LR
 
 ```bash
 # once, on the GPU machine (needs an NVIDIA GPU with MIG; on a full GPU skip setup/mig.sh)
-bash setup/lambda_k3s.sh            # K3s with the NVIDIA runtime and device plugin
-bash setup/mig.sh                   # 2 x 3g.40gb (not persistent across reboots)
+bash setup/lambda_k3s.sh            # K3s with the NVIDIA runtime, MIG (2 x 3g.40gb) and the device plugin
+                                    # (MIG does not survive a reboot: run setup/mig.sh again after one)
 cp .env.example .env                # LITELLM_MASTER_KEY, SUPERLINKED_API_KEY (never committed)
 bash setup/launch_cluster.sh        # namespace -> PostgreSQL -> Mooncake -> workers -> smoke -> warm gate -> Prometheus/Grafana -> LiteLLM
 bash setup/start_forward.sh         # grafana :3000, prometheus :9090, litellm :4000
@@ -89,9 +89,9 @@ All numbers are from `metrics/runs/` (raw per-call data) and explained in [`ARCH
 
 | Question | Answer | Where |
 | --- | --- | --- |
-| How many sessions before it breaks? | refusals below 5 % up to N = 16 synthetic sessions; above, the cap refuses 38-70 % of the attempts but the served ones keep TTFT p99 at 7-14 s (SLO 20 s) | `plots/final_knee.png` |
+| How many sessions before it breaks? | refusals below 5 % up to N = 16 synthetic sessions; above, the cap refuses 38-70 % of the attempts but the served ones keep TTFT p99 at 7-14 s (SLO 20 s) | `plots/final_knee.png`; repeated on the final code: N = 24 gave 52.2 served/min with p99 9.2 s (`metrics/runs/fin5-knee`) |
 | Which worker should serve a call? | `affload` beats LiteLLM `least-busy` on every number at N = 20 with the same conversations: +16 % served, p99 10.3 s against 11.5 s, 88 % of the prompt read from cache against 74 % | `plots/routing_n24.png`, `routing_n20.png`, `final_knee.png` |
-| Is it stable? | a 15-minute soak: 48.6 served/min, p99 7.1 s, queue <= 2, KV <= 57 %, nothing leaked | `plots/final_soak.png` |
+| Is it stable? | a 15-minute soak: 48.6 served/min, p99 7.1 s, queue <= 2, KV <= 57 %, nothing leaked | `plots/final_soak.png`; repeated on the final code: 51.3 served/min, p99 6.9 s, queue <= 2 (`metrics/runs/fin5-soak`) |
 | What does a resting session cost? | after 120 s of idle only 27 % of the first prompt of a turn comes from cache | `plots/final_cache_regimes.png` |
 | Is priority protected? | with 20 % batch sessions interactive refusals are 6.8 % and p99 9.7 s | `plots/final_batch.png` |
 | Does it hold with real agents? | yes: tool-using sessions, 1 malformed call in 488, not refused at N = 20 (the synthetic load is harder) | `plots/final_agents.png` |

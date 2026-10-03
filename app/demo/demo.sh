@@ -32,7 +32,7 @@ if [[ "${DEMO_CLEAN:-0}" == "1" ]]; then
   find "$workdir" -mindepth 1 -not -name .gitkeep -delete
 fi
 
-echo "== 3. pi works in $workdir"
+echo "== 3. pi works in ${workdir#$root/}"
 cd "$workdir"
 start=$(date +%s)
 if [[ "${1:-}" == "--interactive" ]]; then
@@ -44,7 +44,7 @@ fi
 echo "pi finished in $(( $(date +%s) - start )) s"
 
 echo "== 4. what pi built"
-ls -la "$workdir" | sed 's/^/  /'
+ls -l "$workdir" | awk 'NR>1 {print "  " $5 " bytes  " $9}'
 for f in index.html style.css app.js; do [[ -s "$workdir/$f" ]] && echo "  ok: $f ($(wc -l < "$workdir/$f") lines)" || echo "  missing: $f"; done
 
 echo "== 5. what the cluster did"

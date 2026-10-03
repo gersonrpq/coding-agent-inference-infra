@@ -50,7 +50,7 @@ spec:
               value: "security.admission:litellm_worker_startup"
             - name: MAX_TOKENS_POLICY        # clamp = a request for more than the 4096-token cap is served with 4096 (decision 54); reject = answer 400
               value: "clamp"
-            - name: ADMISSION_CHECKS         # stateless sheds that run first. timeout_queue (estimate from stale gauges) is off: the counter replaces it
+            - name: ADMISSION_CHECKS         # stateless sheds that run first. timeout_queue (estimate from stale gauges) is off: the in-flight cap replaces it
               value: "kv_pressure,batch_pressure"
             - name: PLACEMENT_POLICY         # litellm = LiteLLM's routing_strategy decides; affload = control/place.py
               value: "affload"

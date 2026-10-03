@@ -52,19 +52,19 @@ Each client (the demo, the load generators, two test tenants) has its own **key*
 Each figure is a real run on the GPU; the raw per-call data is in `metrics/runs/`.
 
 ![Capacity curve](plots/final_knee.png)
-**Figure 1. How many sessions before it breaks.** Served calls per minute peak at 20 sessions (50-57 calls a minute) and fall at 24. Refused attempts grow from 4 % at 16 sessions to 38 % at 20 and 70 % at 24: the gateway refuses the extra requests instead of slowing everyone, so the slowest 1 % of first words of the accepted ones stays between 8 and 14 s, always under the 20 s line. The two extra markers at 20 sessions compare the final placement rule with the simple "least busy worker" rule.
+**Figure 1. How many sessions before it breaks.** Served calls per minute peak at 20 sessions (50-57 calls a minute) and fall at 24. Refused attempts grow from 4 % at 16 sessions to 38-49 % at 20 (two runs) and 70 % at 24: the gateway refuses the extra requests instead of slowing everyone, so the slowest 1 % of first words of the accepted ones stays between 8 and 14 s, always under the 20 s line. The two extra markers at 20 sessions compare the final placement rule with the simple "least busy worker" rule. Repeating 24 sessions on the final code gave 52.2 calls a minute with the slowest 1 % at 9.2 s.
 
 ![Soak test](plots/final_soak.png)
-**Figure 2. Fifteen minutes under steady load.** Throughput, waiting line (never above 2) and memory (never above 57 %) stay flat: nothing leaks and nothing drifts.
+**Figure 2. Fifteen minutes under steady load.** Throughput, waiting line (never above 2) and memory (never above 57 %) stay flat: nothing leaks and nothing drifts. A repeat of the soak on the final code gave 51.3 calls a minute, the slowest 1 % at 6.9 s and the same flat queue.
 
 ![Placement comparison](plots/routing_n24.png)
 **Figure 3. Which worker should serve a call (24 sessions).** Six rules compared. Keeping a conversation on its worker unless that worker is clearly busier (`affload`) serves 54 calls a minute against 40 for picking the least busy worker (`lb`), and finds 87 % of each prompt in memory against 73 %, with the slowest 1 % of first words at 9 s in both.
 
 ![Cache regimes](plots/final_cache_regimes.png)
-**Figure 4. A resting conversation loses its shortcuts.** With short pauses (20 s) about 89 % of the prompt at the start of a turn is found in the GPU's memory. After a two-minute rest only about 27 % is: most of the history has to be read again. Plan for slower starts after idle time.
+**Figure 4. A resting conversation loses its shortcuts.** With short pauses (20 s) about 89 % of the prompt at the start of a turn is found in the cache. After a two-minute rest only about 27 % is: most of the history has to be read again. Plan for slower starts after idle time.
 
 ![Real agents](plots/final_agents.png)
-**Figure 5. Real assistants, not only synthetic load.** Sessions where the model really reads files and calls tools behave better than the synthetic load: 1 malformed call in 488, and no refusals at 20 sessions.
+**Figure 5. Real assistants, not only synthetic load.** Sessions where the model really reads files and calls tools behave better than the synthetic load: 1 malformed call in 488, and at 20 sessions no request was refused and the slowest 1 % of first words was 6.1 s.
 
 ![Worker recovery](plots/final_ramp.png)
 **Figure 6. A worker dies and comes back.** Three requests in flight failed; then nothing was sent to the dead worker. When it returned, it got only a quarter of its share at first and the rest over about two minutes, so a cold worker is not flooded.
@@ -77,7 +77,7 @@ These are lines copied from the running system (the full scrapes are in [`ARCHIT
 
 ```text
 gauge with the cap full: (200, {'litellm_admission_admitted_requests': '14.0', 'litellm_admission_queued_requests': '0.0'})
-request 15: HTTP 503 in 0.0 s  (expected 503, at once)  ... "Worker at capacity: 14 in-flight, 0 queued requests. Retry later."
+request 15: HTTP 503 in 0.01 s  (expected 503, at once)  ... "Worker at capacity: 14 in-flight, 0 queued requests. Retry later."
 the 14 held requests: statuses [200]
 a new request after they finished: HTTP 200 in 0.4 s  (expected 200: the place came back)
 ```
@@ -91,7 +91,7 @@ litellm_admission_rejected_requests_total{reason="queue_full"} 902.0
 
 **The memory of past work is reused** (183 million prompt tokens in the load runs): 57 % were found on the GPU, 20 % in host memory, 2 % in the shared pool and only **21 % had to be computed again**. A conversation that moves to the other worker found 46,904 of 46,930 tokens in the shared pool (first word in 2.3 s instead of 4.5 s cold).
 
-**The demo works end to end:** the assistant built a working todo-list web page (`app/todo-app/`: HTML, CSS and 203 lines of JavaScript) in 71 seconds through this cluster; the gateway counters moved by exactly the two requests it made.
+**The demo works end to end:** the assistant built a working todo-list web page (`app/todo-app/`: HTML, CSS and about 300 lines of JavaScript) in about a minute and a half through this cluster (95 s in the last run); the gateway counters moved by exactly the three requests it made, all interactive.
 
 **Workers start warm:** right after a restart the first word takes 1.76 s on a cold worker against 0.32 s warm, so the gateway waits for a warm-up before sending traffic.
 

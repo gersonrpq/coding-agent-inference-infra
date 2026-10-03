@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+# Fresh machine: K3s with the NVIDIA runtime, MIG (2 x 3g.40gb) and the device plugin. Idempotent. Run from the repo root.
 echo "== GPU =="
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
 

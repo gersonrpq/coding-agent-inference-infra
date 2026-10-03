@@ -1,0 +1,13 @@
+[    30s] last30s attempts=0 ok=0 shed=0 ttft_p99=-
+[    60s] last30s attempts=77 ok=5 shed=72 ttft_p99=14.1
+[    90s] last30s attempts=95 ok=7 shed=88 ttft_p99=8.4
+[   120s] last30s attempts=93 ok=7 shed=86 ttft_p99=6.2
+[   150s] last30s attempts=63 ok=13 shed=50 ttft_p99=7.2
+[   180s] last30s attempts=47 ok=13 shed=34 ttft_p99=5.5
+[   210s] last30s attempts=34 ok=19 shed=15 ttft_p99=4.0
+[   240s] last30s attempts=68 ok=19 shed=49 ttft_p99=7.1
+[   270s] last30s attempts=61 ok=21 shed=40 ttft_p99=8.8
+[   300s] last30s attempts=44 ok=12 shed=32 ttft_p99=6.0
+[   330s] last30s attempts=50 ok=14 shed=36 ttft_p99=7.7
+[   360s] last30s attempts=34 ok=14 shed=20 ttft_p99=4.6
+{"sessions": 24, "profile": "paper", "window_s": 300.0, "compactions": 27}

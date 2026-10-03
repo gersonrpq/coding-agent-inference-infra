@@ -2,7 +2,7 @@
 gateway already reachable on localhost:4000 (an existing tunnel); not opening another
 gateway health: HTTP 200
 == 2. before
-== 3. pi works in /home/gersonrpq/Escritorio/Programacion/Estudio/Inferencing/final_project/coding-agent-inference-infra/app/todo-app
+== 3. pi works in ./app/todo-app
 
 
 Done! I've created a clean, dependency-free todo list app with the following files:
@@ -35,13 +35,13 @@ Done! I've created a clean, dependency-free todo list app with the following fil
 pi finished in 95 s
 == 4. what pi built
   total 32
-  drwxrwxr-x 2 gersonrpq gersonrpq 4096 oct  3 16:11 .
-  drwxrwxr-x 6 gersonrpq gersonrpq 4096 oct  3 14:03 ..
-  -rw-rw-r-- 1 gersonrpq gersonrpq 8388 oct  3 16:11 app.js
-  -rw-rw-r-- 1 gersonrpq gersonrpq    0 oct  2 22:58 .gitkeep
-  -rw-rw-r-- 1 gersonrpq gersonrpq 1164 oct  3 16:11 index.html
-  -rw-rw-r-- 1 gersonrpq gersonrpq 1038 oct  3 16:11 README.md
-  -rw-rw-r-- 1 gersonrpq gersonrpq 2950 oct  3 16:11 style.css
+  drwxrwxr-x 2 user user 4096 oct  3 16:11 .
+  drwxrwxr-x 6 user user 4096 oct  3 14:03 ..
+  -rw-rw-r-- 1 user user 8388 oct  3 16:11 app.js
+  -rw-rw-r-- 1 user user    0 oct  2 22:58 .gitkeep
+  -rw-rw-r-- 1 user user 1164 oct  3 16:11 index.html
+  -rw-rw-r-- 1 user user 1038 oct  3 16:11 README.md
+  -rw-rw-r-- 1 user user 2950 oct  3 16:11 style.css
   ok: index.html (38 lines)
   ok: style.css (180 lines)
   ok: app.js (306 lines)

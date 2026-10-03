@@ -9,6 +9,7 @@ Tools for the capacity and cost tests. Standard library only (they run on the se
 | `prom_snapshot.py` | Reads what the cluster measured over the run (sheds by reason, queues, KV, cache hits by tier) |
 | `cost_report.py` | GPU cost per 1M tokens / per call / per session-hour, and the same traffic billed at the overflow API rates |
 | `sweep.sh` | Runs all of the above for a list of session counts |
+| `agent_run.sh` | Runs `agentgen.py` once per session count and collects what `sweep.sh` collects (GPU samples, Prometheus snapshot, cost) |
 | `fetch_results.sh` | Copies `metrics/runs/` from the server to this repo |
 | `cap_variant.sh` | Show or change the cap on requests in flight (`max_in_flight_requests_per_worker` = 12 + K) on the live cluster |
 | `agentgen.py` | Real agent sessions: the model calls tools (`read_file`, `list_dir`, `grep` on this repository) and the history is what really happened; same record format as `loadgen.py` |

@@ -1,0 +1,304 @@
+{
+ "admitted": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 752.2666666666667
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": 0.0
+  }
+ ],
+ "shed_by_reason": [
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "timeout_queue"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "timeout_queue"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "kv_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "kv_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "batch_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "batch_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "batch_share"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "batch_share"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "no_healthy_worker"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "no_healthy_worker"
+   },
+   "value": 0.0
+  }
+ ],
+ "gateway_in_flight_max": [
+  {
+   "labels": {},
+   "value": 14.0
+  }
+ ],
+ "gateway_ttft_p99_s": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 8.929999999999993
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": NaN
+  }
+ ],
+ "engine_ttft_p99_s": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 7.851428571428575
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 5.878666666666665
+  }
+ ],
+ "engine_queue_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 2.0
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 2.0
+  }
+ ],
+ "engine_running_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 6.0
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 6.0
+  }
+ ],
+ "kv_used_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 0.5808400295037442
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 0.569518771872178
+  }
+ ],
+ "retracted_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 0.0
+  }
+ ],
+ "prefill_tokens_by_source": [
+  {
+   "labels": {
+    "mode": "input",
+    "worker": "1"
+   },
+   "value": 1671113.8888888888
+  },
+  {
+   "labels": {
+    "mode": "device_hit",
+    "worker": "1"
+   },
+   "value": 10694684.0
+  },
+  {
+   "labels": {
+    "mode": "host_hit",
+    "worker": "1"
+   },
+   "value": 1918231.4666666666
+  },
+  {
+   "labels": {
+    "mode": "storage_hit",
+    "worker": "1"
+   },
+   "value": 89056.64444444444
+  },
+  {
+   "labels": {
+    "mode": "input",
+    "worker": "0"
+   },
+   "value": 1784653.95480226
+  },
+  {
+   "labels": {
+    "mode": "device_hit",
+    "worker": "0"
+   },
+   "value": 11783136.542372882
+  },
+  {
+   "labels": {
+    "mode": "host_hit",
+    "worker": "0"
+   },
+   "value": 1973593.6045197742
+  },
+  {
+   "labels": {
+    "mode": "storage_hit",
+    "worker": "0"
+   },
+   "value": 127932.6327683616
+  }
+ ],
+ "placement_by_worker": [
+  {
+   "labels": {
+    "policy": "affload",
+    "priority_class": "interactive",
+    "worker": "w0"
+   },
+   "value": 396.35555555555555
+  },
+  {
+   "labels": {
+    "policy": "affload",
+    "priority_class": "interactive",
+    "worker": "w1"
+   },
+   "value": 355.9111111111111
+  }
+ ],
+ "placement_sessions": [
+  {
+   "labels": {
+    "result": "new"
+   },
+   "value": 69.76666666666667
+  },
+  {
+   "labels": {
+    "result": "kept"
+   },
+   "value": 663.2888888888889
+  },
+  {
+   "labels": {
+    "result": "moved"
+   },
+   "value": 19.21111111111111
+  }
+ ],
+ "hicache_backup_tokens": [
+  {
+   "labels": {
+    "pool": "kv",
+    "worker": "1"
+   },
+   "value": 1675728.5999999999
+  },
+  {
+   "labels": {
+    "pool": "mamba",
+    "worker": "1"
+   },
+   "value": 868.5444444444444
+  },
+  {
+   "labels": {
+    "pool": "kv",
+    "worker": "0"
+   },
+   "value": 1781110.6101694917
+  },
+  {
+   "labels": {
+    "pool": "mamba",
+    "worker": "0"
+   },
+   "value": 934.677966101695
+  }
+ ]
+}

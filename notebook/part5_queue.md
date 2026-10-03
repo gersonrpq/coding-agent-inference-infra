@@ -704,7 +704,7 @@ shed by reason               [('timeout_queue', '0'), ('kv_pressure', '0'), ('ba
 Output:
 
 ```text
-rejected by the cap          []
+rejected by the cap          [('queue_full', '2')]
 ```
 
 Output:
@@ -734,11 +734,11 @@ overflow decisions           []
 Output:
 
 ```text
-requests by key              [('None', '1'), ('pi-demo', '3'), ('None', '28')]
+requests by key              [('None', '1'), ('pi-demo', '3'), ('None', '28'), ('loadgen', '30')]
 ```
 
 Output:
 
 ```text
-evicted tokens               []
+evicted tokens               [('1', '7983')]
 ```

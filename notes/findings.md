@@ -457,6 +457,15 @@ The final configuration (K = 2, `affload`, first-token cut 20 s, `lru`, bf16) un
 - Two problems found while running it, both fixed in `app/demo/demo.sh`: (1) `tunnel.sh status` only recognises tunnels it opened, so with the user's own `ssh -L` already holding ports 4000/3000/9090 the script failed with "Address already in use"; it now skips the tunnel when the gateway already answers on `localhost:4000`. (2) `pi -p` waits for end-of-file on stdin; started from a background job with an open stdin it sat idle for 10 minutes with no connection to the gateway. Run it from a terminal, or with `< /dev/null`.
 - The run used the master key because this machine's `.env` has no `LITELLM_KEY_PI_DEMO` (the script warns); `python3 script/make_keys.py` creates pi's own key.
 
+## A prediction the cap probe corrected: `/metrics/` is served with the cap full
+
+- We had written (decision [55](../ARCHITECTURE.md#decision-55), `CLAUDE.md`) that LiteLLM's admission middleware counts every route except `/health*`, so a `/metrics` scrape would be refused when 14 requests are in flight. The probe printed that as "predicted 503" and then measured **HTTP 200 in 0.04-0.06 s** on every run, including the run after the cluster was rebuilt.
+- Consequence: the risk of losing the gateway's metrics during an overload does not exist for `/metrics/`; the texts were corrected to say what was measured.
+
+## The headline runs repeated on the final code (V9; `notes/final-load-tests.md`)
+
+- After the rebuild, N = 24 (same seed) gave 52.2 served/min with p99 9.2 s and 63 % refused, and the 15-minute soak 51.3 served/min with p99 6.9 s, queue <= 2, KV <= 58 %, 0 retractions and no leaked places. Both inside the bands written beforehand. Consequence: the original figures (`plots/final_knee.png`, `final_soak.png`) stay as the reference and V9 is quoted as the confirmation that the simplified control plane, without the first-token cut, behaves the same.
+
 ## Open questions (state at the end of the notebook)
 
 | Question | State |

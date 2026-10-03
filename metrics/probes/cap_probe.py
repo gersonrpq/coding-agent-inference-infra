@@ -3,7 +3,7 @@
 
 Opens 14 long streaming requests, then sends a 15th and a /metrics scrape while the 14 are running:
   - the 15th must be refused AT ONCE with a 503 (nothing waits at the gateway);
-  - the scrape is predicted to be refused too (the middleware counts every route except /health*);
+  - the scrape of /metrics/ is still served (we had predicted a 503; the measurement shows 200);
   - when the 14 finish, a new request is served again (the place is released at the end of the stream).
 Run where the gateway is reachable (GATEWAY_URL) with LITELLM_KEY_LOADGEN (or LITELLM_API_KEY) and LITELLM_MASTER_KEY in the environment.
 Do not run it during a load test.
@@ -65,7 +65,7 @@ time.sleep(3)                                          # all of them are running
 print("gauge with the cap full:", gauge())
 extra = post(16, None, "extra")
 print(f"request {CAP + 1}: HTTP {extra[1]} in {extra[2]} s  (expected 503, at once)  {extra[3] or ''} {extra[4]}")
-print("GET /metrics/ with the cap full: HTTP %s in %s s  (predicted 503: the middleware counts it)" % get("/metrics/", MASTER))
+print("GET /metrics/ with the cap full: HTTP %s in %s s  (served: the cap does not refuse the scrape)" % get("/metrics/", MASTER))
 print("GET /health/liveliness with the cap full: HTTP %s in %s s  (exempt, must be 200)" % get("/health/liveliness", MASTER))
 for t in threads:
     t.join()
