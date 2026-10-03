@@ -1,0 +1,348 @@
+{
+ "admitted": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 215.83333333333331
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": 0.0
+  }
+ ],
+ "shed_by_reason": [
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "timeout_queue"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "timeout_queue"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "kv_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "kv_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "batch_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "batch_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "decode_capacity"
+   },
+   "value": 1287.6995805555557
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "decode_capacity"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "ttft_cut"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "ttft_cut"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "tenant_tokens"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "tenant_tokens"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "tenant_concurrency"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "tenant_concurrency"
+   },
+   "value": 0.0
+  }
+ ],
+ "gateway_in_flight_max": [
+  {
+   "labels": {},
+   "value": 14.0
+  }
+ ],
+ "gateway_ttft_p99_s": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 27.47058823529413
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": NaN
+  }
+ ],
+ "engine_ttft_p99_s": [
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 18.811111111111106
+  },
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 18.811111111111106
+  }
+ ],
+ "engine_queue_max": [
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 2.0
+  },
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 3.0
+  }
+ ],
+ "engine_running_max": [
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 6.0
+  },
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 6.0
+  }
+ ],
+ "kv_used_max": [
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 0.573500858228075
+  },
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 0.5644245506078829
+  }
+ ],
+ "retracted_max": [
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 0.0
+  }
+ ],
+ "prefill_tokens_by_source": [
+  {
+   "labels": {
+    "mode": "input",
+    "worker": "1"
+   },
+   "value": 1749300.3888888888
+  },
+  {
+   "labels": {
+    "mode": "device_hit",
+    "worker": "1"
+   },
+   "value": 1718265.611111111
+  },
+  {
+   "labels": {
+    "mode": "host_hit",
+    "worker": "1"
+   },
+   "value": 928047.361111111
+  },
+  {
+   "labels": {
+    "mode": "storage_hit",
+    "worker": "1"
+   },
+   "value": 74415.22222222222
+  },
+  {
+   "labels": {
+    "mode": "input",
+    "worker": "0"
+   },
+   "value": 1702501.5555555555
+  },
+  {
+   "labels": {
+    "mode": "device_hit",
+    "worker": "0"
+   },
+   "value": 1356251.4444444443
+  },
+  {
+   "labels": {
+    "mode": "host_hit",
+    "worker": "0"
+   },
+   "value": 1602594.361111111
+  },
+  {
+   "labels": {
+    "mode": "storage_hit",
+    "worker": "0"
+   },
+   "value": 6709.333333333333
+  }
+ ],
+ "placement_by_worker": [
+  {
+   "labels": {
+    "policy": "affload",
+    "priority_class": "interactive",
+    "worker": "w0"
+   },
+   "value": 108.94444444444443
+  },
+  {
+   "labels": {
+    "policy": "affload",
+    "priority_class": "interactive",
+    "worker": "w1"
+   },
+   "value": 106.88888888888889
+  },
+  {
+   "labels": {
+    "policy": "affload",
+    "priority_class": "batch",
+    "worker": "w1"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "policy": "affload",
+    "priority_class": "batch",
+    "worker": "w0"
+   },
+   "value": 0.0
+  }
+ ],
+ "placement_sessions": [
+  {
+   "labels": {
+    "result": "new"
+   },
+   "value": 59.61111111111111
+  },
+  {
+   "labels": {
+    "result": "kept"
+   },
+   "value": 145.94444444444443
+  },
+  {
+   "labels": {
+    "result": "moved"
+   },
+   "value": 10.277777777777777
+  }
+ ],
+ "hicache_backup_tokens": [
+  {
+   "labels": {
+    "pool": "kv",
+    "worker": "1"
+   },
+   "value": 1512076.9444444443
+  },
+  {
+   "labels": {
+    "pool": "mamba",
+    "worker": "1"
+   },
+   "value": 570.4166666666666
+  },
+  {
+   "labels": {
+    "pool": "kv",
+    "worker": "0"
+   },
+   "value": 1580347.0833333333
+  },
+  {
+   "labels": {
+    "pool": "mamba",
+    "worker": "0"
+   },
+   "value": 557.0555555555555
+  }
+ ]
+}

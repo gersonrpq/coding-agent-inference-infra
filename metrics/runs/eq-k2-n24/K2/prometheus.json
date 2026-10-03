@@ -1,0 +1,294 @@
+{
+ "admitted": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 146.66666666666669
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": 0.0
+  }
+ ],
+ "shed_by_reason": [
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "timeout_queue"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "timeout_queue"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "kv_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "kv_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "batch_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "batch_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "decode_capacity"
+   },
+   "value": 441.11111111111114
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "decode_capacity"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "ttft_cut"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "ttft_cut"
+   },
+   "value": 0.0
+  }
+ ],
+ "gateway_queue_depth_max": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": 0.0
+  }
+ ],
+ "gateway_in_flight_max": [
+  {
+   "labels": {},
+   "value": 14.0
+  }
+ ],
+ "gateway_queue_wait_p99_s": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 0.0099
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": NaN
+  }
+ ],
+ "gateway_ttft_p99_s": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 28.66666666666668
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": NaN
+  }
+ ],
+ "engine_ttft_p99_s": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 27.399999999999984
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 32.60000000000008
+  }
+ ],
+ "engine_queue_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 2.0
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 2.0
+  }
+ ],
+ "engine_running_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 6.0
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 6.0
+  }
+ ],
+ "kv_used_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 0.5960238879225366
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 0.5521703864209246
+  }
+ ],
+ "retracted_max": [
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 0.0
+  }
+ ],
+ "prefill_tokens_by_source": [
+  {
+   "labels": {
+    "mode": "input",
+    "worker": "1"
+   },
+   "value": 1261892.2222222222
+  },
+  {
+   "labels": {
+    "mode": "device_hit",
+    "worker": "1"
+   },
+   "value": 868977.7777777779
+  },
+  {
+   "labels": {
+    "mode": "host_hit",
+    "worker": "1"
+   },
+   "value": 418955.55555555556
+  },
+  {
+   "labels": {
+    "mode": "storage_hit",
+    "worker": "1"
+   },
+   "value": 411906.6666666667
+  },
+  {
+   "labels": {
+    "mode": "input",
+    "worker": "0"
+   },
+   "value": 970615.6250000001
+  },
+  {
+   "labels": {
+    "mode": "device_hit",
+    "worker": "0"
+   },
+   "value": 990180.2083333334
+  },
+  {
+   "labels": {
+    "mode": "host_hit",
+    "worker": "0"
+   },
+   "value": 329471.875
+  },
+  {
+   "labels": {
+    "mode": "storage_hit",
+    "worker": "0"
+   },
+   "value": 767633.3333333334
+  }
+ ],
+ "hicache_backup_tokens": [
+  {
+   "labels": {
+    "pool": "kv",
+    "worker": "0"
+   },
+   "value": 1012794.7916666667
+  },
+  {
+   "labels": {
+    "pool": "mamba",
+    "worker": "0"
+   },
+   "value": 342.70833333333337
+  },
+  {
+   "labels": {
+    "pool": "kv",
+    "worker": "1"
+   },
+   "value": 1308270.0
+  },
+  {
+   "labels": {
+    "pool": "mamba",
+    "worker": "1"
+   },
+   "value": 402.22222222222223
+  }
+ ]
+}

@@ -4,11 +4,15 @@ metadata:
   name: sglang-config
   namespace: gpu-serving
 data:
-  MODEL_NAME: "Qwen/Qwen3-0.6B-FP8" # "Qwen/Qwen3.6-27B-FP8"
-
-  # Deliberadamente conservadores al principio.
-  # Estos NO son todavía los valores finales del proyecto.
-  MAX_MODEL_LEN: "32768" #"65536" #  https://arxiv.org/pdf/2608.00101 by median they use this length, but we can go higher with Qwen3.6-27B-FP8
-  MAX_NUM_SEQS: "22" 
-
-  MAX_MEM_FRAC: "0.485"
+  # Engine settings shared by both workers. Capacity = 2 workers x MAX_NUM_SEQS; if it changes, change the
+  # in-flight cap in cluster/litellm/config.yaml (12 + K) with it. 2-GPU target: Qwen/Qwen3.6-27B-FP8, MAX_NUM_SEQS 22.
+  MODEL_NAME: "Qwen/Qwen3.5-9B"
+  KV_CACHE_DTYPE: "auto"            # bf16, 32 KiB per token (fp8 would run with uncalibrated scales)
+  MAX_MODEL_LEN: "65536"            # 64K: covers the measured agent calls (max 55K) and keeps 6 sequences per worker
+  MAX_NUM_SEQS: "6"                 # per worker: KV pool of 435K tokens / 64K
+  MAX_MEM_FRAC: "0.85"              # fraction of the worker's 39.5 GiB MIG instance
+  MAMBA_FULL_MEMORY_RATIO: "0.17"   # share of the pool kept for the recurrent states of this hybrid model (default 0.9 left 4 sequences)
+  HICACHE_WRITE_POLICY: "write_through"   # publish KV to host RAM and Mooncake as it is written, so the other worker can use it
+  MAX_QUEUED_REQUESTS: "1000000"    # effectively unbounded: the bound is the in-flight cap at the gateway
+  RADIX_EVICTION_POLICY: "lru"      # an agent loop reuses what it touched seconds ago
+  CHUNKED_PREFILL_SIZE: "4096"      # prefill tokens per engine step; smaller lets running decodes advance more often

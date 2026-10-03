@@ -1,0 +1,315 @@
+{
+ "admitted": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 245.63888888888886
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": 0.0
+  }
+ ],
+ "shed_by_reason": [
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "timeout_queue"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "timeout_queue"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "kv_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "kv_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "batch_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "batch_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "decode_capacity"
+   },
+   "value": 267.3497277777778
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "decode_capacity"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "ttft_cut"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "ttft_cut"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "tenant_tokens"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "tenant_tokens"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "tenant_concurrency"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "tenant_concurrency"
+   },
+   "value": 0.0
+  }
+ ],
+ "gateway_in_flight_max": [
+  {
+   "labels": {},
+   "value": 14.0
+  }
+ ],
+ "gateway_ttft_p99_s": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 23.84999999999998
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": NaN
+  }
+ ],
+ "engine_ttft_p99_s": [
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 13.550000000000018
+  },
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 17.739999999999988
+  }
+ ],
+ "engine_queue_max": [
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 2.0
+  },
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 2.0
+  }
+ ],
+ "engine_running_max": [
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 6.0
+  },
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 6.0
+  }
+ ],
+ "kv_used_max": [
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 0.5033398514242909
+  },
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 0.5523748905673037
+  }
+ ],
+ "retracted_max": [
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 0.0
+  }
+ ],
+ "prefill_tokens_by_source": [
+  {
+   "labels": {
+    "mode": "input",
+    "worker": "1"
+   },
+   "value": 1432839.3888888888
+  },
+  {
+   "labels": {
+    "mode": "device_hit",
+    "worker": "1"
+   },
+   "value": 1840848.6666666665
+  },
+  {
+   "labels": {
+    "mode": "host_hit",
+    "worker": "1"
+   },
+   "value": 1389314.0277777778
+  },
+  {
+   "labels": {
+    "mode": "storage_hit",
+    "worker": "1"
+   },
+   "value": 153821.3333333333
+  },
+  {
+   "labels": {
+    "mode": "input",
+    "worker": "0"
+   },
+   "value": 1391709.7777777778
+  },
+  {
+   "labels": {
+    "mode": "device_hit",
+    "worker": "0"
+   },
+   "value": 2079355.8055555553
+  },
+  {
+   "labels": {
+    "mode": "host_hit",
+    "worker": "0"
+   },
+   "value": 1407641.361111111
+  },
+  {
+   "labels": {
+    "mode": "storage_hit",
+    "worker": "0"
+   },
+   "value": 126284.08333333333
+  }
+ ],
+ "placement_by_worker": [],
+ "placement_sessions": [
+  {
+   "labels": {
+    "result": "new"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "result": "kept"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "result": "moved"
+   },
+   "value": 0.0
+  }
+ ],
+ "hicache_backup_tokens": [
+  {
+   "labels": {
+    "pool": "kv",
+    "worker": "1"
+   },
+   "value": 1094312.0
+  },
+  {
+   "labels": {
+    "pool": "mamba",
+    "worker": "1"
+   },
+   "value": 506.6944444444444
+  },
+  {
+   "labels": {
+    "pool": "kv",
+    "worker": "0"
+   },
+   "value": 1019059.1388888888
+  },
+  {
+   "labels": {
+    "pool": "mamba",
+    "worker": "0"
+   },
+   "value": 506.6944444444444
+  }
+ ]
+}

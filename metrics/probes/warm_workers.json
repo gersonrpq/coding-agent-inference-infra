@@ -1,0 +1,24 @@
+[
+  {
+    "port": 30000,
+    "cold_ttft_s": 0.297,
+    "round_mean_ttft_s": [
+      0.267,
+      0.262,
+      0.264
+    ],
+    "warm_ttft_s": 0.292,
+    "warm": true
+  },
+  {
+    "port": 30001,
+    "cold_ttft_s": 0.303,
+    "round_mean_ttft_s": [
+      0.29,
+      0.276,
+      0.264
+    ],
+    "warm_ttft_s": 0.296,
+    "warm": true
+  }
+]

@@ -33,6 +33,10 @@ spec:
               subPath: prometheus.yml
               readOnly: true
 
+            - name: prometheus-rules
+              mountPath: /etc/prometheus/rules
+              readOnly: true
+
             - name: litellm-secret
               mountPath: /etc/prometheus/secrets
               readOnly: true
@@ -44,6 +48,10 @@ spec:
         - name: prometheus-config
           configMap:
             name: prometheus-config
+
+        - name: prometheus-rules
+          configMap:
+            name: prometheus-rules
 
         - name: litellm-secret
           secret:

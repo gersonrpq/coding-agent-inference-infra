@@ -1,0 +1,332 @@
+{
+ "admitted": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 138.54166666666669
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": 0.0
+  }
+ ],
+ "shed_by_reason": [
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "timeout_queue"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "timeout_queue"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "kv_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "kv_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "batch_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "batch_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "decode_capacity"
+   },
+   "value": 431.25000000000006
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "decode_capacity"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "ttft_cut"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "ttft_cut"
+   },
+   "value": 0.0
+  }
+ ],
+ "gateway_queue_depth_max": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": 0.0
+  }
+ ],
+ "gateway_in_flight_max": [
+  {
+   "labels": {},
+   "value": 14.0
+  }
+ ],
+ "gateway_queue_wait_p99_s": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 0.0099
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": NaN
+  }
+ ],
+ "gateway_ttft_p99_s": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 49.04999999999991
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": NaN
+  }
+ ],
+ "engine_ttft_p99_s": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 4.860000000000005
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 39.17
+  }
+ ],
+ "engine_queue_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 1.0
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 7.0
+  }
+ ],
+ "engine_running_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 4.0
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 6.0
+  }
+ ],
+ "kv_used_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 0.26434343828915047
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 0.5989558799537683
+  }
+ ],
+ "retracted_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 0.0
+  }
+ ],
+ "prefill_tokens_by_source": [
+  {
+   "labels": {
+    "mode": "input",
+    "worker": "1"
+   },
+   "value": 269494.7916666667
+  },
+  {
+   "labels": {
+    "mode": "device_hit",
+    "worker": "1"
+   },
+   "value": 1832939.5833333335
+  },
+  {
+   "labels": {
+    "mode": "host_hit",
+    "worker": "1"
+   },
+   "value": 67802.08333333334
+  },
+  {
+   "labels": {
+    "mode": "storage_hit",
+    "worker": "1"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "mode": "input",
+    "worker": "0"
+   },
+   "value": 902842.7083333334
+  },
+  {
+   "labels": {
+    "mode": "device_hit",
+    "worker": "0"
+   },
+   "value": 1338133.3333333335
+  },
+  {
+   "labels": {
+    "mode": "host_hit",
+    "worker": "0"
+   },
+   "value": 1272767.7083333335
+  },
+  {
+   "labels": {
+    "mode": "storage_hit",
+    "worker": "0"
+   },
+   "value": 1400.0
+  }
+ ],
+ "placement_by_worker": [
+  {
+   "labels": {
+    "policy": "affinity",
+    "priority_class": "interactive",
+    "worker": "w0"
+   },
+   "value": 79.16666666666667
+  },
+  {
+   "labels": {
+    "policy": "affinity",
+    "priority_class": "interactive",
+    "worker": "w1"
+   },
+   "value": 59.37500000000001
+  }
+ ],
+ "placement_sessions": [
+  {
+   "labels": {
+    "result": "new"
+   },
+   "value": 20.833333333333336
+  },
+  {
+   "labels": {
+    "result": "kept"
+   },
+   "value": 114.88328333333332
+  },
+  {
+   "labels": {
+    "result": "moved"
+   },
+   "value": 0.0
+  }
+ ],
+ "hicache_backup_tokens": [
+  {
+   "labels": {
+    "pool": "kv",
+    "worker": "0"
+   },
+   "value": 598312.5
+  },
+  {
+   "labels": {
+    "pool": "mamba",
+    "worker": "0"
+   },
+   "value": 339.58333333333337
+  },
+  {
+   "labels": {
+    "pool": "kv",
+    "worker": "1"
+   },
+   "value": 192790.625
+  },
+  {
+   "labels": {
+    "pool": "mamba",
+    "worker": "1"
+   },
+   "value": 141.66666666666669
+  }
+ ]
+}

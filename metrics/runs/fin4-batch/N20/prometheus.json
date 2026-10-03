@@ -1,0 +1,320 @@
+{
+ "admitted": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 256.9444444444444
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": 18.5
+  }
+ ],
+ "shed_by_reason": [
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "timeout_queue"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "timeout_queue"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "kv_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "kv_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "batch_pressure"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "batch_pressure"
+   },
+   "value": 221.16584444444447
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "ttft_cut"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "ttft_cut"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "interactive",
+    "reason": "batch_share"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "priority_class": "batch",
+    "reason": "batch_share"
+   },
+   "value": 164.35260000000002
+  }
+ ],
+ "gateway_in_flight_max": [
+  {
+   "labels": {},
+   "value": 14.0
+  }
+ ],
+ "gateway_ttft_p99_s": [
+  {
+   "labels": {
+    "priority_class": "interactive"
+   },
+   "value": 9.912028644885009
+  },
+  {
+   "labels": {
+    "priority_class": "batch"
+   },
+   "value": 28.100000000000012
+  }
+ ],
+ "engine_ttft_p99_s": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 13.249999999999961
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 13.450000000000015
+  }
+ ],
+ "engine_queue_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 2.0
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 2.0
+  }
+ ],
+ "engine_running_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 6.0
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 6.0
+  }
+ ],
+ "kv_used_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 0.5433146675428941
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 0.5219796001369489
+  }
+ ],
+ "retracted_max": [
+  {
+   "labels": {
+    "worker": "1"
+   },
+   "value": 0.0
+  },
+  {
+   "labels": {
+    "worker": "0"
+   },
+   "value": 0.0
+  }
+ ],
+ "prefill_tokens_by_source": [
+  {
+   "labels": {
+    "mode": "input",
+    "worker": "1"
+   },
+   "value": 942297.7681159421
+  },
+  {
+   "labels": {
+    "mode": "device_hit",
+    "worker": "1"
+   },
+   "value": 3981810.2318840586
+  },
+  {
+   "labels": {
+    "mode": "host_hit",
+    "worker": "1"
+   },
+   "value": 593691.2753623188
+  },
+  {
+   "labels": {
+    "mode": "storage_hit",
+    "worker": "1"
+   },
+   "value": 29421.971014492756
+  },
+  {
+   "labels": {
+    "mode": "input",
+    "worker": "0"
+   },
+   "value": 889289.861111111
+  },
+  {
+   "labels": {
+    "mode": "device_hit",
+    "worker": "0"
+   },
+   "value": 4094158.944444444
+  },
+  {
+   "labels": {
+    "mode": "host_hit",
+    "worker": "0"
+   },
+   "value": 492888.3055555555
+  },
+  {
+   "labels": {
+    "mode": "storage_hit",
+    "worker": "0"
+   },
+   "value": 11576.888888888887
+  }
+ ],
+ "placement_by_worker": [
+  {
+   "labels": {
+    "policy": "affload",
+    "priority_class": "interactive",
+    "worker": "w1"
+   },
+   "value": 133.6111111111111
+  },
+  {
+   "labels": {
+    "policy": "affload",
+    "priority_class": "interactive",
+    "worker": "w0"
+   },
+   "value": 122.74699999999999
+  },
+  {
+   "labels": {
+    "policy": "affload",
+    "priority_class": "batch",
+    "worker": "w1"
+   },
+   "value": 8.323580952380953
+  },
+  {
+   "labels": {
+    "policy": "affload",
+    "priority_class": "batch",
+    "worker": "w0"
+   },
+   "value": 9.25
+  }
+ ],
+ "placement_sessions": [
+  {
+   "labels": {
+    "result": "new"
+   },
+   "value": 25.694444444444443
+  },
+  {
+   "labels": {
+    "result": "kept"
+   },
+   "value": 224.20344444444444
+  },
+  {
+   "labels": {
+    "result": "moved"
+   },
+   "value": 5.072805555555556
+  }
+ ],
+ "hicache_backup_tokens": [
+  {
+   "labels": {
+    "pool": "kv",
+    "worker": "1"
+   },
+   "value": 725711.5652173914
+  },
+  {
+   "labels": {
+    "pool": "mamba",
+    "worker": "1"
+   },
+   "value": 405.3913043478261
+  },
+  {
+   "labels": {
+    "pool": "kv",
+    "worker": "0"
+   },
+   "value": 831042.611111111
+  },
+  {
+   "labels": {
+    "pool": "mamba",
+    "worker": "0"
+   },
+   "value": 404.9444444444444
+  }
+ ]
+}

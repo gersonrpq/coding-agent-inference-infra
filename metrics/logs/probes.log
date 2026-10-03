@@ -1,0 +1,63 @@
+[15:55:16] deploy repo defaults
+[15:59:25] variant gate k=3 cut=0 checks=none
+== SGLang: MAX_QUEUED_REQUESTS 1000000 -> 3 (restarts both workers, ~3 min)
+configmap/sglang-config patched
+deployment.apps/sglang-worker-0 restarted
+deployment.apps/sglang-worker-1 restarted
+Waiting for deployment "sglang-worker-0" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "sglang-worker-0" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "sglang-worker-0" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "sglang-worker-0" rollout to finish: 0 of 1 updated replicas are available...
+deployment "sglang-worker-0" successfully rolled out
+deployment "sglang-worker-1" successfully rolled out
+== LiteLLM: ADMISSION_MODE=gate TTFT_CUT_S=0 ADMISSION_CHECKS=''
+Waiting for deployment "litellm" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "litellm" rollout to finish: 1 old replicas are pending termination...
+deployment "litellm" successfully rolled out
+sglang-config: MAX_QUEUED_REQUESTS=3
+FLEET_MAX_IN_FLIGHT=12
+BATCH_SHARE=0.75
+GATEWAY_QUEUE_MAX=64
+ADMISSION_MODE=gate
+ADMISSION_CHECKS=
+TTFT_CUT_S=0
+[16:03:43] === probe m1
+engine before: {'0': {'running': 0, 'queued': 0}, '1': {'running': 0, 'queued': 0}}
+engine at +3s: {'0': {'running': 0, 'queued': 0}, '1': {'running': 0, 'queued': 0}}
+
+== m1: 24 concurrent interactive calls
+  status=200 reason=served n=4 ttft=[3.0, 3.2, 3.2, 3.2] ends=[11.26, 11.34, 11.34, 11.36]
+  status=500 reason=None n=20 ttft=[] ends=[2.98, 2.98, 2.98, 2.98, 2.98, 2.98]
+     sample body: '{"error":{"message":"litellm.APIConnectionError: APIConnectionError: OpenAIException - The request queue is full.","type":null,"param":null,"code":"500"}}'
+[16:04:15] === probe m1b
+engine after the batch wave: {'0': {'running': 4, 'queued': 0}, '1': {'running': 4, 'queued': 0}}
+engine after the interactive wave: {'0': {'running': 5, 'queued': 0}, '1': {'running': 6, 'queued': 1}}
+
+== m1b batch (priority 8) wave
+  status=200 reason=served n=8 ttft=[1.2, 1.2, 1.2, 1.2, 1.5, 1.7, 1.7, 1.7] ends=[9.57, 9.57, 9.59, 9.59, 10.9, 10.9]
+  status=500 reason=None n=8 ttft=[] ends=[1.22, 1.23, 1.23, 1.23, 1.23, 1.24]
+     sample body: '{"error":{"message":"litellm.APIConnectionError: APIConnectionError: OpenAIException - The request queue is full.","type":null,"param":null,"code":"500"}}'
+
+== m1b interactive (priority 5) wave
+  status=200 reason=served n=4 ttft=[0.2, 1.0, 1.0, 3.1] ends=[2.23, 3.06, 3.1, 5.5]
+[16:04:46] === probe m3
+engine before the extra call: {'0': {'running': 6, 'queued': 0}, '1': {'running': 6, 'queued': 0}}
+engine with the extra call waiting: {'0': {'running': 6, 'queued': 1}, '1': {'running': 6, 'queued': 0}}
+engine 3 s after it left: {'0': {'running': 6, 'queued': 0}, '1': {'running': 6, 'queued': 0}}
+engine at the end: {'0': {'running': 0, 'queued': 0}, '1': {'running': 0, 'queued': 0}}
+[16:05:19] variant gate k=3 cut=4
+== SGLang: MAX_QUEUED_REQUESTS already 3
+== LiteLLM: ADMISSION_MODE=gate TTFT_CUT_S=4 ADMISSION_CHECKS=''
+Waiting for deployment "litellm" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "litellm" rollout to finish: 1 old replicas are pending termination...
+deployment "litellm" successfully rolled out
+sglang-config: MAX_QUEUED_REQUESTS=3
+FLEET_MAX_IN_FLIGHT=12
+BATCH_SHARE=0.75
+GATEWAY_QUEUE_MAX=64
+ADMISSION_MODE=gate
+ADMISSION_CHECKS=
+TTFT_CUT_S=4
+[16:05:42] === probe m2
+command terminated with exit code 137
+[16:05:44] PROBES_DONE

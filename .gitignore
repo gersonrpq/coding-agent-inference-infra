@@ -216,3 +216,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+app/.sessions/
+
+# metrics/ is part of the submission (scrapes, hop dictionary, eviction counts, 429/503, raw runs): it must NOT be ignored.
+# The general *.log rule above would hide its logs, so they are un-ignored here.
+!metrics/logs/*.log
+!metrics/runs/**/progress.log
+
+archive/
+
+# Internal: the course statement is not part of the repository
+HOMEWORK.md
+PRESENTATION_QA.md

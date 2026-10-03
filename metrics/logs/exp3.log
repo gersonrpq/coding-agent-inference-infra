@@ -1,0 +1,24 @@
+[17:13:08] counter mode with live override, no stateless checks
+ADMISSION_CHECKS=
+TTFT_CUT_S=0
+ADMISSION_ALLOW_OVERRIDE=1
+[17:13:31] === K sweep at N=24 (K = 0 2 4 6)
+snapshot written: metrics/runs/eq-k2-n24/K6/prometheus.json
+
+   K served/min ttft p50    p99  shed% shed wait p95 late>5s  reasons
+   0      37.67      2.4    7.2   76.1           0.3       0  {'decode_capacity': 360}
+   2       40.0      3.3   15.7   71.0           0.2       0  {'decode_capacity': 294}
+   4       37.0      6.3   18.3   61.9           0.2       0  {'decode_capacity': 180}
+   6       29.0     14.0   29.4   64.9           0.1       0  {'decode_capacity': 161}
+[17:32:19] === K sweep at N=20 (K = 0 2 4 6)
+snapshot written: metrics/runs/eq-k2-n20/K6/prometheus.json
+
+   K served/min ttft p50    p99  shed% shed wait p95 late>5s  reasons
+   0      45.67      1.7    6.2   61.2           0.2       0  {'decode_capacity': 216}
+   2      43.33      2.2   12.3   48.2           0.3       0  {'decode_capacity': 121}
+   4      36.33      5.7   17.1   22.7           0.2       0  {'decode_capacity': 32}
+   6      30.67      7.0   28.2    4.2           0.1       0  {'decode_capacity': 4}
+[17:51:07] restore repo defaults and reopen the forwards
+TTFT_CUT_S=0
+ADMISSION_ALLOW_OVERRIDE=0
+[17:51:34] EXP3_DONE

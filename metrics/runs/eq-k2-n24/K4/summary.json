@@ -1,0 +1,124 @@
+{
+ "sessions": 24,
+ "profile": "paper",
+ "window_s": 180.0,
+ "classes": {
+  "interactive": {
+   "worker_stickiness": 0.517,
+   "by_position": {
+    "session_start": {
+     "n": 0,
+     "ttft_p50": null,
+     "ttft_p99": null,
+     "cached_share": null
+    },
+    "turn_start": {
+     "n": 22,
+     "ttft_p50": 6.325275182723999,
+     "ttft_p99": 17.361026525497437,
+     "cached_share": 0.51
+    },
+    "within_turn": {
+     "n": 89,
+     "ttft_p50": 6.09149694442749,
+     "ttft_p99": 19.530603647232056,
+     "cached_share": 0.699
+    }
+   },
+   "ttft_p50_first_half": 5.614832878112793,
+   "ttft_p50_second_half": 6.3015851974487305,
+   "attempts": 291,
+   "served": 111,
+   "shed": 180,
+   "shed_by_reason": {
+    "decode_capacity": 180
+   },
+   "other_errors": 0,
+   "other_error_samples": [],
+   "shed_rate": 0.6186,
+   "shed_wait_p50": 0.0681147575378418,
+   "shed_wait_p95": 0.24260234832763672,
+   "shed_late_over_5s": 0,
+   "calls": 154,
+   "calls_abandoned": 43,
+   "ttft_p50": 6.3015851974487305,
+   "ttft_p95": 16.030553102493286,
+   "ttft_p99": 18.299438953399658,
+   "ttft_max": 19.530603647232056,
+   "ttft_within_slo": 1.0,
+   "total_p50": 19.3185031414032,
+   "total_p99": 69.90403628349304,
+   "prompt_tokens": 3974019,
+   "cached_tokens_reported": 2622875,
+   "completion_tokens": 41171,
+   "served_per_min": 37.0,
+   "prompt_tok_per_s": 22078,
+   "completion_tok_per_s": 228.7
+  },
+  "all": {
+   "worker_stickiness": 0.517,
+   "by_position": {
+    "session_start": {
+     "n": 0,
+     "ttft_p50": null,
+     "ttft_p99": null,
+     "cached_share": null
+    },
+    "turn_start": {
+     "n": 22,
+     "ttft_p50": 6.325275182723999,
+     "ttft_p99": 17.361026525497437,
+     "cached_share": 0.51
+    },
+    "within_turn": {
+     "n": 89,
+     "ttft_p50": 6.09149694442749,
+     "ttft_p99": 19.530603647232056,
+     "cached_share": 0.699
+    }
+   },
+   "ttft_p50_first_half": 5.614832878112793,
+   "ttft_p50_second_half": 6.3015851974487305,
+   "attempts": 291,
+   "served": 111,
+   "shed": 180,
+   "shed_by_reason": {
+    "decode_capacity": 180
+   },
+   "other_errors": 0,
+   "other_error_samples": [],
+   "shed_rate": 0.6186,
+   "shed_wait_p50": 0.0681147575378418,
+   "shed_wait_p95": 0.24260234832763672,
+   "shed_late_over_5s": 0,
+   "calls": 154,
+   "calls_abandoned": 43,
+   "ttft_p50": 6.3015851974487305,
+   "ttft_p95": 16.030553102493286,
+   "ttft_p99": 18.299438953399658,
+   "ttft_max": 19.530603647232056,
+   "ttft_within_slo": 1.0,
+   "total_p50": 19.3185031414032,
+   "total_p99": 69.90403628349304,
+   "prompt_tokens": 3974019,
+   "cached_tokens_reported": 2622875,
+   "completion_tokens": 41171,
+   "served_per_min": 37.0,
+   "prompt_tok_per_s": 22078,
+   "completion_tok_per_s": 228.7
+  }
+ },
+ "compactions": 21,
+ "turns_started": 60,
+ "start_epoch": 1790961775.803701,
+ "warmup_s": 60.0,
+ "duration_s": 240.0,
+ "verdict": {
+  "slo_ttft_s": 20.0,
+  "max_shed": 0.01,
+  "ttft_p99_ok": true,
+  "shed_ok": false,
+  "steady_state": true,
+  "pass": false
+ }
+}

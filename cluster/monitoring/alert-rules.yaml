@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-rules
+  namespace: gpu-serving
+data:
+  alerts.yml: |
+    # Four alerts (ARCHITECTURE.md, Alerts). No Alertmanager: they are visible at /alerts in Prometheus.
+    groups:
+      - name: coding-agent-serving
+        rules:
+          - alert: CapacityShedRateHigh
+            expr: |
+              (sum(rate(litellm_orch_requests_shed_total{reason="kv_pressure"}[5m])) + sum(rate(litellm_litellm_admission_rejected_requests_total{reason="queue_full"}[5m])))
+                / clamp_min(sum(rate(litellm_orch_requests_shed_total[5m])) + sum(rate(litellm_orch_requests_admitted_total[5m])) + sum(rate(litellm_litellm_admission_rejected_requests_total[5m])), 0.001)
+              > 0.05
+            for: 5m
+            labels: {severity: page}
+            annotations:
+              summary: "More than 5% of requests are refused for capacity (the 14-request cap: queue_full, or kv_pressure)"
+              action: "The fleet is at its limit: check KV, the in-flight cap and the overflow share; do not lengthen the queue."
+
+          - alert: InteractiveTTFTSLOBreach
+            expr: |
+              histogram_quantile(0.99, sum by (le) (rate(litellm_orch_request_ttft_seconds_bucket{priority_class="interactive"}[5m]))) > 20
+            for: 10m
+            labels: {severity: page}
+            annotations:
+              summary: "Interactive TTFT p99 above the 20 s SLO"
+              action: "Priority is no longer protecting the user: look at batch share, retractions and the cache hit rate."
+
+          - alert: KVPressureWithRetractions
+            expr: |
+              max(litellm_orch_replica_kv_used_ratio) > 0.9 and max(max_over_time(sglang:num_retracted_reqs[5m])) > 0
+            for: 5m
+            labels: {severity: ticket}
+            annotations:
+              summary: "KV above 90% while the engine retracts requests"
+              action: "The engine is re-doing prefill work: shed new prefixes earlier or lower the in-flight cap."
+
+          - alert: StaleOrMissingTelemetry
+            expr: |
+              max(litellm_orch_fleet_snapshot_age_seconds) > 45 or min(up{job="sglang"}) == 0
+            for: 2m
+            labels: {severity: page}
+            annotations:
+              summary: "Fleet telemetry is stale or a worker stopped answering /metrics"
+              action: "Every admission decision is running on old data; check the poller and the workers."

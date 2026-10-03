@@ -1,0 +1,66 @@
+[16:30:53] deploy repo (guard with images, override code)
+[16:31:43] counter mode, override on, no stateless checks
+== SGLang: MAX_QUEUED_REQUESTS already 1000000
+== LiteLLM: ADMISSION_MODE=queue FLEET_MAX_IN_FLIGHT=12 GATEWAY_QUEUE_MAX=0 TTFT_CUT_S=0 ADMISSION_CHECKS=''
+Waiting for deployment "litellm" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "litellm" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "litellm" rollout to finish: 1 old replicas are pending termination...
+deployment "litellm" successfully rolled out
+sglang-config: MAX_QUEUED_REQUESTS=1000000
+FLEET_MAX_IN_FLIGHT=12
+BATCH_SHARE=0.75
+GATEWAY_QUEUE_MAX=0
+ADMISSION_MODE=queue
+ADMISSION_CHECKS=
+TTFT_CUT_S=0
+ADMISSION_ALLOW_OVERRIDE=1
+[16:32:12] live checks
+== multimodal through the gateway
+  red 64x64: HTTP 200 answer='Red.' prompt_tokens=89
+  blue 512x512: HTTP 200 answer='Blue' prompt_tokens=281
+  remote URL -> 400 {"error":{"message":"Remote image URLs are not accepted: send the image as a data: URI","type":"invalid_request_error","param":null,"code":"
+  text parts as a list -> 200
+== live override of the queue limits
+Traceback (most recent call last):
+  File "/tmp/live_checks.py", line 28, in <module>
+    print("  capacity before:", cap())
+                                ~~~^^
+  File "/tmp/live_checks.py", line 15, in cap
+    txt = urllib.request.urlopen("http://localhost:4000/metrics", timeout=10).read().decode()
+          ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/urllib/request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/urllib/request.py", line 495, in open
+    response = meth(req, response)
+  File "/usr/lib/python3.13/urllib/request.py", line 604, in http_response
+    response = self.parent.error(
+        'http', request, response, code, msg, hdrs)
+  File "/usr/lib/python3.13/urllib/request.py", line 533, in error
+    return self._call_chain(*args)
+           ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/usr/lib/python3.13/urllib/request.py", line 466, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.13/urllib/request.py", line 613, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 401: Unauthorized
+command terminated with exit code 1
+[16:32:15] === reference r0 at N=20
+== K=r0  (fleet places 12, gateway holds up to 64)  N=20  240s
+interactive attempts=143 served=134 shed=9 {'timeout_queue': 9} abandoned=0/134 ttft p50/p95/p99=6.98/11.32/12.48s in-slo=1.0
+all         attempts=143 served=134 shed=9 {'timeout_queue': 9} abandoned=0/134 ttft p50/p95/p99=6.98/11.32/12.48s in-slo=1.0
+verdict: {'slo_ttft_s': 20.0, 'max_shed': 0.01, 'ttft_p99_ok': True, 'shed_ok': False, 'steady_state': True, 'pass': False}
+snapshot written: metrics/runs/eq-ref-n20/Kr0/prometheus.json
+
+   K served/min ttft p50    p99  shed% shed wait p95 late>5s  reasons
+  r0      44.67      7.0   12.5    6.3          10.8       9  {'timeout_queue': 9}
+[16:36:45] === reference r0 at N=28
+== K=r0  (fleet places 12, gateway holds up to 64)  N=28  240s
+interactive attempts=200 served=87 shed=113 {'timeout_queue': 113} abandoned=23/110 ttft p50/p95/p99=12.59/15.54/20.01s in-slo=0.9885
+all         attempts=200 served=87 shed=113 {'timeout_queue': 113} abandoned=23/110 ttft p50/p95/p99=12.59/15.54/20.01s in-slo=0.9885
+verdict: {'slo_ttft_s': 20.0, 'max_shed': 0.01, 'ttft_p99_ok': False, 'shed_ok': False, 'steady_state': True, 'pass': False}
+snapshot written: metrics/runs/eq-ref-n28/Kr0/prometheus.json
+
+   K served/min ttft p50    p99  shed% shed wait p95 late>5s  reasons
+  r0       29.0     12.6   20.0   56.5          10.2     113  {'timeout_queue': 113}
+[16:41:38] EXP1_DONE

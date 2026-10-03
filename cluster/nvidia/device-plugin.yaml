@@ -29,11 +29,14 @@ spec:
         - name: nvidia-device-plugin
           image: nvcr.io/nvidia/k8s-device-plugin:v0.17.4
 
-          # only when using less gpu for developing
-          args:
-            - --config-file=/config/config.yaml
-
           env:
+            # setup/mig.sh splits the H100 into 2 x 3g.40gb; each MIG instance is advertised as one nvidia.com/gpu.
+            - name: MIG_STRATEGY
+              value: single
+            # needed to read MIG instance memory
+            - name: NVIDIA_MIG_MONITOR_DEVICES
+              value: all
+
             - name: DEVICE_LIST_STRATEGY
               value: envvar
 
@@ -41,10 +44,8 @@ spec:
               value: compute,utility
 
           securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
+            # MIG discovery needs /dev/nvidia-caps; CAP_SYS_ADMIN alone was not enough on K3s
+            privileged: true
 
           resources:
             requests:
@@ -58,23 +59,13 @@ spec:
             - name: device-plugin
               mountPath: /var/lib/kubelet/device-plugins
 
-            # only when using less gpu for developing
-            - name: config
-              mountPath: /config
-
       volumes:
         - name: device-plugin
           hostPath:
             path: /var/lib/kubelet/device-plugins
             type: Directory
 
-        # only when using less gpu for developing
-        - name: config
-          configMap:
-            name: nvidia-device-plugin-config
-
-      # No hace falta poner runtimeClassName:
-      # K3s ya tiene NVIDIA como default runtime.
+      # no runtimeClassName: K3s already uses the NVIDIA runtime by default
 
   updateStrategy:
     type: RollingUpdate

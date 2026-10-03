@@ -1,0 +1,7 @@
+{
+  "defaultProvider": "litellm",
+  "defaultModel": "qwen-coding-local",
+  "defaultThinkingLevel": "off",
+  "quietStartup": true,
+  "enableInstallTelemetry": false
+}

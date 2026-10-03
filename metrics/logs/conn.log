@@ -1,0 +1,81 @@
+[16:06:14] variant: SGLang queue unbounded, gate mode, first-token cut 4 s, no stateless checks
+== SGLang: MAX_QUEUED_REQUESTS 3 -> 1000000 (restarts both workers, ~3 min)
+configmap/sglang-config patched
+deployment.apps/sglang-worker-0 restarted
+deployment.apps/sglang-worker-1 restarted
+Waiting for deployment "sglang-worker-0" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "sglang-worker-0" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "sglang-worker-0" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "sglang-worker-0" rollout to finish: 0 of 1 updated replicas are available...
+deployment "sglang-worker-0" successfully rolled out
+deployment "sglang-worker-1" successfully rolled out
+== LiteLLM: ADMISSION_MODE=gate TTFT_CUT_S=4 ADMISSION_CHECKS=''
+deployment "litellm" successfully rolled out
+sglang-config: MAX_QUEUED_REQUESTS=1000000
+FLEET_MAX_IN_FLIGHT=12
+BATCH_SHARE=0.75
+GATEWAY_QUEUE_MAX=64
+ADMISSION_MODE=gate
+ADMISSION_CHECKS=
+TTFT_CUT_S=4
+[16:09:53] pod litellm-6c4fdd5596-nlqgl
+[16:09:54] === s1
+
+== s1: streaming client leaves at 3 s while running (max_tokens=800)
+   events: {'client_disconnected_at_s': 5.0}
+   t(s)  running queued tokens_generated_since_start
+     0.1       0      0        0
+     2.9       1      0        0
+     5.2       0      0        0
+   total tokens generated: 0
+   VERDICT: upstream closed (generation stopped early)
+--- SGLang abort lines during s1:
+[16:11:06] === s2
+
+== s2: non-streaming client leaves at 3 s while running (max_tokens=800)
+   events: {'client_disconnected_at_s': 3.1}
+   t(s)  running queued tokens_generated_since_start
+     0.1       0      0        0
+     0.6       1      0        0
+     4.6       0      0      215
+   total tokens generated: 215
+   VERDICT: upstream closed (generation stopped early)
+--- SGLang abort lines during s2:
+[16:12:15] === s3
+
+== s3: client leaves while its request is QUEUED in SGLang
+   events: {'queued_before_leave': 3.0, 'left_at_s': 3.9}
+   t(s)  running queued tokens_generated_since_start
+     0.1       0      0        0
+     1.2       6      1        0
+     1.8       7      2        0
+     2.4      12      2        0
+     3.6      12      3        0
+     7.0      12      2        0
+    13.4       7      1        0
+    14.0       1      0        0
+    14.6       2      0        0
+    24.7       1      0        0
+    25.3       0      0        0
+   total tokens generated: 0
+--- SGLang abort lines during s3:
+[16:13:15] === s4
+
+== s4: LiteLLM cuts a QUEUED request at TTFT_CUT_S (expected tokens if the cut frees the place: 14 x 600 = 8400)
+   events: {'interactive_status': 408, 'answered_after_s': 4.2, 'ttft': None, 'error': '{"error":{"message":"litellm.Timeout: APITimeoutError - Request timed out. Error_str: Request timed out.\\n\\nDeployment Info: request_timeout'}
+   t(s)  running queued tokens_generated_since_start
+     0.1       0      0        0
+     0.7       1      1        0
+     1.3       7      2        0
+     1.9      12      2        0
+     3.7      12      3        0
+    11.9      12      2        0
+    13.1       7      1        0
+    13.7       1      0        0
+    14.3       2      0        0
+    24.4       1      0        0
+    25.0       0      0        0
+   total tokens generated: 0
+   VERDICT: the cut removed the request from SGLang
+--- SGLang abort lines during s4:
+[16:14:24] CONN_DONE

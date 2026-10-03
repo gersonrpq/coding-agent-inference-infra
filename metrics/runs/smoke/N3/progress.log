@@ -1,0 +1,5 @@
+[    30s] last30s attempts=6 ok=6 shed=0 ttft_p99=2.9
+[    60s] last30s attempts=6 ok=6 shed=0 ttft_p99=1.9
+[    90s] last30s attempts=1 ok=1 shed=0 ttft_p99=0.9
+[   120s] last30s attempts=6 ok=6 shed=0 ttft_p99=1.0
+{"sessions": 3, "profile": "light", "window_s": 100.0, "compactions": 0}

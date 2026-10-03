@@ -1,0 +1,15 @@
+12 long requests sent; waiting for the KV to fill ...
+extra requests sent at 25 s, KV now {'w0': (83.4, 6, 0, 0), 'w1': (83.3, 6, 0, 0)}
+KV used, worst worker, peak: 84.6 %   engine retractions seen: 0
+every 10 s (second, {worker: kv %, running, waiting, retracted}):
+  0 {'w0': (0.0, 0, 0, 0), 'w1': (0.0, 0, 0, 0)}
+  11 {'w0': (82.9, 6, 0, 0), 'w1': (82.8, 6, 0, 0)}
+  22 {'w0': (83.3, 6, 0, 0), 'w1': (83.3, 6, 0, 0)}
+  33 {'w0': (83.7, 6, 1, 0), 'w1': (83.6, 6, 0, 0)}
+  44 {'w0': (84.1, 6, 1, 0), 'w1': (84.0, 6, 0, 0)}
+  55 {'w0': (84.5, 6, 1, 0), 'w1': (84.5, 6, 0, 0)}
+long requests: [200] statuses; slowest 63.7 s
+new-prefix: HTTP 503 in 0.1 s  shed-reason=kv_pressure {"error":{"message":"Fleet KV usage is 83% and the prefix is new. Try again later.","type":"internal
+reused-prefix: HTTP 200 in 35.8 s  shed-reason=None 
+orch_requests_shed_total{priority_class="interactive",reason="kv_pressure",status_code="503"} 1.0
+orch_requests_shed_total{priority_class="batch",reason="kv_pressure",status_code="503"} 0.0

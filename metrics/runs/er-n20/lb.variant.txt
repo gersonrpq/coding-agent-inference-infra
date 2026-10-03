@@ -1,0 +1,5 @@
+== variant lb
+routing_strategy: least-busy
+FLEET_MAX_IN_FLIGHT=12
+PLACEMENT_POLICY=litellm
+PLACEMENT_SLACK=3

@@ -1,0 +1,32 @@
+{
+ "sessions": 20,
+ "window_s": 300.0,
+ "price_per_hour": 3.29,
+ "gpu_cost_usd_for_window": 0.2742,
+ "avg_power_w": 328.5,
+ "idle_power_w": 84.2,
+ "energy_wh": 27.37,
+ "slot_utilization": 0.799,
+ "served_calls": 224,
+ "prompt_tokens": 8800359,
+ "cached_prompt_tokens": 7799615,
+ "uncached_prompt_tokens": 1000744,
+ "cached_share": 0.886,
+ "completion_tokens": 80609,
+ "usd_per_1k_served_calls": 1.224,
+ "usd_per_1M_prompt_tokens_all": 0.031,
+ "usd_per_1M_prompt_tokens_uncached": 0.274,
+ "usd_per_1M_completion_tokens": 3.401,
+ "usd_per_session_hour": 0.1645,
+ "overflow_bill_no_cache_discount_usd": 2.3613,
+ "local_over_overflow_no_cache_discount": 0.12,
+ "overflow_bill_cached_at_10pct_usd": 0.6064,
+ "local_over_overflow_cached_at_10pct": 0.45,
+ "notes": [
+  "gpu cost = hourly price x window (the machine is billed whether busy or not)",
+  "the per-token figures divide the whole bill by one kind of token each; do not add them",
+  "overflow: same traffic at the Superlinked rates; whether cached tokens are discounted is unknown, so both cases are shown",
+  "local is cheaper than overflow when local_over_overflow_* < 1",
+  "slot_utilization = served-call seconds / (window x slots); low utilization makes every per-token cost look high"
+ ]
+}

@@ -14,6 +14,8 @@ if [[ ! -r "$KUBECONFIG" ]]; then
   exit 1
 fi
 
+echo "== MIG (1 GPU -> 2 x 3g.40gb) =="
+bash "$(dirname "$0")/mig.sh"
+
 echo "== NVIDIA DEAMONSET =="
-kubectl apply -f cluster/nvidia/config.yaml
 kubectl apply -f cluster/nvidia/device-plugin.yaml

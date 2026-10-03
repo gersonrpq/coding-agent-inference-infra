@@ -1,0 +1,178 @@
+{
+ "sessions": 20,
+ "profile": "paper",
+ "window_s": 300.0,
+ "classes": {
+  "interactive": {
+   "worker_stickiness": 0.916,
+   "by_position": {
+    "session_start": {
+     "n": 0,
+     "ttft_p50": null,
+     "ttft_p99": null,
+     "cached_share": null
+    },
+    "turn_start": {
+     "n": 26,
+     "ttft_p50": 1.4657559394836426,
+     "ttft_p99": 7.123738765716553,
+     "cached_share": 0.835
+    },
+    "within_turn": {
+     "n": 178,
+     "ttft_p50": 1.2750167846679688,
+     "ttft_p99": 7.702029228210449,
+     "cached_share": 0.882
+    }
+   },
+   "ttft_p50_first_half": 1.6659584045410156,
+   "ttft_p50_second_half": 1.2142746448516846,
+   "attempts": 337,
+   "served": 204,
+   "shed": 133,
+   "shed_by_reason": {
+    "queue_full": 133
+   },
+   "other_errors": 0,
+   "other_error_samples": [],
+   "shed_rate": 0.3947,
+   "shed_wait_p50": 0.006826162338256836,
+   "shed_wait_p95": 0.1226809024810791,
+   "shed_late_over_5s": 0,
+   "calls": 230,
+   "calls_abandoned": 26,
+   "ttft_p50": 1.2967450618743896,
+   "ttft_p95": 5.871673583984375,
+   "ttft_p99": 7.123738765716553,
+   "ttft_max": 10.64523196220398,
+   "ttft_within_slo": 1.0,
+   "total_p50": 10.867737293243408,
+   "total_p99": 38.89582180976868,
+   "prompt_tokens": 7901645,
+   "cached_tokens_reported": 6920623,
+   "completion_tokens": 71002,
+   "served_per_min": 40.8,
+   "prompt_tok_per_s": 26339,
+   "completion_tok_per_s": 236.7
+  },
+  "batch": {
+   "worker_stickiness": 0.588,
+   "by_position": {
+    "session_start": {
+     "n": 1,
+     "ttft_p50": 6.338184356689453,
+     "ttft_p99": 6.338184356689453,
+     "cached_share": 0.175
+    },
+    "turn_start": {
+     "n": 9,
+     "ttft_p50": 2.595083713531494,
+     "ttft_p99": 14.521970987319946,
+     "cached_share": 0.786
+    },
+    "within_turn": {
+     "n": 30,
+     "ttft_p50": 2.284712076187134,
+     "ttft_p99": 8.470389127731323,
+     "cached_share": 0.866
+    }
+   },
+   "ttft_p50_first_half": 2.6333250999450684,
+   "ttft_p50_second_half": 1.8136894702911377,
+   "attempts": 253,
+   "served": 40,
+   "shed": 213,
+   "shed_by_reason": {
+    "queue_full": 54,
+    "batch_pressure": 159
+   },
+   "other_errors": 0,
+   "other_error_samples": [],
+   "shed_rate": 0.8419,
+   "shed_wait_p50": 0.07477521896362305,
+   "shed_wait_p95": 0.32860493659973145,
+   "shed_late_over_5s": 0,
+   "calls": 106,
+   "calls_abandoned": 66,
+   "ttft_p50": 2.3025553226470947,
+   "ttft_p95": 6.373477935791016,
+   "ttft_p99": 14.521970987319946,
+   "ttft_max": 14.521970987319946,
+   "ttft_within_slo": 1.0,
+   "total_p50": 11.453094482421875,
+   "total_p99": 42.69794201850891,
+   "prompt_tokens": 1482868,
+   "cached_tokens_reported": 1219904,
+   "completion_tokens": 12920,
+   "served_per_min": 8.0,
+   "prompt_tok_per_s": 4943,
+   "completion_tok_per_s": 43.1
+  },
+  "all": {
+   "worker_stickiness": 0.866,
+   "by_position": {
+    "session_start": {
+     "n": 1,
+     "ttft_p50": 6.338184356689453,
+     "ttft_p99": 6.338184356689453,
+     "cached_share": 0.175
+    },
+    "turn_start": {
+     "n": 35,
+     "ttft_p50": 2.1298153400421143,
+     "ttft_p99": 14.521970987319946,
+     "cached_share": 0.824
+    },
+    "within_turn": {
+     "n": 208,
+     "ttft_p50": 1.3281877040863037,
+     "ttft_p99": 7.702029228210449,
+     "cached_share": 0.88
+    }
+   },
+   "ttft_p50_first_half": 1.764458179473877,
+   "ttft_p50_second_half": 1.228647232055664,
+   "attempts": 590,
+   "served": 244,
+   "shed": 346,
+   "shed_by_reason": {
+    "queue_full": 187,
+    "batch_pressure": 159
+   },
+   "other_errors": 0,
+   "other_error_samples": [],
+   "shed_rate": 0.5864,
+   "shed_wait_p50": 0.048976898193359375,
+   "shed_wait_p95": 0.31284189224243164,
+   "shed_late_over_5s": 0,
+   "calls": 336,
+   "calls_abandoned": 92,
+   "ttft_p50": 1.4410316944122314,
+   "ttft_p95": 6.039899826049805,
+   "ttft_p99": 8.470389127731323,
+   "ttft_max": 14.521970987319946,
+   "ttft_within_slo": 1.0,
+   "total_p50": 10.932182788848877,
+   "total_p99": 40.297430753707886,
+   "prompt_tokens": 9384513,
+   "cached_tokens_reported": 8140527,
+   "completion_tokens": 83922,
+   "served_per_min": 48.8,
+   "prompt_tok_per_s": 31282,
+   "completion_tok_per_s": 279.7
+  }
+ },
+ "compactions": 25,
+ "turns_started": 68,
+ "start_epoch": 1790980888.7135875,
+ "warmup_s": 60.0,
+ "duration_s": 360.0,
+ "verdict": {
+  "slo_ttft_s": 20.0,
+  "max_shed": 0.01,
+  "ttft_p99_ok": true,
+  "shed_ok": false,
+  "steady_state": true,
+  "pass": false
+ }
+}

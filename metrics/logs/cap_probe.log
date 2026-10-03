@@ -1,0 +1,9 @@
+cap under test: 14
+gauge before: (200, {'litellm_admission_admitted_requests': '0.0', 'litellm_admission_queued_requests': '0.0'})
+gauge with the cap full: (200, {'litellm_admission_admitted_requests': '14.0', 'litellm_admission_queued_requests': '0.0'})
+request 15: HTTP 503 in 0.0 s  (expected 503, at once)  1 {"error":{"message":"Worker at capacity: 14 in-flight, 0 queued requests. Retry later.","type":"overloaded_error","code"
+GET /metrics/ with the cap full: HTTP 200 in 0.04 s  (predicted 503: the middleware counts it)
+GET /health/liveliness with the cap full: HTTP 200 in 0.0 s  (exempt, must be 200)
+the 14 held requests: statuses [200]
+a new request after they finished: HTTP 200 in 0.4 s  (expected 200: the place came back)
+gauge after: (200, {'litellm_admission_admitted_requests': '0.0', 'litellm_admission_queued_requests': '0.0', 'litellm_admission_rejected_requests_total{reason="queue_full"}': '1.0', 'litellm_admission_rejected_requests_created{reason="queue_full"}': '1.790978532983831e+09'})

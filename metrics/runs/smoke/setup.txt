@@ -1,0 +1,6 @@
+tag=smoke profile=light counts=3 duration=120 extra=--ramp 10 --turn-idle 8
+date=2026-10-02T14:32:45+00:00
+{"HICACHE_WRITE_POLICY":"write_through","KV_CACHE_DTYPE":"auto","MAMBA_FULL_MEMORY_RATIO":"0.17","MAX_MEM_FRAC":"0.85","MAX_MODEL_LEN":"65536","MAX_NUM_SEQS":"6","MODEL_NAME":"Qwen/Qwen3.5-9B"}
+FLEET_MAX_IN_FLIGHT=12
+BATCH_SHARE=0.75
+GATEWAY_QUEUE_MAX=64

@@ -1,0 +1,10 @@
+== idle GPU baseline (30 s) ==
+== N=3 sessions, profile=light, 120s ==
+interactive attempts=24 served=24 shed=0 {} abandoned=0/24 ttft p50/p95/p99=0.51/1.12/1.86s in-slo=1.0
+all         attempts=24 served=24 shed=0 {} abandoned=0/24 ttft p50/p95/p99=0.51/1.12/1.86s in-slo=1.0
+verdict: {'slo_ttft_s': 20.0, 'max_shed': 0.01, 'ttft_p99_ok': True, 'shed_ok': True, 'pass': True}
+snapshot written: metrics/runs/smoke/N3/prometheus.json
+   N=  3 pass=True ttft p50/p99=0.5/1.9s shed=0.0 {} served/min=14.4 $/1Mout=8.582 avgW=251.3
+   (exit code of loadgen: 0; 0 = verdict pass, 2 = fail)
+done: metrics/runs/smoke
+FINISHED

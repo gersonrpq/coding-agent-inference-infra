@@ -1,0 +1,14 @@
+tenant  call  status  seconds
+acme       0     200  3.98
+acme       1     200  3.96
+acme       2     200  3.94
+acme       3     429  0.03
+acme       4     429  0.02
+acme       5     429  0.02
+beta       0     200  3.94
+acme statuses: [200, 200, 200, 429, 429, 429] | beta statuses: [200]
+--- LiteLLM counters per key alias
+  tenant-acme HTTP 429: 3.0
+  tenant-acme HTTP 200: 1.0
+  tenant-acme HTTP 200: 2.0
+  tenant-beta HTTP 200: 1.0

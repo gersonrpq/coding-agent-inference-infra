@@ -7,6 +7,8 @@ rsync -avz -e "ssh -i $LAMBDA_SSH_KEY -o StrictHostKeyChecking=accept-new" \
   --exclude '__pycache__' \
   --exclude '.pytest_cache' \
   --exclude '.env' \
+  --exclude '.venv' \
+  --exclude '.git' \
   ./ \
   "$LAMBDA:~/final_project/"
 echo "Synced."

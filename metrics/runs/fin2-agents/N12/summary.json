@@ -1,0 +1,139 @@
+{
+ "sessions": 12,
+ "profile": "agent",
+ "window_s": 300.0,
+ "classes": {
+  "interactive": {
+   "worker_stickiness": 0.905,
+   "by_position": {
+    "session_start": {
+     "n": 0,
+     "ttft_p50": null,
+     "ttft_p99": null,
+     "cached_share": null
+    },
+    "turn_start": {
+     "n": 76,
+     "ttft_p50": 0.8947174549102783,
+     "ttft_p99": 4.278720378875732,
+     "cached_share": 0.819
+    },
+    "within_turn": {
+     "n": 114,
+     "ttft_p50": 0.7237527370452881,
+     "ttft_p99": 1.9034807682037354,
+     "cached_share": 0.92
+    }
+   },
+   "ttft_p50_first_half": 0.7517359256744385,
+   "ttft_p50_second_half": 0.7617461681365967,
+   "attempts": 200,
+   "served": 190,
+   "shed": 0,
+   "shed_by_reason": {},
+   "other_errors": 10,
+   "other_error_samples": [
+    "{\"error\":{\"message\":\"litellm.BadRequestError: OpenAIException - Assistant tool c"
+   ],
+   "shed_rate": 0.0,
+   "shed_wait_p50": null,
+   "shed_wait_p95": null,
+   "shed_late_over_5s": 0,
+   "calls": 200,
+   "calls_abandoned": 10,
+   "ttft_p50": 0.7617461681365967,
+   "ttft_p95": 2.3875560760498047,
+   "ttft_p99": 3.4832496643066406,
+   "ttft_max": 4.278720378875732,
+   "ttft_within_slo": 1.0,
+   "total_p50": 3.0204155445098877,
+   "total_p99": 26.521722078323364,
+   "prompt_tokens": 5499916,
+   "cached_tokens_reported": 4844288,
+   "completion_tokens": 43425,
+   "served_per_min": 38.0,
+   "prompt_tok_per_s": 18333,
+   "completion_tok_per_s": 144.8
+  },
+  "all": {
+   "worker_stickiness": 0.905,
+   "by_position": {
+    "session_start": {
+     "n": 0,
+     "ttft_p50": null,
+     "ttft_p99": null,
+     "cached_share": null
+    },
+    "turn_start": {
+     "n": 76,
+     "ttft_p50": 0.8947174549102783,
+     "ttft_p99": 4.278720378875732,
+     "cached_share": 0.819
+    },
+    "within_turn": {
+     "n": 114,
+     "ttft_p50": 0.7237527370452881,
+     "ttft_p99": 1.9034807682037354,
+     "cached_share": 0.92
+    }
+   },
+   "ttft_p50_first_half": 0.7517359256744385,
+   "ttft_p50_second_half": 0.7617461681365967,
+   "attempts": 200,
+   "served": 190,
+   "shed": 0,
+   "shed_by_reason": {},
+   "other_errors": 10,
+   "other_error_samples": [
+    "{\"error\":{\"message\":\"litellm.BadRequestError: OpenAIException - Assistant tool c"
+   ],
+   "shed_rate": 0.0,
+   "shed_wait_p50": null,
+   "shed_wait_p95": null,
+   "shed_late_over_5s": 0,
+   "calls": 200,
+   "calls_abandoned": 10,
+   "ttft_p50": 0.7617461681365967,
+   "ttft_p95": 2.3875560760498047,
+   "ttft_p99": 3.4832496643066406,
+   "ttft_max": 4.278720378875732,
+   "ttft_within_slo": 1.0,
+   "total_p50": 3.0204155445098877,
+   "total_p99": 26.521722078323364,
+   "prompt_tokens": 5499916,
+   "cached_tokens_reported": 4844288,
+   "completion_tokens": 43425,
+   "served_per_min": 38.0,
+   "prompt_tok_per_s": 18333,
+   "completion_tok_per_s": 144.8
+  }
+ },
+ "compactions": 0,
+ "turns_started": 0,
+ "start_epoch": 1790979441.876717,
+ "warmup_s": 60.0,
+ "duration_s": 360.0,
+ "verdict": {
+  "slo_ttft_s": 20.0,
+  "max_shed": 0.01,
+  "ttft_p99_ok": true,
+  "shed_ok": true,
+  "steady_state": true,
+  "pass": true
+ },
+ "agent": {
+  "turns_finished": 93,
+  "turns_cut_or_lost": 13,
+  "steps_per_finished_turn_p50": 2,
+  "steps_per_finished_turn_max": 12,
+  "tool_calls_by_name": {
+   "read_file": 109,
+   "grep": 43,
+   "list_dir": 52
+  },
+  "malformed_tool_calls": 1,
+  "tool_result_tokens_p50": 649,
+  "tool_result_tokens_p95": 5013,
+  "compactions": 0
+ }
+}

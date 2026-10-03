@@ -1,0 +1,14 @@
+[16:42:51] K sweep at N=28 (r0 is already measured at N=28 in eq-ref-n28)
+snapshot written: metrics/runs/eq-k-n28/K16/prometheus.json
+== K=24  (fleet places 36, gateway holds up to 0)  N=28  240s
+interactive attempts=62 served=62 shed=0 {} abandoned=0/62 ttft p50/p95/p99=39.87/50.97/60.27s in-slo=0.0
+all         attempts=62 served=62 shed=0 {} abandoned=0/62 ttft p50/p95/p99=39.87/50.97/60.27s in-slo=0.0
+verdict: {'slo_ttft_s': 20.0, 'max_shed': 0.01, 'ttft_p99_ok': False, 'shed_ok': True, 'steady_state': True, 'pass': False}
+snapshot written: metrics/runs/eq-k-n28/K24/prometheus.json
+
+   K served/min ttft p50    p99  shed% shed wait p95 late>5s  reasons
+   4       24.0     12.3   23.1   87.2           0.1       0  {'decode_capacity': 490}
+  10      27.67     22.9   36.2   58.5           0.1       0  {'decode_capacity': 117}
+  16      28.67     28.2   44.6    0.0             -       0  {}
+  24      20.67     39.9   60.3    0.0             -       0  {}
+[17:03:07] EXP2_DONE

@@ -1,0 +1,5 @@
+tag=fin3-batch profile=paper counts=20 duration=360 extra=--batch-share 0.2
+date=2026-10-02T22:40:58+00:00
+{"CHUNKED_PREFILL_SIZE":"4096","HICACHE_WRITE_POLICY":"write_through","KV_CACHE_DTYPE":"auto","MAMBA_FULL_MEMORY_RATIO":"0.17","MAX_MEM_FRAC":"0.85","MAX_MODEL_LEN":"65536","MAX_NUM_SEQS":"6","MAX_QUEUED_REQUESTS":"1000000","MODEL_NAME":"Qwen/Qwen3.5-9B","RADIX_EVICTION_POLICY":"lru"}
+ADMISSION_CHECKS=kv_pressure,batch_pressure
+TTFT_CUT_S=20

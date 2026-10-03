@@ -1,0 +1,57 @@
+== 1. tunnel to the cluster
+gateway already reachable on localhost:4000 (an existing tunnel); not opening another
+gateway health: HTTP 200
+== 2. before
+== 3. pi works in /home/gersonrpq/Escritorio/Programacion/Estudio/Inferencing/final_project/coding-agent-inference-infra/app/todo-app
+
+
+Done! I've created a clean, dependency-free todo list app with the following files:
+
+**Files created:**
+
+1. **index.html** - The main HTML structure with inputs, buttons, and filters
+2. **style.css** - Modern styling with gradient background, hover effects, and responsive design
+3. **app.js** - Vanilla JavaScript with small, readable functions:
+   - `addTask()` - Add new tasks
+   - `editTask()` - Inline editing on double-click
+   - `toggleTask()` - Mark complete/incomplete
+   - `deleteTask()` - Remove tasks
+   - `applyFilter()` - Filter by All/Active/Completed
+   - `clearCompletedTasks()` - Bulk delete
+   - `saveTasks()` / `getTasks()` - localStorage persistence
+4. **README.md** - Instructions on how to open the app
+
+**To open it:** Just double-click `index.html` in your browser, or run `python3 -m http.server` and visit localhost.
+
+**Features implemented:**
+- ✅ Add with Enter or button (ignores empty)
+- ✅ Checkbox toggles done state with strikethrough
+- ✅ Double-click to edit (Enter saves, Escape cancels)
+- ✅ Delete button per task
+- ✅ Filter buttons (All, Active, Completed)
+- ✅ Left tasks counter
+- ✅ "Clear completed" button (only shows when needed)
+- ✅ localStorage persistence
+pi finished in 95 s
+== 4. what pi built
+  total 32
+  drwxrwxr-x 2 gersonrpq gersonrpq 4096 oct  3 16:11 .
+  drwxrwxr-x 6 gersonrpq gersonrpq 4096 oct  3 14:03 ..
+  -rw-rw-r-- 1 gersonrpq gersonrpq 8388 oct  3 16:11 app.js
+  -rw-rw-r-- 1 gersonrpq gersonrpq    0 oct  2 22:58 .gitkeep
+  -rw-rw-r-- 1 gersonrpq gersonrpq 1164 oct  3 16:11 index.html
+  -rw-rw-r-- 1 gersonrpq gersonrpq 1038 oct  3 16:11 README.md
+  -rw-rw-r-- 1 gersonrpq gersonrpq 2950 oct  3 16:11 style.css
+  ok: index.html (38 lines)
+  ok: style.css (180 lines)
+  ok: app.js (306 lines)
+== 5. what the cluster did
+What the cluster did during the demo (gateway counters, after - before):
+  orch_placement_session_total{result="kept"}                                                                    +2
+  orch_placement_session_total{result="new"}                                                                     +1
+  orch_placement_total{policy="affload",priority_class="interactive",worker="w1"}                                +3
+  orch_requests_admitted_total{priority_class="interactive"}                                                     +3
+  places in use now: 0 of 14
+
+Try the app:  cd app/todo-app && python3 -m http.server 8000   ->   http://localhost:8000
+EXIT 0

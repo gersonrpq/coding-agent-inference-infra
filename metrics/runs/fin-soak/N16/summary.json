@@ -1,0 +1,128 @@
+{
+ "sessions": 16,
+ "profile": "paper",
+ "window_s": 840.0,
+ "classes": {
+  "interactive": {
+   "worker_stickiness": 0.935,
+   "by_position": {
+    "session_start": {
+     "n": 0,
+     "ttft_p50": null,
+     "ttft_p99": null,
+     "cached_share": null
+    },
+    "turn_start": {
+     "n": 120,
+     "ttft_p50": 0.9456682205200195,
+     "ttft_p99": 5.575884819030762,
+     "cached_share": 0.887
+    },
+    "within_turn": {
+     "n": 560,
+     "ttft_p50": 0.9794504642486572,
+     "ttft_p99": 7.585103988647461,
+     "cached_share": 0.901
+    }
+   },
+   "ttft_p50_first_half": 1.0152459144592285,
+   "ttft_p50_second_half": 0.9413797855377197,
+   "attempts": 693,
+   "served": 680,
+   "shed": 12,
+   "shed_by_reason": {
+    "decode_capacity": 12
+   },
+   "other_errors": 1,
+   "other_error_samples": [
+    "{\"error\":{\"message\":\"litellm.InternalServerError: InternalServerError: OpenAIExc"
+   ],
+   "shed_rate": 0.0173,
+   "shed_wait_p50": 0.0689389705657959,
+   "shed_wait_p95": 0.20283913612365723,
+   "shed_late_over_5s": 0,
+   "calls": 681,
+   "calls_abandoned": 1,
+   "ttft_p50": 0.9794504642486572,
+   "ttft_p95": 4.244656085968018,
+   "ttft_p99": 7.123694181442261,
+   "ttft_max": 8.839918375015259,
+   "ttft_within_slo": 1.0,
+   "total_p50": 10.034656047821045,
+   "total_p99": 37.14125394821167,
+   "prompt_tokens": 26557189,
+   "cached_tokens_reported": 23870078,
+   "completion_tokens": 238434,
+   "served_per_min": 48.57,
+   "prompt_tok_per_s": 31616,
+   "completion_tok_per_s": 283.9
+  },
+  "all": {
+   "worker_stickiness": 0.935,
+   "by_position": {
+    "session_start": {
+     "n": 0,
+     "ttft_p50": null,
+     "ttft_p99": null,
+     "cached_share": null
+    },
+    "turn_start": {
+     "n": 120,
+     "ttft_p50": 0.9456682205200195,
+     "ttft_p99": 5.575884819030762,
+     "cached_share": 0.887
+    },
+    "within_turn": {
+     "n": 560,
+     "ttft_p50": 0.9794504642486572,
+     "ttft_p99": 7.585103988647461,
+     "cached_share": 0.901
+    }
+   },
+   "ttft_p50_first_half": 1.0152459144592285,
+   "ttft_p50_second_half": 0.9413797855377197,
+   "attempts": 693,
+   "served": 680,
+   "shed": 12,
+   "shed_by_reason": {
+    "decode_capacity": 12
+   },
+   "other_errors": 1,
+   "other_error_samples": [
+    "{\"error\":{\"message\":\"litellm.InternalServerError: InternalServerError: OpenAIExc"
+   ],
+   "shed_rate": 0.0173,
+   "shed_wait_p50": 0.0689389705657959,
+   "shed_wait_p95": 0.20283913612365723,
+   "shed_late_over_5s": 0,
+   "calls": 681,
+   "calls_abandoned": 1,
+   "ttft_p50": 0.9794504642486572,
+   "ttft_p95": 4.244656085968018,
+   "ttft_p99": 7.123694181442261,
+   "ttft_max": 8.839918375015259,
+   "ttft_within_slo": 1.0,
+   "total_p50": 10.034656047821045,
+   "total_p99": 37.14125394821167,
+   "prompt_tokens": 26557189,
+   "cached_tokens_reported": 23870078,
+   "completion_tokens": 238434,
+   "served_per_min": 48.57,
+   "prompt_tok_per_s": 31616,
+   "completion_tok_per_s": 283.9
+  }
+ },
+ "compactions": 53,
+ "turns_started": 136,
+ "start_epoch": 1790977376.4957938,
+ "warmup_s": 60.0,
+ "duration_s": 900.0,
+ "verdict": {
+  "slo_ttft_s": 20.0,
+  "max_shed": 0.01,
+  "ttft_p99_ok": true,
+  "shed_ok": false,
+  "steady_state": true,
+  "pass": false
+ }
+}

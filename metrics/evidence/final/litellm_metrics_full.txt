@@ -1,0 +1,756 @@
+# HELP python_gc_objects_collected_total Objects collected during gc
+# TYPE python_gc_objects_collected_total counter
+python_gc_objects_collected_total{generation="0"} 192202.0
+python_gc_objects_collected_total{generation="1"} 201556.0
+python_gc_objects_collected_total{generation="2"} 4.231012e+06
+# HELP python_gc_objects_uncollectable_total Uncollectable objects found during GC
+# TYPE python_gc_objects_uncollectable_total counter
+python_gc_objects_uncollectable_total{generation="0"} 0.0
+python_gc_objects_uncollectable_total{generation="1"} 0.0
+python_gc_objects_uncollectable_total{generation="2"} 0.0
+# HELP python_gc_collections_total Number of times this generation was collected
+# TYPE python_gc_collections_total counter
+python_gc_collections_total{generation="0"} 3982.0
+python_gc_collections_total{generation="1"} 362.0
+python_gc_collections_total{generation="2"} 20.0
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="3",minor="13",patchlevel="15",version="3.13.15"} 1.0
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 1.562300416e+09
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 8.14415872e+08
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.79097642953e+09
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 945.3900000000001
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 19.0
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1.048576e+06
+# HELP orch_requests_shed_total Requests shed by the admission hook
+# TYPE orch_requests_shed_total counter
+orch_requests_shed_total{priority_class="interactive",reason="timeout_queue",status_code="503"} 0.0
+orch_requests_shed_total{priority_class="batch",reason="timeout_queue",status_code="503"} 0.0
+orch_requests_shed_total{priority_class="interactive",reason="kv_pressure",status_code="503"} 0.0
+orch_requests_shed_total{priority_class="batch",reason="kv_pressure",status_code="503"} 0.0
+orch_requests_shed_total{priority_class="interactive",reason="batch_pressure",status_code="503"} 0.0
+orch_requests_shed_total{priority_class="batch",reason="batch_pressure",status_code="503"} 376.0
+orch_requests_shed_total{priority_class="interactive",reason="decode_capacity",status_code="503"} 1272.0
+orch_requests_shed_total{priority_class="batch",reason="decode_capacity",status_code="503"} 59.0
+orch_requests_shed_total{priority_class="interactive",reason="ttft_cut",status_code="503"} 0.0
+orch_requests_shed_total{priority_class="batch",reason="ttft_cut",status_code="503"} 0.0
+orch_requests_shed_total{priority_class="interactive",reason="tenant_tokens",status_code="429"} 0.0
+orch_requests_shed_total{priority_class="batch",reason="tenant_tokens",status_code="429"} 0.0
+orch_requests_shed_total{priority_class="interactive",reason="tenant_concurrency",status_code="429"} 0.0
+orch_requests_shed_total{priority_class="batch",reason="tenant_concurrency",status_code="429"} 0.0
+# HELP orch_requests_shed_created Requests shed by the admission hook
+# TYPE orch_requests_shed_created gauge
+orch_requests_shed_created{priority_class="interactive",reason="timeout_queue",status_code="503"} 1.7909764460070796e+09
+orch_requests_shed_created{priority_class="batch",reason="timeout_queue",status_code="503"} 1.7909764460070913e+09
+orch_requests_shed_created{priority_class="interactive",reason="kv_pressure",status_code="503"} 1.7909764460070984e+09
+orch_requests_shed_created{priority_class="batch",reason="kv_pressure",status_code="503"} 1.7909764460071032e+09
+orch_requests_shed_created{priority_class="interactive",reason="batch_pressure",status_code="503"} 1.7909764460071077e+09
+orch_requests_shed_created{priority_class="batch",reason="batch_pressure",status_code="503"} 1.790976446007112e+09
+orch_requests_shed_created{priority_class="interactive",reason="decode_capacity",status_code="503"} 1.7909764460071158e+09
+orch_requests_shed_created{priority_class="batch",reason="decode_capacity",status_code="503"} 1.7909764460071197e+09
+orch_requests_shed_created{priority_class="interactive",reason="ttft_cut",status_code="503"} 1.790976446007123e+09
+orch_requests_shed_created{priority_class="batch",reason="ttft_cut",status_code="503"} 1.7909764460071266e+09
+orch_requests_shed_created{priority_class="interactive",reason="tenant_tokens",status_code="429"} 1.7909764460071313e+09
+orch_requests_shed_created{priority_class="batch",reason="tenant_tokens",status_code="429"} 1.7909764460071356e+09
+orch_requests_shed_created{priority_class="interactive",reason="tenant_concurrency",status_code="429"} 1.7909764460071394e+09
+orch_requests_shed_created{priority_class="batch",reason="tenant_concurrency",status_code="429"} 1.790976446007143e+09
+# HELP orch_requests_admitted_total Requests admitted by the admission hook
+# TYPE orch_requests_admitted_total counter
+orch_requests_admitted_total{priority_class="interactive"} 1168.0
+orch_requests_admitted_total{priority_class="batch"} 14.0
+# HELP orch_requests_admitted_created Requests admitted by the admission hook
+# TYPE orch_requests_admitted_created gauge
+orch_requests_admitted_created{priority_class="interactive"} 1.790976446007157e+09
+orch_requests_admitted_created{priority_class="batch"} 1.7909764460071604e+09
+# HELP orch_request_latency_seconds End-to-end latency of successful requests as seen by the gateway
+# TYPE orch_request_latency_seconds histogram
+orch_request_latency_seconds_bucket{le="0.1",priority_class="interactive"} 0.0
+orch_request_latency_seconds_bucket{le="0.25",priority_class="interactive"} 0.0
+orch_request_latency_seconds_bucket{le="0.5",priority_class="interactive"} 0.0
+orch_request_latency_seconds_bucket{le="1.0",priority_class="interactive"} 0.0
+orch_request_latency_seconds_bucket{le="2.0",priority_class="interactive"} 14.0
+orch_request_latency_seconds_bucket{le="5.0",priority_class="interactive"} 192.0
+orch_request_latency_seconds_bucket{le="10.0",priority_class="interactive"} 500.0
+orch_request_latency_seconds_bucket{le="20.0",priority_class="interactive"} 878.0
+orch_request_latency_seconds_bucket{le="40.0",priority_class="interactive"} 1121.0
+orch_request_latency_seconds_bucket{le="60.0",priority_class="interactive"} 1160.0
+orch_request_latency_seconds_bucket{le="120.0",priority_class="interactive"} 1167.0
+orch_request_latency_seconds_bucket{le="300.0",priority_class="interactive"} 1167.0
+orch_request_latency_seconds_bucket{le="+Inf",priority_class="interactive"} 1167.0
+orch_request_latency_seconds_count{priority_class="interactive"} 1167.0
+orch_request_latency_seconds_sum{priority_class="interactive"} 17450.11173900001
+orch_request_latency_seconds_bucket{le="0.1",priority_class="batch"} 0.0
+orch_request_latency_seconds_bucket{le="0.25",priority_class="batch"} 0.0
+orch_request_latency_seconds_bucket{le="0.5",priority_class="batch"} 0.0
+orch_request_latency_seconds_bucket{le="1.0",priority_class="batch"} 0.0
+orch_request_latency_seconds_bucket{le="2.0",priority_class="batch"} 0.0
+orch_request_latency_seconds_bucket{le="5.0",priority_class="batch"} 0.0
+orch_request_latency_seconds_bucket{le="10.0",priority_class="batch"} 3.0
+orch_request_latency_seconds_bucket{le="20.0",priority_class="batch"} 11.0
+orch_request_latency_seconds_bucket{le="40.0",priority_class="batch"} 13.0
+orch_request_latency_seconds_bucket{le="60.0",priority_class="batch"} 14.0
+orch_request_latency_seconds_bucket{le="120.0",priority_class="batch"} 14.0
+orch_request_latency_seconds_bucket{le="300.0",priority_class="batch"} 14.0
+orch_request_latency_seconds_bucket{le="+Inf",priority_class="batch"} 14.0
+orch_request_latency_seconds_count{priority_class="batch"} 14.0
+orch_request_latency_seconds_sum{priority_class="batch"} 255.481099
+# HELP orch_request_latency_seconds_created End-to-end latency of successful requests as seen by the gateway
+# TYPE orch_request_latency_seconds_created gauge
+orch_request_latency_seconds_created{priority_class="interactive"} 1.790976446007201e+09
+orch_request_latency_seconds_created{priority_class="batch"} 1.7909764460072436e+09
+# HELP orch_request_ttft_seconds Time to first token of successful streaming requests as seen by the gateway
+# TYPE orch_request_ttft_seconds histogram
+orch_request_ttft_seconds_bucket{le="0.05",priority_class="interactive"} 0.0
+orch_request_ttft_seconds_bucket{le="0.1",priority_class="interactive"} 0.0
+orch_request_ttft_seconds_bucket{le="0.25",priority_class="interactive"} 0.0
+orch_request_ttft_seconds_bucket{le="0.5",priority_class="interactive"} 57.0
+orch_request_ttft_seconds_bucket{le="1.0",priority_class="interactive"} 521.0
+orch_request_ttft_seconds_bucket{le="2.0",priority_class="interactive"} 826.0
+orch_request_ttft_seconds_bucket{le="5.0",priority_class="interactive"} 1012.0
+orch_request_ttft_seconds_bucket{le="10.0",priority_class="interactive"} 1148.0
+orch_request_ttft_seconds_bucket{le="30.0",priority_class="interactive"} 1167.0
+orch_request_ttft_seconds_bucket{le="60.0",priority_class="interactive"} 1167.0
+orch_request_ttft_seconds_bucket{le="+Inf",priority_class="interactive"} 1167.0
+orch_request_ttft_seconds_count{priority_class="interactive"} 1167.0
+orch_request_ttft_seconds_sum{priority_class="interactive"} 2558.8868030000017
+orch_request_ttft_seconds_bucket{le="0.05",priority_class="batch"} 0.0
+orch_request_ttft_seconds_bucket{le="0.1",priority_class="batch"} 0.0
+orch_request_ttft_seconds_bucket{le="0.25",priority_class="batch"} 0.0
+orch_request_ttft_seconds_bucket{le="0.5",priority_class="batch"} 0.0
+orch_request_ttft_seconds_bucket{le="1.0",priority_class="batch"} 0.0
+orch_request_ttft_seconds_bucket{le="2.0",priority_class="batch"} 2.0
+orch_request_ttft_seconds_bucket{le="5.0",priority_class="batch"} 6.0
+orch_request_ttft_seconds_bucket{le="10.0",priority_class="batch"} 13.0
+orch_request_ttft_seconds_bucket{le="30.0",priority_class="batch"} 14.0
+orch_request_ttft_seconds_bucket{le="60.0",priority_class="batch"} 14.0
+orch_request_ttft_seconds_bucket{le="+Inf",priority_class="batch"} 14.0
+orch_request_ttft_seconds_count{priority_class="batch"} 14.0
+orch_request_ttft_seconds_sum{priority_class="batch"} 69.161479
+# HELP orch_request_ttft_seconds_created Time to first token of successful streaming requests as seen by the gateway
+# TYPE orch_request_ttft_seconds_created gauge
+orch_request_ttft_seconds_created{priority_class="interactive"} 1.790976446007229e+09
+orch_request_ttft_seconds_created{priority_class="batch"} 1.7909764460072565e+09
+# HELP orch_replica_queue_depth Engine waiting-queue depth per replica, as last scraped by the control plane
+# TYPE orch_replica_queue_depth gauge
+orch_replica_queue_depth{replica="sglang-worker-0"} 0.0
+orch_replica_queue_depth{replica="sglang-worker-1"} 0.0
+# HELP orch_replica_running_requests Requests running on the engine per replica, as last scraped by the control plane
+# TYPE orch_replica_running_requests gauge
+orch_replica_running_requests{replica="sglang-worker-0"} 0.0
+orch_replica_running_requests{replica="sglang-worker-1"} 0.0
+# HELP orch_replica_kv_used_ratio KV cache used ratio (0-1) per replica, as last scraped by the control plane
+# TYPE orch_replica_kv_used_ratio gauge
+orch_replica_kv_used_ratio{replica="sglang-worker-0"} 0.0
+orch_replica_kv_used_ratio{replica="sglang-worker-1"} 0.0
+# HELP orch_fleet_snapshot_age_seconds Seconds since the last successful fleet scrape (-1 = never scraped)
+# TYPE orch_fleet_snapshot_age_seconds gauge
+orch_fleet_snapshot_age_seconds 13.2513411070031
+# HELP orch_fleet_estimated_queue_wait_seconds Estimated queue wait used by the admission hook (waiting x TTFT p50)
+# TYPE orch_fleet_estimated_queue_wait_seconds gauge
+orch_fleet_estimated_queue_wait_seconds 0.0
+# HELP orch_fleet_ttft_seconds Fleet TTFT quantile computed by the control plane from the SGLang histogram
+# TYPE orch_fleet_ttft_seconds gauge
+orch_fleet_ttft_seconds{quantile="0.5"} 0.0
+orch_fleet_ttft_seconds{quantile="0.99"} 0.0
+# HELP orch_gateway_in_flight Requests holding a fleet place
+# TYPE orch_gateway_in_flight gauge
+orch_gateway_in_flight 0.0
+# HELP orch_gateway_capacity Fleet places; batch may use the batch limit of them
+# TYPE orch_gateway_capacity gauge
+orch_gateway_capacity{limit="total"} 14.0
+orch_gateway_capacity{limit="batch"} 10.0
+# HELP orch_gateway_slots_reaped_total Places recovered because the request never reported back
+# TYPE orch_gateway_slots_reaped_total counter
+orch_gateway_slots_reaped_total 0.0
+# HELP orch_gateway_slots_reaped_created Places recovered because the request never reported back
+# TYPE orch_gateway_slots_reaped_created gauge
+orch_gateway_slots_reaped_created 1.7909764460090716e+09
+# HELP orch_overflow_decisions_total Overflow gate decisions after a failed call
+# TYPE orch_overflow_decisions_total counter
+orch_overflow_decisions_total{decision="leave",forwarded="no",status="503"} 1707.0
+orch_overflow_decisions_total{decision="stay",forwarded="no",status="500"} 1.0
+# HELP orch_overflow_decisions_created Overflow gate decisions after a failed call
+# TYPE orch_overflow_decisions_created gauge
+orch_overflow_decisions_created{decision="leave",forwarded="no",status="503"} 1.7909765358725755e+09
+orch_overflow_decisions_created{decision="stay",forwarded="no",status="500"} 1.7909781149947472e+09
+# HELP orch_hops_total Calls served by a different worker than the session's previous call
+# TYPE orch_hops_total counter
+orch_hops_total{backend="mooncake",dst="w1",src="w0"} 15.0
+orch_hops_total{backend="mooncake",dst="w0",src="w1"} 21.0
+# HELP orch_hops_created Calls served by a different worker than the session's previous call
+# TYPE orch_hops_created gauge
+orch_hops_created{backend="mooncake",dst="w1",src="w0"} 1.7909765549492645e+09
+orch_hops_created{backend="mooncake",dst="w0",src="w1"} 1.7909767232317572e+09
+# HELP orch_hop_tokens_total Prompt tokens of those calls
+# TYPE orch_hop_tokens_total counter
+orch_hop_tokens_total{backend="mooncake",dst="w1",src="w0"} 590384.0
+orch_hop_tokens_total{backend="mooncake",dst="w0",src="w1"} 896589.0
+# HELP orch_hop_tokens_created Prompt tokens of those calls
+# TYPE orch_hop_tokens_created gauge
+orch_hop_tokens_created{backend="mooncake",dst="w1",src="w0"} 1.7909765549492977e+09
+orch_hop_tokens_created{backend="mooncake",dst="w0",src="w1"} 1.7909767232317722e+09
+# HELP orch_hop_cached_tokens_total Of those, prompt tokens the engine read from cache (warm part of the hop)
+# TYPE orch_hop_cached_tokens_total counter
+orch_hop_cached_tokens_total{backend="mooncake",dst="w1",src="w0"} 449162.0
+orch_hop_cached_tokens_total{backend="mooncake",dst="w0",src="w1"} 373632.0
+# HELP orch_hop_cached_tokens_created Of those, prompt tokens the engine read from cache (warm part of the hop)
+# TYPE orch_hop_cached_tokens_created gauge
+orch_hop_cached_tokens_created{backend="mooncake",dst="w1",src="w0"} 1.790976554949322e+09
+orch_hop_cached_tokens_created{backend="mooncake",dst="w0",src="w1"} 1.790976723231784e+09
+# HELP orch_hops_local_total Calls served by the same worker as the session's previous call (no hop)
+# TYPE orch_hops_local_total counter
+orch_hops_local_total{worker="w0"} 497.0
+orch_hops_local_total{worker="w1"} 477.0
+# HELP orch_hops_local_created Calls served by the same worker as the session's previous call (no hop)
+# TYPE orch_hops_local_created gauge
+orch_hops_local_created{worker="w0"} 1.7909764460100877e+09
+orch_hops_local_created{worker="w1"} 1.7909764460100927e+09
+# HELP orch_tenant_requests_total Requests by tenant and outcome
+# TYPE orch_tenant_requests_total counter
+orch_tenant_requests_total{outcome="admitted",tenant="default_user_id"} 2513.0
+# HELP orch_tenant_requests_created Requests by tenant and outcome
+# TYPE orch_tenant_requests_created gauge
+orch_tenant_requests_created{outcome="admitted",tenant="default_user_id"} 1.790976491654532e+09
+# HELP orch_tenant_tokens_total Estimated tokens admitted per tenant
+# TYPE orch_tenant_tokens_total counter
+orch_tenant_tokens_total{tenant="default_user_id"} 6.7227022e+07
+# HELP orch_tenant_tokens_created Estimated tokens admitted per tenant
+# TYPE orch_tenant_tokens_created gauge
+orch_tenant_tokens_created{tenant="default_user_id"} 1.7909764916545498e+09
+# HELP orch_tenant_inflight Requests in flight per tenant
+# TYPE orch_tenant_inflight gauge
+orch_tenant_inflight{tenant="default_user_id"} 0.0
+# HELP orch_placement_total Requests placed by a custom policy
+# TYPE orch_placement_total counter
+orch_placement_total{policy="affload",priority_class="interactive",worker="w1"} 572.0
+orch_placement_total{policy="affload",priority_class="interactive",worker="w0"} 596.0
+orch_placement_total{policy="affload",priority_class="batch",worker="w1"} 9.0
+orch_placement_total{policy="affload",priority_class="batch",worker="w0"} 5.0
+# HELP orch_placement_created Requests placed by a custom policy
+# TYPE orch_placement_created gauge
+orch_placement_created{policy="affload",priority_class="interactive",worker="w1"} 1.790976491654658e+09
+orch_placement_created{policy="affload",priority_class="interactive",worker="w0"} 1.7909764926670325e+09
+orch_placement_created{policy="affload",priority_class="batch",worker="w1"} 1.7909764951760812e+09
+orch_placement_created{policy="affload",priority_class="batch",worker="w0"} 1.7909765039249086e+09
+# HELP orch_placement_session_total Interactive requests by what happened to their session
+# TYPE orch_placement_session_total counter
+orch_placement_session_total{result="new"} 162.0
+orch_placement_session_total{result="kept"} 972.0
+orch_placement_session_total{result="moved"} 34.0
+# HELP orch_placement_session_created Interactive requests by what happened to their session
+# TYPE orch_placement_session_created gauge
+orch_placement_session_created{result="new"} 1.7909764460129433e+09
+orch_placement_session_created{result="kept"} 1.7909764460129485e+09
+orch_placement_session_created{result="moved"} 1.7909764460129519e+09
+# HELP orch_placement_inflight Requests in flight per worker, counted by placement
+# TYPE orch_placement_inflight gauge
+orch_placement_inflight{worker="w0"} 0.0
+orch_placement_inflight{worker="w1"} 0.0
+# HELP litellm_proxy_failed_requests_metric_total Total number of failed responses from proxy - the client did not get a success response from litellm proxy
+# TYPE litellm_proxy_failed_requests_metric_total counter
+litellm_proxy_failed_requests_metric_total{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",exception_class="HTTPException",exception_status="503",hashed_api_key="litellm_proxy_master_key",model_id="None",org_alias="None",org_id="None",requested_model="qwen-coding-local",route="/v1/chat/completions",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1707.0
+litellm_proxy_failed_requests_metric_total{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",exception_class="Openai.InternalServerError",exception_status="500",hashed_api_key="litellm_proxy_master_key",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",route="/v1/chat/completions",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1.0
+# HELP litellm_proxy_failed_requests_metric_created Total number of failed responses from proxy - the client did not get a success response from litellm proxy
+# TYPE litellm_proxy_failed_requests_metric_created gauge
+litellm_proxy_failed_requests_metric_created{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",exception_class="HTTPException",exception_status="503",hashed_api_key="litellm_proxy_master_key",model_id="None",org_alias="None",org_id="None",requested_model="qwen-coding-local",route="/v1/chat/completions",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1.7909765358724363e+09
+litellm_proxy_failed_requests_metric_created{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",exception_class="Openai.InternalServerError",exception_status="500",hashed_api_key="litellm_proxy_master_key",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",route="/v1/chat/completions",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1.790978114994613e+09
+# HELP litellm_proxy_total_requests_metric_total Total number of requests made to the proxy server - track number of client side requests
+# TYPE litellm_proxy_total_requests_metric_total counter
+litellm_proxy_total_requests_metric_total{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",route="/v1/chat/completions",status_code="200",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 580.0
+litellm_proxy_total_requests_metric_total{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",route="/v1/chat/completions",status_code="200",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 601.0
+litellm_proxy_total_requests_metric_total{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model_id="None",org_alias="None",org_id="None",requested_model="qwen-coding-local",route="/v1/chat/completions",status_code="503",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1707.0
+litellm_proxy_total_requests_metric_total{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",route="/v1/chat/completions",status_code="500",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1.0
+# HELP litellm_proxy_total_requests_metric_created Total number of requests made to the proxy server - track number of client side requests
+# TYPE litellm_proxy_total_requests_metric_created gauge
+litellm_proxy_total_requests_metric_created{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",route="/v1/chat/completions",status_code="200",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1.7909765036383598e+09
+litellm_proxy_total_requests_metric_created{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",route="/v1/chat/completions",status_code="200",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1.790976504429533e+09
+litellm_proxy_total_requests_metric_created{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model_id="None",org_alias="None",org_id="None",requested_model="qwen-coding-local",route="/v1/chat/completions",status_code="503",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1.790976535872506e+09
+litellm_proxy_total_requests_metric_created{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",route="/v1/chat/completions",status_code="500",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1.7909781149946883e+09
+# HELP litellm_request_total_latency_metric End-to-end latency (seconds) for a request to LiteLLM Proxy Server, from the moment the request reached the proxy through the end of processing -- includes authentication, pre-call hooks, the LLM API call, and post-call processing
+# TYPE litellm_request_total_latency_metric histogram
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.005",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.01",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.025",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.05",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.1",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.25",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.5",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="1.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="2.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 6.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="5.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 88.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="10.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 230.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="30.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 504.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="60.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 577.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="120.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="300.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="420.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="600.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="+Inf",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_total_latency_metric_count{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_total_latency_metric_sum{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 8949.833561300566
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.005",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.01",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.025",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.05",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.1",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.25",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.5",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="1.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="2.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 7.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="5.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 102.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="10.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 271.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="30.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 535.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="60.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 597.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="120.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="300.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="420.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="600.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_total_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="+Inf",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_total_latency_metric_count{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_total_latency_metric_sum{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 8779.885099005118
+# HELP litellm_request_total_latency_metric_created End-to-end latency (seconds) for a request to LiteLLM Proxy Server, from the moment the request reached the proxy through the end of processing -- includes authentication, pre-call hooks, the LLM API call, and post-call processing
+# TYPE litellm_request_total_latency_metric_created gauge
+litellm_request_total_latency_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 1.7909765036372015e+09
+litellm_request_total_latency_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 1.7909765044274104e+09
+# HELP litellm_llm_api_latency_metric Total latency (seconds) for a models LLM API call
+# TYPE litellm_llm_api_latency_metric histogram
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.005",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.01",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.025",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.05",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.1",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.25",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.5",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="1.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="2.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 6.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="5.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 89.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="10.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 234.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="30.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 504.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="60.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 577.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="120.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="300.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="420.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="600.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="+Inf",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_latency_metric_count{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_latency_metric_sum{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 8880.75511899999
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.005",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.01",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.025",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.05",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.1",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.25",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.5",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="1.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="2.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 10.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="5.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 107.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="10.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 274.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="30.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 535.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="60.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 597.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="120.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="300.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="420.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="600.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_latency_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="+Inf",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_latency_metric_count{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_latency_metric_sum{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 8704.515324000015
+# HELP litellm_llm_api_latency_metric_created Total latency (seconds) for a models LLM API call
+# TYPE litellm_llm_api_latency_metric_created gauge
+litellm_llm_api_latency_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 1.7909765036370127e+09
+litellm_llm_api_latency_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 1.790976504427236e+09
+# HELP litellm_llm_api_time_to_first_token_metric Time to first token for a models LLM API call
+# TYPE litellm_llm_api_time_to_first_token_metric histogram
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.005",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.01",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.025",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.05",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.1",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.25",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.5",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 66.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="1.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 290.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="2.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 412.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="5.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 500.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="10.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 570.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="30.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="60.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="120.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="300.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="420.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="600.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="+Inf",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_time_to_first_token_metric_count{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_llm_api_time_to_first_token_metric_sum{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 1252.5378730000004
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.005",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.01",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.025",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.05",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.1",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.25",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 0.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.5",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 66.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="1.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 307.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="2.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 428.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="5.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 523.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="10.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 592.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="30.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="60.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="120.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="300.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="420.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="600.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_time_to_first_token_metric_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="+Inf",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_time_to_first_token_metric_count{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_llm_api_time_to_first_token_metric_sum{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 1255.1880139999994
+# HELP litellm_llm_api_time_to_first_token_metric_created Time to first token for a models LLM API call
+# TYPE litellm_llm_api_time_to_first_token_metric_created gauge
+litellm_llm_api_time_to_first_token_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id"} 1.7909765036367464e+09
+litellm_llm_api_time_to_first_token_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id"} 1.7909765044269052e+09
+# HELP litellm_spend_metric_total Total spend on LLM requests
+# TYPE litellm_spend_metric_total counter
+litellm_spend_metric_total{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 0.7023155279999996
+litellm_spend_metric_total{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 0.708245409
+# HELP litellm_spend_metric_created Total spend on LLM requests
+# TYPE litellm_spend_metric_created gauge
+litellm_spend_metric_created{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",service_tier="None",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1.7909765036301222e+09
+litellm_spend_metric_created{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",service_tier="None",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1.7909765044204345e+09
+# HELP litellm_total_tokens_metric_total Total number of input + output tokens from LLM requests
+# TYPE litellm_total_tokens_metric_total counter
+litellm_total_tokens_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id",user_email="None"} 2.3118766e+07
+litellm_total_tokens_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id",user_email="None"} 2.4493778e+07
+# HELP litellm_total_tokens_metric_created Total number of input + output tokens from LLM requests
+# TYPE litellm_total_tokens_metric_created gauge
+litellm_total_tokens_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id",user_email="None"} 1.7909765036302285e+09
+litellm_total_tokens_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id",user_email="None"} 1.7909765044205294e+09
+# HELP litellm_input_tokens_metric_total Total number of input tokens from LLM requests
+# TYPE litellm_input_tokens_metric_total counter
+litellm_input_tokens_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id",user_email="None"} 2.2910425e+07
+litellm_input_tokens_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id",user_email="None"} 2.4293139e+07
+# HELP litellm_input_tokens_metric_created Total number of input tokens from LLM requests
+# TYPE litellm_input_tokens_metric_created gauge
+litellm_input_tokens_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id",user_email="None"} 1.7909765036303062e+09
+litellm_input_tokens_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id",user_email="None"} 1.7909765044206014e+09
+# HELP litellm_output_tokens_metric_total Total number of output tokens from LLM requests
+# TYPE litellm_output_tokens_metric_total counter
+litellm_output_tokens_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id",user_email="None"} 208341.0
+litellm_output_tokens_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id",user_email="None"} 200639.0
+# HELP litellm_output_tokens_metric_created Total number of output tokens from LLM requests
+# TYPE litellm_output_tokens_metric_created gauge
+litellm_output_tokens_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id",user_email="None"} 1.7909765036303747e+09
+litellm_output_tokens_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id",user_email="None"} 1.7909765044206667e+09
+# HELP litellm_input_cached_tokens_metric_total Provider-side cached input tokens (e.g. OpenAI prompt_tokens_details.cached_tokens, Anthropic cache_read_input_tokens)
+# TYPE litellm_input_cached_tokens_metric_total counter
+litellm_input_cached_tokens_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id",user_email="None"} 1.8683258e+07
+litellm_input_cached_tokens_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id",user_email="None"} 1.9919007e+07
+# HELP litellm_input_cached_tokens_metric_created Provider-side cached input tokens (e.g. OpenAI prompt_tokens_details.cached_tokens, Anthropic cache_read_input_tokens)
+# TYPE litellm_input_cached_tokens_metric_created gauge
+litellm_input_cached_tokens_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id",user_email="None"} 1.7909765062813792e+09
+litellm_input_cached_tokens_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id",user_email="None"} 1.7909765173280308e+09
+# HELP litellm_input_cache_creation_tokens_metric_total Provider-side input tokens written to prompt cache (e.g. Anthropic cache_creation_input_tokens)
+# TYPE litellm_input_cache_creation_tokens_metric_total counter
+# HELP litellm_input_audio_tokens_metric_total Audio input tokens reported in prompt_tokens_details.audio_tokens
+# TYPE litellm_input_audio_tokens_metric_total counter
+# HELP litellm_output_reasoning_tokens_metric_total Reasoning tokens reported in completion_tokens_details.reasoning_tokens
+# TYPE litellm_output_reasoning_tokens_metric_total counter
+litellm_output_reasoning_tokens_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id",user_email="None"} 330.0
+litellm_output_reasoning_tokens_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id",user_email="None"} 197.0
+# HELP litellm_output_reasoning_tokens_metric_created Reasoning tokens reported in completion_tokens_details.reasoning_tokens
+# TYPE litellm_output_reasoning_tokens_metric_created gauge
+litellm_output_reasoning_tokens_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id",user_email="None"} 1.7909765044207685e+09
+litellm_output_reasoning_tokens_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id",user_email="None"} 1.790976527005937e+09
+# HELP litellm_output_audio_tokens_metric_total Audio output tokens reported in completion_tokens_details.audio_tokens
+# TYPE litellm_output_audio_tokens_metric_total counter
+# HELP litellm_video_duration_seconds_metric_total Seconds of video generated, from usage.duration_seconds on video generation calls
+# TYPE litellm_video_duration_seconds_metric_total counter
+# HELP litellm_images_generated_metric_total Number of images generated, from the image generation response
+# TYPE litellm_images_generated_metric_total counter
+# HELP litellm_remaining_team_budget_metric Remaining budget for team
+# TYPE litellm_remaining_team_budget_metric gauge
+# HELP litellm_team_max_budget_metric Maximum budget set for team
+# TYPE litellm_team_max_budget_metric gauge
+# HELP litellm_team_budget_remaining_hours_metric Remaining days for team budget to be reset
+# TYPE litellm_team_budget_remaining_hours_metric gauge
+# HELP litellm_team_members_metric Number of members in a team
+# TYPE litellm_team_members_metric gauge
+# HELP litellm_remaining_org_budget_metric Remaining budget for org
+# TYPE litellm_remaining_org_budget_metric gauge
+# HELP litellm_org_max_budget_metric Maximum budget set for org
+# TYPE litellm_org_max_budget_metric gauge
+# HELP litellm_org_budget_remaining_hours_metric Remaining hours for org budget to be reset
+# TYPE litellm_org_budget_remaining_hours_metric gauge
+# HELP litellm_remaining_api_key_budget_metric Remaining budget for api key
+# TYPE litellm_remaining_api_key_budget_metric gauge
+litellm_remaining_api_key_budget_metric{api_key_alias="",hashed_api_key="litellm_proxy_master_key"} +Inf
+# HELP litellm_api_key_max_budget_metric Maximum budget set for api key
+# TYPE litellm_api_key_max_budget_metric gauge
+# HELP litellm_api_key_budget_remaining_hours_metric Remaining hours for api key budget to be reset
+# TYPE litellm_api_key_budget_remaining_hours_metric gauge
+# HELP litellm_remaining_user_budget_metric Remaining budget for user
+# TYPE litellm_remaining_user_budget_metric gauge
+litellm_remaining_user_budget_metric{user="default_user_id"} +Inf
+# HELP litellm_user_max_budget_metric Maximum budget set for user
+# TYPE litellm_user_max_budget_metric gauge
+# HELP litellm_user_budget_remaining_hours_metric Remaining hours for user budget to be reset
+# TYPE litellm_user_budget_remaining_hours_metric gauge
+# HELP litellm_remaining_customer_budget_metric Remaining budget for customer (end user)
+# TYPE litellm_remaining_customer_budget_metric gauge
+# HELP litellm_customer_max_budget_metric Maximum budget set for customer (end user)
+# TYPE litellm_customer_max_budget_metric gauge
+# HELP litellm_customer_budget_remaining_hours_metric Remaining hours for customer (end user) budget to be reset
+# TYPE litellm_customer_budget_remaining_hours_metric gauge
+# HELP litellm_remaining_api_key_requests_for_model Remaining Requests API Key can make for model (model based rpm limit on key)
+# TYPE litellm_remaining_api_key_requests_for_model gauge
+litellm_remaining_api_key_requests_for_model{api_key_alias="None",hashed_api_key="litellm_proxy_master_key",model="qwen-coding-w1",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78"} 9.223372036854776e+18
+litellm_remaining_api_key_requests_for_model{api_key_alias="None",hashed_api_key="litellm_proxy_master_key",model="qwen-coding-w0",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874"} 9.223372036854776e+18
+# HELP litellm_remaining_api_key_tokens_for_model Remaining Tokens API Key can make for model (model based tpm limit on key)
+# TYPE litellm_remaining_api_key_tokens_for_model gauge
+litellm_remaining_api_key_tokens_for_model{api_key_alias="None",hashed_api_key="litellm_proxy_master_key",model="qwen-coding-w1",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78"} 9.223372036854776e+18
+litellm_remaining_api_key_tokens_for_model{api_key_alias="None",hashed_api_key="litellm_proxy_master_key",model="qwen-coding-w0",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874"} 9.223372036854776e+18
+# HELP litellm_api_key_rate_limit_allowed_metric Configured rate limit for the API Key in the current window (rpm_limit / tpm_limit), by rate_limit_type
+# TYPE litellm_api_key_rate_limit_allowed_metric gauge
+# HELP litellm_api_key_rate_limit_used_metric Requests or tokens the API Key has consumed in the current rate limit window, by rate_limit_type
+# TYPE litellm_api_key_rate_limit_used_metric gauge
+# HELP litellm_team_rate_limit_allowed_metric Configured rate limit for the Team in the current window (team rpm_limit / tpm_limit), by rate_limit_type
+# TYPE litellm_team_rate_limit_allowed_metric gauge
+# HELP litellm_team_rate_limit_used_metric Requests or tokens the Team has consumed in the current rate limit window, by rate_limit_type
+# TYPE litellm_team_rate_limit_used_metric gauge
+# HELP litellm_remaining_requests_metric LLM Deployment Analytics - remaining requests for model, returned from LLM API Provider
+# TYPE litellm_remaining_requests_metric gauge
+# HELP litellm_remaining_tokens_metric remaining tokens for model, returned from LLM API Provider
+# TYPE litellm_remaining_tokens_metric gauge
+# HELP litellm_overhead_latency_metric Latency overhead (milliseconds) added by LiteLLM processing
+# TYPE litellm_overhead_latency_metric histogram
+# HELP litellm_overhead_with_guardrails_latency_metric Total internal latency (seconds) added by LiteLLM, including pre/post-call guardrails (excludes the LLM API call)
+# TYPE litellm_overhead_with_guardrails_latency_metric histogram
+# HELP litellm_request_queue_time_seconds Time (seconds) from request arrival at the proxy to the start of pre-call processing -- includes authentication and any ASGI-level queueing
+# TYPE litellm_request_queue_time_seconds histogram
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.005",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 294.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.01",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 373.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.025",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 501.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.05",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 535.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.1",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 550.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.25",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 572.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.5",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 578.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="1.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="2.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="5.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="10.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="30.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="60.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="120.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="300.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="420.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="600.0",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="+Inf",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_queue_time_seconds_count{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_request_queue_time_seconds_sum{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 12.669182300567627
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.005",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 289.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.01",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 370.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.025",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 527.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.05",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 560.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.1",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 581.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.25",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 596.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="0.5",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 600.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="1.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 600.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="2.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="5.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="10.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="30.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="60.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="120.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="300.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="420.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="600.0",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_queue_time_seconds_bucket{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",le="+Inf",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_queue_time_seconds_count{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 601.0
+litellm_request_queue_time_seconds_sum{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 11.456640005111694
+# HELP litellm_request_queue_time_seconds_created Time (seconds) from request arrival at the proxy to the start of pre-call processing -- includes authentication and any ASGI-level queueing
+# TYPE litellm_request_queue_time_seconds_created gauge
+litellm_request_queue_time_seconds_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id"} 1.7909765036373842e+09
+litellm_request_queue_time_seconds_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id"} 1.790976504428546e+09
+# HELP litellm_guardrail_latency_seconds Latency (seconds) for guardrail execution
+# TYPE litellm_guardrail_latency_seconds histogram
+# HELP litellm_guardrail_errors_total Total number of errors encountered during guardrail execution
+# TYPE litellm_guardrail_errors_total counter
+# HELP litellm_guardrail_requests_total Total number of guardrail invocations
+# TYPE litellm_guardrail_requests_total counter
+# HELP litellm_provider_remaining_budget_metric Remaining budget for provider - used when you set provider budget limits
+# TYPE litellm_provider_remaining_budget_metric gauge
+# HELP litellm_deployment_state LLM Deployment Analytics - The state of the deployment: 0 = healthy, 1 = partial outage, 2 = complete outage
+# TYPE litellm_deployment_state gauge
+litellm_deployment_state{api_base="http://sglang-worker-1:30001/v1",api_provider="openai",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78"} 0.0
+litellm_deployment_state{api_base="http://sglang-worker-0:30000/v1",api_provider="openai",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874"} 0.0
+# HELP litellm_deployment_tpm_limit Deployment TPM limit found in config
+# TYPE litellm_deployment_tpm_limit gauge
+# HELP litellm_deployment_rpm_limit Deployment RPM limit found in config
+# TYPE litellm_deployment_rpm_limit gauge
+# HELP litellm_deployment_cooled_down_total LLM Deployment Analytics - Number of times a deployment has been cooled down by LiteLLM load balancing logic. exception_status is the status of the exception that caused the deployment to be cooled down
+# TYPE litellm_deployment_cooled_down_total counter
+# HELP litellm_deployment_success_responses_total LLM Deployment Analytics - Total number of successful LLM API calls via litellm
+# TYPE litellm_deployment_success_responses_total counter
+litellm_deployment_success_responses_total{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_group="qwen-coding-w1",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",requested_model="qwen-coding-w1",team="None",team_alias="None",user_agent=""} 580.0
+litellm_deployment_success_responses_total{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_group="qwen-coding-w0",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",requested_model="qwen-coding-w0",team="None",team_alias="None",user_agent=""} 601.0
+# HELP litellm_deployment_success_responses_created LLM Deployment Analytics - Total number of successful LLM API calls via litellm
+# TYPE litellm_deployment_success_responses_created gauge
+litellm_deployment_success_responses_created{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_group="qwen-coding-w1",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",requested_model="qwen-coding-w1",team="None",team_alias="None",user_agent=""} 1.790976503637839e+09
+litellm_deployment_success_responses_created{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_group="qwen-coding-w0",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",requested_model="qwen-coding-w0",team="None",team_alias="None",user_agent=""} 1.7909765044290588e+09
+# HELP litellm_deployment_failure_responses_total LLM Deployment Analytics - Total number of failed LLM API calls for a specific LLM deploymeny. exception_status is the status of the exception from the llm api
+# TYPE litellm_deployment_failure_responses_total counter
+litellm_deployment_failure_responses_total{api_base="",api_key_alias="None",api_provider="",client_ip="10.42.0.1",exception_class="HTTPException",exception_status="503",hashed_api_key="litellm_proxy_master_key",litellm_model_name="",model_group="",model_id="",requested_model="qwen-coding-local",team="None",team_alias="None",user_agent=""} 1707.0
+litellm_deployment_failure_responses_total{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",exception_class="Openai.InternalServerError",exception_status="500",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_group="qwen-coding-w1",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",requested_model="qwen-coding-w1",team="None",team_alias="None",user_agent=""} 1.0
+# HELP litellm_deployment_failure_responses_created LLM Deployment Analytics - Total number of failed LLM API calls for a specific LLM deploymeny. exception_status is the status of the exception from the llm api
+# TYPE litellm_deployment_failure_responses_created gauge
+litellm_deployment_failure_responses_created{api_base="",api_key_alias="None",api_provider="",client_ip="10.42.0.1",exception_class="HTTPException",exception_status="503",hashed_api_key="litellm_proxy_master_key",litellm_model_name="",model_group="",model_id="",requested_model="qwen-coding-local",team="None",team_alias="None",user_agent=""} 1.790976535845705e+09
+litellm_deployment_failure_responses_created{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",exception_class="Openai.InternalServerError",exception_status="500",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_group="qwen-coding-w1",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",requested_model="qwen-coding-w1",team="None",team_alias="None",user_agent=""} 1.7909781148582458e+09
+# HELP litellm_deployment_total_requests_total LLM Deployment Analytics - Total number of LLM API calls via litellm - success + failure
+# TYPE litellm_deployment_total_requests_total counter
+litellm_deployment_total_requests_total{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_group="qwen-coding-w1",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",requested_model="qwen-coding-w1",team="None",team_alias="None",user_agent=""} 581.0
+litellm_deployment_total_requests_total{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_group="qwen-coding-w0",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",requested_model="qwen-coding-w0",team="None",team_alias="None",user_agent=""} 601.0
+litellm_deployment_total_requests_total{api_base="",api_key_alias="None",api_provider="",client_ip="10.42.0.1",hashed_api_key="litellm_proxy_master_key",litellm_model_name="",model_group="",model_id="",requested_model="qwen-coding-local",team="None",team_alias="None",user_agent=""} 1707.0
+# HELP litellm_deployment_total_requests_created LLM Deployment Analytics - Total number of LLM API calls via litellm - success + failure
+# TYPE litellm_deployment_total_requests_created gauge
+litellm_deployment_total_requests_created{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_group="qwen-coding-w1",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",requested_model="qwen-coding-w1",team="None",team_alias="None",user_agent=""} 1.7909765036379187e+09
+litellm_deployment_total_requests_created{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_group="qwen-coding-w0",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",requested_model="qwen-coding-w0",team="None",team_alias="None",user_agent=""} 1.7909765044291399e+09
+litellm_deployment_total_requests_created{api_base="",api_key_alias="None",api_provider="",client_ip="10.42.0.1",hashed_api_key="litellm_proxy_master_key",litellm_model_name="",model_group="",model_id="",requested_model="qwen-coding-local",team="None",team_alias="None",user_agent=""} 1.7909765358457575e+09
+# HELP litellm_deployment_latency_per_output_token LLM Deployment Analytics - Latency per output token
+# TYPE litellm_deployment_latency_per_output_token histogram
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.005",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 283.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.01",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 409.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.025",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 496.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.05",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 551.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.075",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 568.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.1",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 575.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.25",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 579.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.5",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 580.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.75",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 580.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="1.0",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 580.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="2.5",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 580.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="5.0",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 580.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="7.5",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 580.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="10.0",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 580.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="+Inf",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 580.0
+litellm_deployment_latency_per_output_token_count{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 580.0
+litellm_deployment_latency_per_output_token_sum{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 7.317643317319457
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.005",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 284.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.01",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 409.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.025",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 506.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.05",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 563.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.075",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 580.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.1",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 586.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.25",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 599.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.5",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 601.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="0.75",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 601.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="1.0",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 601.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="2.5",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 601.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="5.0",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 601.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="7.5",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 601.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="10.0",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 601.0
+litellm_deployment_latency_per_output_token_bucket{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",le="+Inf",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 601.0
+litellm_deployment_latency_per_output_token_count{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 601.0
+litellm_deployment_latency_per_output_token_sum{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 9.030719407917895
+# HELP litellm_deployment_latency_per_output_token_created LLM Deployment Analytics - Latency per output token
+# TYPE litellm_deployment_latency_per_output_token_created gauge
+litellm_deployment_latency_per_output_token_created{api_base="http://sglang-worker-1:30001/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",team="None",team_alias="None"} 1.790976503638047e+09
+litellm_deployment_latency_per_output_token_created{api_base="http://sglang-worker-0:30000/v1",api_key_alias="None",api_provider="openai",hashed_api_key="litellm_proxy_master_key",litellm_model_name="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",team="None",team_alias="None"} 1.7909765044292364e+09
+# HELP litellm_deployment_successful_fallbacks_total LLM Deployment Analytics - Number of successful fallback requests from primary model -> fallback model
+# TYPE litellm_deployment_successful_fallbacks_total counter
+# HELP litellm_deployment_failed_fallbacks_total LLM Deployment Analytics - Number of failed fallback requests from primary model -> fallback model
+# TYPE litellm_deployment_failed_fallbacks_total counter
+# HELP litellm_callback_logging_failures_metric_total Total number of failures when emitting logs to callbacks (e.g. s3_v2, langfuse, etc)
+# TYPE litellm_callback_logging_failures_metric_total counter
+# HELP litellm_llm_api_failed_requests_metric_total deprecated - use litellm_proxy_failed_requests_metric
+# TYPE litellm_llm_api_failed_requests_metric_total counter
+litellm_llm_api_failed_requests_metric_total{api_key_alias="None",end_user="None",hashed_api_key="litellm_proxy_master_key",model="qwen-coding-local",model_id="",team="None",team_alias="None",user="default_user_id"} 1707.0
+litellm_llm_api_failed_requests_metric_total{api_key_alias="None",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",team="None",team_alias="None",user="default_user_id"} 1.0
+# HELP litellm_llm_api_failed_requests_metric_created deprecated - use litellm_proxy_failed_requests_metric
+# TYPE litellm_llm_api_failed_requests_metric_created gauge
+litellm_llm_api_failed_requests_metric_created{api_key_alias="None",end_user="None",hashed_api_key="litellm_proxy_master_key",model="qwen-coding-local",model_id="",team="None",team_alias="None",user="default_user_id"} 1.7909765358453717e+09
+litellm_llm_api_failed_requests_metric_created{api_key_alias="None",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",team="None",team_alias="None",user="default_user_id"} 1.7909781148578033e+09
+# HELP litellm_requests_metric_total deprecated - use litellm_proxy_total_requests_metric. Total number of LLM calls to litellm - track total per API Key, team, user
+# TYPE litellm_requests_metric_total counter
+litellm_requests_metric_total{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 580.0
+litellm_requests_metric_total{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 601.0
+# HELP litellm_requests_metric_created deprecated - use litellm_proxy_total_requests_metric. Total number of LLM calls to litellm - track total per API Key, team, user
+# TYPE litellm_requests_metric_created gauge
+litellm_requests_metric_created{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",org_alias="None",org_id="None",requested_model="qwen-coding-w1",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1.7909765036299605e+09
+litellm_requests_metric_created{api_key_alias="None",api_provider="openai",client_ip="10.42.0.1",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",org_alias="None",org_id="None",requested_model="qwen-coding-w0",team="None",team_alias="None",user="default_user_id",user_agent="",user_email="None"} 1.790976504420316e+09
+# HELP litellm_zero_cost_requests_total Requests that carried usage but were logged at $0 on a model whose pricing entry has a non-zero rate, by reason (missing_pricing_key, pricing_not_applied, cost_calculation_error)
+# TYPE litellm_zero_cost_requests_total counter
+# HELP litellm_spend_capture_rate Share of the provider's bill LiteLLM captured as spend over the scheduled check's window (captured spend / provider bill), by api_provider; NaN when the last check produced no rate
+# TYPE litellm_spend_capture_rate gauge
+# HELP litellm_cache_hits_metric_total Total number of LiteLLM cache hits
+# TYPE litellm_cache_hits_metric_total counter
+# HELP litellm_cache_misses_metric_total Total number of LiteLLM cache misses
+# TYPE litellm_cache_misses_metric_total counter
+litellm_cache_misses_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",team="None",team_alias="None",user="default_user_id"} 580.0
+litellm_cache_misses_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",team="None",team_alias="None",user="default_user_id"} 601.0
+# HELP litellm_cache_misses_metric_created Total number of LiteLLM cache misses
+# TYPE litellm_cache_misses_metric_created gauge
+litellm_cache_misses_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",team="None",team_alias="None",user="default_user_id"} 1.790976503638229e+09
+litellm_cache_misses_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",team="None",team_alias="None",user="default_user_id"} 1.7909765044294047e+09
+# HELP litellm_cached_tokens_metric_total Total tokens served from LiteLLM cache
+# TYPE litellm_cached_tokens_metric_total counter
+# HELP litellm_provider_cache_read_input_tokens_metric_total Total prompt/input tokens read from provider prompt cache (e.g. OpenAI/Anthropic/Gemini/Bedrock)
+# TYPE litellm_provider_cache_read_input_tokens_metric_total counter
+litellm_provider_cache_read_input_tokens_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",team="None",team_alias="None",user="default_user_id"} 1.8683258e+07
+litellm_provider_cache_read_input_tokens_metric_total{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",team="None",team_alias="None",user="default_user_id"} 1.9919007e+07
+# HELP litellm_provider_cache_read_input_tokens_metric_created Total prompt/input tokens read from provider prompt cache (e.g. OpenAI/Anthropic/Gemini/Bedrock)
+# TYPE litellm_provider_cache_read_input_tokens_metric_created gauge
+litellm_provider_cache_read_input_tokens_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="f41255a844a9d96f42460de759ee67b04a283ed3e821db86ff9a8be89461ca78",team="None",team_alias="None",user="default_user_id"} 1.7909765062855468e+09
+litellm_provider_cache_read_input_tokens_metric_created{api_key_alias="None",api_provider="openai",end_user="None",hashed_api_key="litellm_proxy_master_key",model="Qwen/Qwen3.5-9B",model_id="e5fb38a19e90043beb11aaddd5f48d44f38e1d9fefce6324639520ab04b0f874",team="None",team_alias="None",user="default_user_id"} 1.7909765173331282e+09
+# HELP litellm_provider_cache_creation_input_tokens_metric_total Total prompt/input tokens written to provider prompt cache (e.g. Anthropic/Bedrock)
+# TYPE litellm_provider_cache_creation_input_tokens_metric_total counter
+# HELP litellm_total_users Total number of users in LiteLLM
+# TYPE litellm_total_users gauge
+litellm_total_users 0.0
+# HELP litellm_active_users Number of billable users in LiteLLM (excludes SCIM-deactivated users)
+# TYPE litellm_active_users gauge
+litellm_active_users 0.0
+# HELP litellm_teams_count Total number of teams in LiteLLM
+# TYPE litellm_teams_count gauge
+litellm_teams_count 0.0
+# HELP litellm_managed_batch_created_total Total number of managed batches created
+# TYPE litellm_managed_batch_created_total counter
+# HELP litellm_managed_file_size_bytes Size of the most recent managed batch file in bytes (last-seen value per label combination)
+# TYPE litellm_managed_file_size_bytes gauge
+# HELP litellm_managed_batch_duration_seconds Duration of completed managed batches in seconds (completed_at - created_at)
+# TYPE litellm_managed_batch_duration_seconds histogram
+# HELP litellm_managed_file_created_total Total number of managed files created
+# TYPE litellm_managed_file_created_total counter
+# HELP litellm_managed_file_deleted_total Total number of managed file deletions (success or blocked)
+# TYPE litellm_managed_file_deleted_total counter
+# HELP litellm_check_batch_cost_jobs_polled Number of unprocessed batches found by the last CheckBatchCost poll
+# TYPE litellm_check_batch_cost_jobs_polled gauge
+litellm_check_batch_cost_jobs_polled 0.0
+# HELP litellm_check_batch_cost_jobs_processed_total Total number of batches successfully cost-tracked by CheckBatchCost
+# TYPE litellm_check_batch_cost_jobs_processed_total counter
+# HELP litellm_check_batch_cost_errors_total Total number of errors in CheckBatchCost by error type
+# TYPE litellm_check_batch_cost_errors_total counter
+# HELP litellm_check_batch_cost_last_run_timestamp Unix timestamp of the last CheckBatchCost job run
+# TYPE litellm_check_batch_cost_last_run_timestamp gauge
+litellm_check_batch_cost_last_run_timestamp 0.0
+# HELP litellm_mcp_tool_calls_total Total MCP tool calls, segmented by tool and server name
+# TYPE litellm_mcp_tool_calls_total counter
+# HELP litellm_mcp_tool_call_spend_metric_total Total spend on MCP tool calls, segmented by tool and server name
+# TYPE litellm_mcp_tool_call_spend_metric_total counter
+# HELP litellm_in_flight_requests Number of HTTP requests currently in-flight on this uvicorn worker
+# TYPE litellm_in_flight_requests gauge
+litellm_in_flight_requests 1.0
+# HELP litellm_admission_admitted_requests Number of requests admitted by this worker
+# TYPE litellm_admission_admitted_requests gauge
+litellm_admission_admitted_requests 0.0
+# HELP litellm_admission_queued_requests Number of requests queued by this worker
+# TYPE litellm_admission_queued_requests gauge
+litellm_admission_queued_requests 0.0
+# HELP litellm_admission_rejected_requests_total Number of requests rejected by this worker
+# TYPE litellm_admission_rejected_requests_total counter

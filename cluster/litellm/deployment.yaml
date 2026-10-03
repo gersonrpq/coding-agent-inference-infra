@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: litellm
-          image: ghcr.io/berriai/litellm:main-latest
+          image: ghcr.io/berriai/litellm@sha256:a69f5f0c56b868d2fdfce7abfb037fed947b70ede202047ffc19c14dc96ab90a   # litellm 1.105.0
           imagePullPolicy: IfNotPresent
           args:
             - --config
@@ -37,14 +37,25 @@ spec:
                 secretKeyRef:
                   name: litellm-secrets
                   key: SUPERLINKED_API_KEY
+            - name: DATABASE_URL             # PostgreSQL: virtual keys per tenant, their limits and spend (cluster/postgres)
+              valueFrom:
+                secretKeyRef:
+                  name: litellm-secrets
+                  key: DATABASE_URL
             - name: PYTHONPATH
               value: /app/security 
             - name: SGLANG_REPLICA_URLS
               value: "http://sglang-worker-0:30000,http://sglang-worker-1:30001"
             - name: LITELLM_WORKER_STARTUP_HOOKS
               value: "security.admission:litellm_worker_startup"
-            - name: FLEET_LOG_DEBUG
-              value: "true"
+            - name: MAX_TOKENS_POLICY        # clamp = a request for more than the 4096-token cap is served with 4096 (decision 54); reject = answer 400
+              value: "clamp"
+            - name: ADMISSION_CHECKS         # stateless sheds that run first. timeout_queue (estimate from stale gauges) is off: the counter replaces it
+              value: "kv_pressure,batch_pressure"
+            - name: PLACEMENT_POLICY         # litellm = LiteLLM's routing_strategy decides; affload = control/place.py
+              value: "affload"
+            - name: PLACEMENT_SLACK          # affload: move a session only if its worker has this many more requests in flight
+              value: "3"
           ports:
             - name: http
               containerPort: 4000
@@ -63,6 +74,12 @@ spec:
             limits:
               cpu: "2"
               memory: 2Gi
+          startupProbe:                  # with PostgreSQL LiteLLM migrates its schema before it listens: allow up to ~7 minutes
+            httpGet:
+              path: /health/liveliness
+              port: http
+            periodSeconds: 10
+            failureThreshold: 42
           readinessProbe:
             httpGet:
               path: /health/readiness

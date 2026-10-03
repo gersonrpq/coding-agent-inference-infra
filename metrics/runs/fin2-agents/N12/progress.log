@@ -1,0 +1,12 @@
+[    30s] last30s attempts=23 ok=21 shed=0 ttft_p99=1.0
+[    60s] last30s attempts=29 ok=28 shed=0 ttft_p99=1.4
+[    90s] last30s attempts=23 ok=23 shed=0 ttft_p99=1.6
+[   120s] last30s attempts=19 ok=19 shed=0 ttft_p99=2.9
+[   150s] last30s attempts=15 ok=14 shed=0 ttft_p99=2.1
+[   180s] last30s attempts=18 ok=17 shed=0 ttft_p99=3.1
+[   210s] last30s attempts=16 ok=13 shed=0 ttft_p99=1.4
+[   240s] last30s attempts=18 ok=16 shed=0 ttft_p99=3.5
+[   270s] last30s attempts=14 ok=14 shed=0 ttft_p99=1.8
+[   300s] last30s attempts=9 ok=7 shed=0 ttft_p99=0.9
+[   330s] last30s attempts=14 ok=13 shed=0 ttft_p99=1.3
+[   360s] last30s attempts=11 ok=11 shed=0 ttft_p99=1.4

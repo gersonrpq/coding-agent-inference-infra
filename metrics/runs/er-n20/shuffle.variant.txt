@@ -1,0 +1,5 @@
+== variant shuffle
+routing_strategy: simple-shuffle
+FLEET_MAX_IN_FLIGHT=12
+PLACEMENT_POLICY=litellm
+PLACEMENT_SLACK=3

@@ -1,111 +1,54 @@
+"""Guard: platform policy applied before admission (first callback after auth).
+
+Product rules only. LiteLLM keeps the generic work (auth, context-window check,
+routing, concurrency limits); admission.py keeps load-based shedding.
+Fail-closed: an unexpected error here rejects the request.
+"""
 from __future__ import annotations
 
 import hashlib
 import logging
+import os
+import re
 from typing import Any
 
 from fastapi import HTTPException
-from litellm.integrations.custom_logger import CustomLogger
+from litellm.integrations.custom_logger import CustomLogger #type: ignore
 
-
-# ==========================================================================
-# LOGGING
-# ==========================================================================
-
-# Dedicated logger for this policy layer.
-#
-# Keeping a dedicated logger makes it possible to filter security policy
-# decisions independently from the rest of LiteLLM logs.
 logger = logging.getLogger("litellm.security.inspect")
 
-
-# ==========================================================================
-# PLATFORM POLICY
-# ==========================================================================
-
-# Models that this security layer is allowed to serve.
-#
-# This is intentionally NOT delegated to generic LiteLLM model routing.
-# LiteLLM answers "can I route to this model?" while this policy answers
-# "is this model part of the security policy of this application?"
-ALLOWED_MODELS = {
-    "qwen-coding-local",
-}
-
-
-# Roles accepted by this coding-agent platform.
-#
-# This is a platform-level contract rather than a generic syntax check.
-#
-# If the product later decides to support additional roles, this is the
-# explicit policy location where they should be added.
-ALLOWED_ROLES = {
-    "system",
-    "developer",
-    "user",
-    "assistant",
-    "tool",
-}
-
-
-# The current H100/SGLang fleet is configured as text-only.
-#
-# Therefore image/audio/multimodal message content is rejected here.
-#
-# This is intentionally kept in the custom policy because it describes
-# the capabilities exposed by THIS product, not a generic OpenAI rule.
-ALLOW_MULTIMODAL = False
-
-
-# Maximum output requested by a client.
-#
-# The model has a larger theoretical context window, but this platform
-# deliberately limits generated output to 4096 tokens.
-#
-# This is an application/product policy and therefore belongs here.
-MAX_OUTPUT_TOKENS = 4096
-
-
-# ==========================================================================
-# TOOL POLICY
-# ==========================================================================
-
-# Maximum number of tools accepted in a single request.
-#
-# This is a defensive platform limit rather than a context-window check.
+# --- Policy ----------------------------------------------------------------
+ALLOWED_MODELS = {"qwen-coding-local"}   # only the public alias; not delegated to LiteLLM routing
+ALLOWED_ROLES = {"system", "developer", "user", "assistant", "tool"}
+# Qwen3.5-9B is multimodal (its vision tower is loaded), so images are accepted, with limits. Audio, video and
+# files are not. Text-only content given as a list of parts ([{"type": "text", ...}]) is always accepted.
+ALLOW_MULTIMODAL = os.getenv("ALLOW_MULTIMODAL", "1") == "1"     # images in user/tool messages
+ALLOW_REMOTE_IMAGE_URLS = False          # an http(s) URL would make the engine fetch from inside the cluster (SSRF); data: URIs only
+ALLOWED_IMAGE_TYPES = {"png", "jpeg", "webp", "gif"}
+MAX_IMAGES_PER_REQUEST = 8
+MAX_IMAGE_BYTES = 5 * 1024 * 1024        # decoded size of one image
+MAX_TOTAL_IMAGE_BYTES = 16 * 1024 * 1024
+IMAGE_ROLES = {"user", "tool"}
+MAX_OUTPUT_TOKENS = 4096                 # product cap, distinct from the 64K context window
+# What to do with a request that asks for more than the cap. pi, for example, asks for 16384 by default.
+#   clamp (default, decision 54): serve it with max_tokens lowered to the cap    reject: answer 400 (the original behaviour)
+MAX_TOKENS_POLICY = os.getenv("MAX_TOKENS_POLICY", "clamp")
+# A caller declares a CLASS, not a rank: priority <= 5 is interactive, 6..10 is batch (lower = more urgent). Inside the
+# interactive class the order is arrival order, so every interactive value is normalised to 5; otherwise any client could
+# send priority=-1000 and jump the engine's queue. Out-of-range values are refused.
+PRIORITY_MIN, PRIORITY_MAX, INTERACTIVE_PRIORITY = 1, 10, 5
+MAX_CHOICES = 1                          # `n` > 1 would run several sequences while counting as one place
 MAX_TOOLS = 64
+MAX_TOOL_SCHEMA_BYTES = 64 * 1024        # per tool definition, not the HTTP body
+GUARDED_CALL_TYPES = {"completion", "acompletion", "text_completion", "atext_completion"}
 
-
-# Maximum approximate size of one tool definition.
-#
-# This protects the gateway from unusually large tool schemas.
-#
-# This is deliberately NOT used to calculate total HTTP request size.
-MAX_TOOL_SCHEMA_BYTES = 64 * 1024
-
-
-# ==========================================================================
-# IDENTITY
-# ==========================================================================
 
 def _caller_id(user_api_key_dict: Any) -> str:
-    """
-    Create an anonymous identifier for security logs.
-
-    The actual API key is never written to the logs.
-
-    The identifier is derived from the first available LiteLLM identity
-    field. Hashing keeps logs useful for correlation while avoiding
-    exposing the original identity/token value.
-    """
+    """Hashed caller id for logs; the key itself is never logged."""
     if user_api_key_dict is None:
         return "anonymous"
 
-    # Try stable LiteLLM identity fields in priority order.
-    #
-    # user_id/team_id are preferable when available.
-    # token is used only as a final fallback.
-    for attr in ("user_id", "team_id", "token","tenant_id"):
+    for attr in ("user_id", "team_id", "token", "tenant_id"):
         try:
             value = getattr(user_api_key_dict, attr, None)
         except Exception:
@@ -117,155 +60,120 @@ def _caller_id(user_api_key_dict: Any) -> str:
     return "anonymous"
 
 
-# ==========================================================================
-# REJECTION
-# ==========================================================================
-
 def _reject(status: int, code: str, message: str) -> None:
-    """
-    Reject a request using the same general error structure expected by
-    the OpenAI-compatible API.
-
-    This function centralizes policy rejection so that every security
-    decision has:
-      - HTTP status
-      - machine-readable error code
-      - human-readable message
-
-    The function always raises and therefore never returns normally.
-    """
+    """Raise an OpenAI-style error; `source: inspect` marks who refused."""
     logger.warning(
         "SECURITY_INSPECT REJECT status=%s reason=%s message=%s",
         status,
         code,
         message,
     )
-
-    # 5xx means the security layer itself failed.
-    #
-    # 4xx means the client violated an explicit platform policy.
-    error_type = "api_error" if status >= 500 else "invalid_request_error"
-
     raise HTTPException(
         status_code=status,
         detail={
             "error": {
                 "message": message,
-                "type": error_type,
+                "type": "api_error" if status >= 500 else "invalid_request_error",
                 "param": None,
                 "code": code,
             }
         },
+        headers={"source": "inspect"},
     )
 
 
-# ==========================================================================
-# MODEL POLICY
-# ==========================================================================
-
 def _check_model(data: dict[str, Any]) -> None:
-    """
-    Enforce the set of models exposed by this application.
-
-    LiteLLM can route models, but this check expresses an explicit
-    application security boundary.
-
-    A request for an unknown model is rejected instead of allowing the
-    custom hook to silently operate on a model outside its policy.
-    """
     model = data.get("model")
 
     if model not in ALLOWED_MODELS:
-        _reject(
-            403,
-            "model_not_allowed",
-            f"Requested model '{model}' is not allowed",
-        )
+        _reject(403, "model_not_allowed", f"Requested model '{model}' is not allowed")
 
 
-# ==========================================================================
-# MESSAGE POLICY
-# ==========================================================================
+_DATA_URI = re.compile(r"^data:image/([a-zA-Z0-9.+-]+);base64,(.*)$", re.DOTALL)
+
+
+def _check_parts(message: dict[str, Any], index: int) -> tuple[int, int]:
+    """Validates a list-valued `content`; returns (images, decoded image bytes)."""
+    images = 0
+    image_bytes = 0
+
+    for part in message["content"]:
+        kind = part.get("type") if isinstance(part, dict) else None
+
+        if kind == "text":
+            if not isinstance(part.get("text"), str):
+                _reject(400, "invalid_content_part", f"Text part without text at message {index}")
+            continue
+
+        if kind != "image_url":
+            _reject(400, "multimodal_not_allowed", f"Content part type '{kind}' is not supported (text and images only)")
+
+        if not ALLOW_MULTIMODAL:
+            _reject(400, "multimodal_not_allowed", "Images are not enabled")
+
+        if message.get("role") not in IMAGE_ROLES:
+            _reject(400, "invalid_content_part", f"Images are only accepted in {sorted(IMAGE_ROLES)} messages")
+
+        ref = part.get("image_url")
+        url = ref.get("url") if isinstance(ref, dict) else ref
+
+        if not isinstance(url, str):
+            _reject(400, "invalid_content_part", f"image_url without a url at message {index}")
+
+        match = _DATA_URI.match(url)
+
+        if match is None:
+            if url.startswith(("http://", "https://")) and not ALLOW_REMOTE_IMAGE_URLS:
+                _reject(400, "remote_image_not_allowed", "Remote image URLs are not accepted: send the image as a data: URI")
+            _reject(400, "invalid_content_part", "Unsupported image reference")
+
+        if match.group(1).lower() not in ALLOWED_IMAGE_TYPES:
+            _reject(400, "unsupported_image_type", f"Image type '{match.group(1)}' is not supported")
+
+        size = len(match.group(2)) * 3 // 4
+
+        if size > MAX_IMAGE_BYTES:
+            _reject(413, "image_too_large", f"An image is larger than {MAX_IMAGE_BYTES // (1024 * 1024)} MiB")
+
+        images += 1
+        image_bytes += size
+
+    return images, image_bytes
+
 
 def _check_messages(data: dict[str, Any]) -> None:
-    """
-    Enforce platform-specific message policies.
-
-    This function intentionally does NOT reimplement LiteLLM's generic
-    request validation.
-
-    It only checks policies that are specific to this fleet:
-      - allowed roles
-      - whether multimodal content is enabled
-    """
     messages = data.get("messages")
 
-    # If LiteLLM has already normalized/validated the request and messages
-    # are absent here, do not create a second generic validation layer.
-    if not isinstance(messages, list):
+    if not isinstance(messages, list):   # generic validation is LiteLLM's job
         return
 
+    total = {"images": 0, "bytes": 0}
+
     for index, message in enumerate(messages):
-        # Do not duplicate full OpenAI schema validation here.
-        #
-        # If LiteLLM has accepted the request, this hook focuses only on
-        # the security policy fields it actually cares about.
         if not isinstance(message, dict):
             continue
 
-        role = message.get("role")
+        if message.get("role") not in ALLOWED_ROLES:
+            _reject(400, "invalid_role", f"Unsupported message role at index {index}")
 
-        # Role restrictions are an application policy.
-        if role not in ALLOWED_ROLES:
-            _reject(
-                400,
-                "invalid_role",
-                f"Unsupported message role at index {index}",
-            )
+        if isinstance(message.get("content"), list):
+            images, image_bytes = _check_parts(message, index)
+            total["images"] += images
+            total["bytes"] += image_bytes
 
-        content = message.get("content")
+    if total["images"] > MAX_IMAGES_PER_REQUEST:
+        _reject(413, "too_many_images", f"At most {MAX_IMAGES_PER_REQUEST} images per request")
 
-        if content is None:
-            continue
+    if total["bytes"] > MAX_TOTAL_IMAGE_BYTES:
+        _reject(413, "images_too_large", "The images of this request are too large")
 
-        # A list-valued content field represents structured/multimodal
-        # content in OpenAI-compatible chat requests.
-        #
-        # The current fleet is text-only, so reject it explicitly.
-        if isinstance(content, list):
-            if not ALLOW_MULTIMODAL:
-                _reject(
-                    400,
-                    "multimodal_not_allowed",
-                    "Multimodal content is not enabled",
-                )
-
-
-# ==========================================================================
-# TOOL SIZE ESTIMATION
-# ==========================================================================
 
 def _estimate_object_bytes(value: Any, depth: int = 0) -> int:
-    """
-    Estimate the memory/serialized size of a tool definition.
-
-    This function is intentionally limited in scope.
-
-    It is NOT:
-      - an HTTP body-size calculator
-      - a JSON serializer
-      - a general LiteLLM request validator
-
-    It exists only to enforce the platform's maximum tool-schema size.
-
-    A bounded recursive traversal is used so a malformed structure cannot
-    cause an unbounded traversal.
-    """
-    # Protect this helper from pathological nested structures.
+    """Bounded size estimate of a tool definition (depth-limited against pathological input)."""
     if depth > 12:
         return 0
 
-    if value is None:
+    if value is None or isinstance(value, bool):
         return 4
 
     if isinstance(value, str):
@@ -273,9 +181,6 @@ def _estimate_object_bytes(value: Any, depth: int = 0) -> int:
 
     if isinstance(value, bytes):
         return len(value)
-
-    if isinstance(value, bool):
-        return 4
 
     if isinstance(value, (int, float)):
         return 16
@@ -289,157 +194,76 @@ def _estimate_object_bytes(value: Any, depth: int = 0) -> int:
     if isinstance(value, (list, tuple)):
         return 2 + sum(_estimate_object_bytes(item, depth + 1) for item in value)
 
-    # LiteLLM/internal objects are intentionally not recursively inspected.
-    #
-    # The security hook only needs a conservative bounded estimate.
-    return 64
+    return 64   # internal LiteLLM objects: not inspected
 
-
-# ==========================================================================
-# TOOL POLICY
-# ==========================================================================
 
 def _check_tools(data: dict[str, Any]) -> None:
-    """
-    Apply platform-specific limits to tool calling.
-
-    LiteLLM remains responsible for generic request processing.
-
-    This function only prevents excessive tool counts or excessively large
-    individual tool schemas from reaching the model backend.
-    """
     tools = data.get("tools")
 
-    # Tool calling is optional.
     if tools is None:
         return
 
     if not isinstance(tools, list):
-        _reject(
-            400,
-            "invalid_tools",
-            "tools must be an array",
-        )
+        _reject(400, "invalid_tools", "tools must be an array")
 
-    # Explicit application-level tool count limit.
     if len(tools) > MAX_TOOLS:
-        _reject(
-            413,
-            "too_many_tools",
-            "Too many tools",
-        )
+        _reject(413, "too_many_tools", "Too many tools")
 
     for index, tool in enumerate(tools):
-        # Do not perform a complete JSON Schema validation here.
-        # LiteLLM/provider validation should own generic schema handling.
         if not isinstance(tool, dict):
-            _reject(
-                400,
-                "invalid_tool",
-                f"Invalid tool definition at index {index}",
-            )
+            _reject(400, "invalid_tool", f"Invalid tool definition at index {index}")
 
-        # Only enforce the platform-specific size boundary.
-        tool_size = _estimate_object_bytes(tool)
+        if _estimate_object_bytes(tool) > MAX_TOOL_SCHEMA_BYTES:
+            _reject(413, "tool_schema_too_large", "Tool schema is too large")
 
-        if tool_size > MAX_TOOL_SCHEMA_BYTES:
-            _reject(
-                413,
-                "tool_schema_too_large",
-                "Tool schema is too large",
-            )
-
-
-# ==========================================================================
-# GENERATION POLICY
-# ==========================================================================
 
 def _check_generation(data: dict[str, Any]) -> None:
-    """
-    Enforce the platform's output-token policy.
+    for key in ("max_completion_tokens", "max_tokens"):
+        value = data.get(key)
 
-    LiteLLM/model metadata handles context-window capacity.
+        if value is None:
+            continue
 
-    This function only answers:
+        if isinstance(value, bool) or not isinstance(value, int):
+            _reject(400, "invalid_max_tokens", "max_tokens must be an integer")
 
-        "Is this client allowed to request more than 4096 output tokens?"
+        if value <= 0:
+            _reject(400, "invalid_max_tokens", "max_tokens must be greater than zero")
 
-    That distinction is important because the model's 65K context window
-    and the product's 4K generation limit are different concepts.
-    """
-    # OpenAI-compatible clients may use either field depending on the API
-    # surface/version they target.
-    value = data.get("max_completion_tokens")
+        if value > MAX_OUTPUT_TOKENS:
+            if MAX_TOKENS_POLICY == "clamp":
+                logger.info("SECURITY_INSPECT CLAMP %s %s -> %s", key, value, MAX_OUTPUT_TOKENS)
+                data[key] = MAX_OUTPUT_TOKENS
+            else:
+                _reject(400, "max_tokens_exceeded", f"Maximum output is {MAX_OUTPUT_TOKENS} tokens")
 
-    if value is None:
-        value = data.get("max_tokens")
 
-    # No explicit value means the normal LiteLLM/model default applies.
+def _check_priority(data: dict[str, Any]) -> None:
+    value = data.get("priority")
+
     if value is None:
         return
 
-    # This is a type/policy check because we need a numeric value before
-    # comparing it against the platform maximum.
-    if isinstance(value, bool) or not isinstance(value, int):
-        _reject(
-            400,
-            "invalid_max_tokens",
-            "max_tokens must be an integer",
-        )
+    if isinstance(value, bool) or not isinstance(value, int) or not PRIORITY_MIN <= value <= PRIORITY_MAX:
+        _reject(400, "invalid_priority", f"priority must be an integer from {PRIORITY_MIN} to {PRIORITY_MAX}")
 
-    if value <= 0:
-        _reject(
-            400,
-            "invalid_max_tokens",
-            "max_tokens must be greater than zero",
-        )
-
-    # This is the actual platform-specific policy.
-    if value > MAX_OUTPUT_TOKENS:
-        _reject(
-            400,
-            "max_tokens_exceeded",
-            f"Maximum output is {MAX_OUTPUT_TOKENS} tokens",
-        )
+    if value <= INTERACTIVE_PRIORITY:
+        data["priority"] = INTERACTIVE_PRIORITY
 
 
-# ==========================================================================
-# MAIN SECURITY INSPECTION
-# ==========================================================================
+def _check_choices(data: dict[str, Any]) -> None:
+    for key in ("n", "best_of"):
+        value = data.get(key)
+
+        if value is not None and (isinstance(value, bool) or not isinstance(value, int) or value != MAX_CHOICES):
+            _reject(400, "multiple_choices_not_supported", f"'{key}' other than {MAX_CHOICES} is not supported: each choice is another sequence")
+
 
 async def inspect(
     data: dict[str, Any],
     user_api_key_dict: Any = None,
     call_type: str | None = None,
 ) -> dict[str, Any]:
-    """
-    Execute the platform-specific security policy.
-
-    The function is deliberately lightweight.
-
-    It does NOT:
-      - implement rate limiting
-      - implement concurrency control
-      - tokenize the request
-      - estimate the context window
-      - implement generic HTTP body limits
-      - retry requests
-      - perform model routing
-
-    Those responsibilities belong to LiteLLM, the ingress layer, or the
-    future admission-control layer.
-
-    The function returns the original data unchanged when the request is
-    allowed. This makes the hook composable with future layers such as:
-
-        security_inspect
-            ->
-        should_shed
-            ->
-        LiteLLM router
-            ->
-        SGLang
-    """
     identity = _caller_id(user_api_key_dict)
 
     logger.info(
@@ -449,29 +273,12 @@ async def inspect(
         call_type,
     )
 
-    # ----------------------------------------------------------------------
-    # Model authorization
-    # ----------------------------------------------------------------------
-    # Security boundary: only models explicitly exposed by this application.
     _check_model(data)
-
-    # ----------------------------------------------------------------------
-    # Message policy
-    # ----------------------------------------------------------------------
-    # Application-specific role and multimodal restrictions.
     _check_messages(data)
-
-    # ----------------------------------------------------------------------
-    # Tool policy
-    # ----------------------------------------------------------------------
-    # Protect the gateway/model from excessive tool definitions.
     _check_tools(data)
-
-    # ----------------------------------------------------------------------
-    # Generation policy
-    # ----------------------------------------------------------------------
-    # Enforce the product's 4096-token output ceiling.
     _check_generation(data)
+    _check_priority(data)
+    _check_choices(data)
 
     logger.info(
         "SECURITY_INSPECT ALLOW caller=%s model=%s",
@@ -479,29 +286,11 @@ async def inspect(
         data.get("model"),
     )
 
-    # No mutation is performed here.
-    #
-    # The tenant layer is the appropriate place to enrich the request.
     return data
 
 
-# ==========================================================================
-# LITELLM HOOK
-# ==========================================================================
-
 class SecurityInspectHook(CustomLogger):
-    """
-    LiteLLM callback adapter.
-
-    LiteLLM invokes async_pre_call_hook before the model call.
-
-    The class itself contains almost no policy logic. It is intentionally
-    just an adapter between LiteLLM's callback lifecycle and inspect().
-    """
-
-    def __init__(self):
-        super().__init__()
-        print("### SECURITY_INSPECT INSTANCE CREATED ###", flush=True)
+    """LiteLLM adapter; the exported name below is what config.yaml references."""
 
     async def async_pre_call_hook(
         self,
@@ -511,30 +300,19 @@ class SecurityInspectHook(CustomLogger):
         call_type: str = "completion",
         **kwargs: Any,
     ):
-        """
-        Execute security policy before the model call.
-
-        Only completion/text_completion requests are inspected by this
-        policy.
-
-        Unsupported call types are returned untouched so this callback
-        does not accidentally become a generic blocker for unrelated
-        LiteLLM endpoints.
-        """
         if data is None:
             data = {}
 
-        # This policy is designed for the coding-agent text-generation path.
-        #
-        # Other LiteLLM operations should not accidentally inherit these
-        # model/message policies.
-        if call_type not in {"completion", "text_completion"}:
+        # Only text generation is inspected; other endpoints pass through.
+        # The proxy reports async chat calls as "acompletion".
+        if call_type not in GUARDED_CALL_TYPES:
             return data
 
         identity = _caller_id(user_api_key_dict)
 
-        if data.get('priority') is None:
-            data['priority'] = 5 # Default priority if not provided
+        if data.get("priority") is None:
+            data["priority"] = 5   # default class: interactive
+            data.setdefault("litellm_params", {})["priority"] = data["priority"]
 
         try:
             return await inspect(
@@ -543,14 +321,9 @@ class SecurityInspectHook(CustomLogger):
                 call_type=call_type,
             )
         except HTTPException:
-            # Policy rejections are already represented by a deliberate
-            # HTTPException. Preserve the original status/code.
             raise
         except Exception:
-            # Unexpected failure inside a security control is fail-closed.
-            #
-            # We do NOT allow a broken security layer to accidentally turn
-            # into an allow decision.
+            # Fail-closed: a broken guard must not turn into an allow.
             logger.exception(
                 "SECURITY_INSPECT FAIL_CLOSED caller=%s model=%s",
                 identity,
@@ -567,22 +340,8 @@ class SecurityInspectHook(CustomLogger):
                         "code": "security_inspection_failed",
                     }
                 },
+                headers={"source": "inspect"},
             )
 
 
-# ==========================================================================
-# EXPORT
-# ==========================================================================
-
-# LiteLLM loads this object through:
-#
-#     security_inspect.security_inspect
-#
-# Therefore the exported variable must have this exact name.
-security_inspect = SecurityInspectHook()
-
-
-print(
-    "### SECURITY_INSPECT MODULE READY ###",
-    flush=True,
-)
+security_inspect = SecurityInspectHook()   # referenced as security_inspect.security_inspect

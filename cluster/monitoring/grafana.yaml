@@ -26,7 +26,10 @@ spec:
               value: admin
 
             - name: GF_SECURITY_ADMIN_PASSWORD
-              value: admin
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-secrets
+                  key: GF_SECURITY_ADMIN_PASSWORD
 
             - name: GF_USERS_ALLOW_SIGN_UP
               value: "false"
@@ -58,7 +61,22 @@ spec:
               mountPath: /etc/grafana/provisioning/datasources
               readOnly: true
 
+            - name: grafana-dashboard-provider
+              mountPath: /etc/grafana/provisioning/dashboards
+              readOnly: true
+
+            - name: grafana-dashboards
+              mountPath: /var/lib/grafana/dashboards
+
       volumes:
         - name: grafana-datasources
           configMap:
             name: grafana-datasources
+
+        - name: grafana-dashboard-provider
+          configMap:
+            name: grafana-dashboard-provider
+
+        - name: grafana-dashboards
+          configMap:
+            name: grafana-dashboards

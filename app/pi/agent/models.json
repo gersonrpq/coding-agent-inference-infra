@@ -1,0 +1,25 @@
+{
+  "providers": {
+    "litellm": {
+      "baseUrl": "http://localhost:4000/v1",
+      "api": "openai-completions",
+      "apiKey": "LITELLM_KEY_PI_DEMO",
+      "models": [
+        {
+          "id": "qwen-coding-local",
+          "name": "Qwen3.5-9B (our cluster, via the gateway)",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 65536,
+          "maxTokens": 4096,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+          "compat": {
+            "supportsDeveloperRole": true,
+            "supportsReasoningEffort": false,
+            "thinkingFormat": "qwen"
+          }
+        }
+      ]
+    }
+  }
+}

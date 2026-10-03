@@ -1,0 +1,6 @@
+== variant aff
+routing_strategy: least-busy
+FLEET_MAX_IN_FLIGHT=12
+ADMISSION_MODE=queue
+PLACEMENT_POLICY=affinity
+PLACEMENT_SLACK=3

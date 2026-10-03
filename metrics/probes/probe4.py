@@ -1,0 +1,12 @@
+import sys; sys.path.insert(0, "/tmp")
+from hop_lib import *
+R = make_prompt(401, 15000)
+print("w0 before", modes(0)); print("w1 before", modes(1), flush=True)
+print("R -> w0 cold  :", chat(0, R), flush=True)
+time.sleep(15)
+print("w0 mid", modes(0), flush=True)
+print("R -> w1 (cross):", chat(1, R), flush=True)
+time.sleep(5)
+print("w1 after", modes(1), flush=True)
+print("R -> w1 again :", chat(1, R), flush=True)
+print("DONE", flush=True)

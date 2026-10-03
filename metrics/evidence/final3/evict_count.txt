@@ -1,0 +1,6 @@
+sglang:hicache_dropped_tokens_total{cache_type="UnifiedRadixCache",dp_rank="0",pool="kv",pp_rank="0",reason="host_pressure",tp_rank="0"} 0.0
+sglang:hicache_dropped_tokens_total{cache_type="UnifiedRadixCache",dp_rank="0",pool="kv",pp_rank="0",reason="write_through_unbacked_eviction",tp_rank="0"} 8192.0
+sglang:evicted_tokens_total{cache_type="UnifiedRadixCache",dp_rank="0",pp_rank="0",tp_rank="0"} 2.9526136e+07
+sglang:hicache_dropped_tokens_total{cache_type="UnifiedRadixCache",dp_rank="0",pool="kv",pp_rank="0",reason="host_pressure",tp_rank="0"} 0.0
+sglang:hicache_dropped_tokens_total{cache_type="UnifiedRadixCache",dp_rank="0",pool="kv",pp_rank="0",reason="write_through_unbacked_eviction",tp_rank="0"} 1.0
+sglang:evicted_tokens_total{cache_type="UnifiedRadixCache",dp_rank="0",pp_rank="0",tp_rank="0"} 1.7847672e+07

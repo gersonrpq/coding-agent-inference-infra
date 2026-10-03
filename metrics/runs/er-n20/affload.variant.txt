@@ -1,0 +1,5 @@
+== variant affload
+routing_strategy: least-busy
+FLEET_MAX_IN_FLIGHT=12
+PLACEMENT_POLICY=affload
+PLACEMENT_SLACK=3

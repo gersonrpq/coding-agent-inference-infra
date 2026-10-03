@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: mooncake-master
-          image: lmsysorg/sglang:latest
+          image: lmsysorg/sglang@sha256:b1259f3ea3275f66237c498ea388919729018bc9f01c3d638391e06e2cf3f469   # sglang 0.5.21 (ships mooncake_master)
           command: ["mooncake_master"]
           args:
             - "--enable_http_metadata_server"

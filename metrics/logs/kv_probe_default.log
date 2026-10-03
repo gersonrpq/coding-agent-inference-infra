@@ -1,0 +1,14 @@
+12 long requests sent; waiting for the KV to fill ...
+KV used, worst worker, peak: 83.0 %   engine retractions seen: 0
+every 10 s (second, {worker: kv %, running, waiting, retracted}):
+  0 {'w0': (0.0, 0, 0, 0), 'w1': (0.0, 0, 0, 0)}
+  12 {'w0': (24.5, 1, 4, 0), 'w1': (24.5, 1, 4, 0)}
+  23 {'w0': (48.0, 3, 2, 0), 'w1': (48.9, 3, 2, 0)}
+  34 {'w0': (71.6, 5, 0, 0), 'w1': (71.6, 5, 0, 0)}
+  45 {'w0': (82.7, 6, 0, 0), 'w1': (82.8, 6, 0, 0)}
+  56 {'w0': (0.0, 0, 0, 0), 'w1': (0.0, 0, 0, 0)}
+  67 {'w0': (0.0, 0, 0, 0), 'w1': (0.0, 0, 0, 0)}
+  78 {'w0': (0.0, 0, 0, 0), 'w1': (0.0, 0, 0, 0)}
+long requests: [200] statuses; slowest 51.2 s
+new-prefix: HTTP 200 in 0.5 s  shed-reason=None 
+reused-prefix: HTTP 200 in 6.1 s  shed-reason=None 

@@ -1,0 +1,4 @@
+port 30001 total s 21.2 chunks 7 {'other': 2, 'tool_calls': 5} completion_tokens 1121
+first chunk at 0.07 s; largest gap between chunks 20.59 s
+gaps > 5 s: [(21.02, 20.59, 'tool_calls')]
+first 5 chunks: [(0.07, 0.07, 'other'), (0.2, 0.13, 'tool_calls'), (0.43, 0.23, 'tool_calls'), (0.43, 0.0, 'tool_calls'), (21.02, 20.59, 'tool_calls')] last 3: [(21.02, 20.59, 'tool_calls'), (21.1, 0.07, 'tool_calls'), (21.16, 'other')]
