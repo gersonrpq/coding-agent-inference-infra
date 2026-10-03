@@ -110,6 +110,12 @@ for v in ["lb", "shuffle", "aff", "affload"]:
 pd.DataFrame(out).pivot(index="policy", columns="worker")
 """)
 md("""
+Names: the waiting / running / preempted states are `sglang:num_queue_reqs`, `sglang:num_running_reqs` and `sglang:num_retracted_reqs` (per worker);
+our equivalent of `orch_replica_queue_depth` is `litellm_orch_replica_queue_depth{replica}` (the control plane's last scrape of the same
+waiting-queue gauge; it is what the admission checks read, and section 12 prints it live). The shed table comes from the `fin-*` runs, made before the
+admission was simplified: `decode_capacity` there is the refusal of the old in-flight counter (today's `queue_full` of the cap) and `ttft_cut` is the
+first-token cut that was later removed.
+
 Reading: the mix is 100 % interactive sessions of the `paper` profile at N = 24. `aff` (static hash) piled 7 requests in
 worker 0's queue and 1 in worker 1's: that is the pod-level answer to *which pod*, and the reason the placement policy
 matters for queueing. With `affload` the queues are 3/2. **Nothing was preempted** in any run (`retracted max` 0): KV
@@ -121,7 +127,7 @@ md("""
 
 Two levels, as in the design:
 1. **Gateway (us):** both take a place if one is free; if none is free, the interactive one still has the reserved
-   places (batch may use only 75 % of them) and both are refused at once otherwise. Priority is forwarded to the engine
+   places (batch is admitted only while fewer than 10 of the 14 are in use, so the last 4 are for interactive calls) and both are refused at once otherwise. Priority is forwarded to the engine
    in `extra_body.priority`.
 2. **Engine (SGLang):** once both are inside, the engine decides: priority scheduling orders its waiting queue (lower
    number first) and **chunked prefill** cuts the 32K prefill into chunks of `--chunked-prefill-size` so decode steps of
@@ -138,6 +144,18 @@ for k in ("MODEL_NAME","KV_CACHE_DTYPE","MAX_MODEL_LEN","MAX_NUM_SEQS","MAX_MEM_
 print("engine flags in worker-0.yaml:", flags)
 """)
 md("""
+**Engine flags used, and why** (`cluster/sglang/worker-0.yaml`, `sglang-config`). Continuous batching is always on in SGLang (there is no flag).
+SGLang's names differ from vLLM's:
+
+| Flag | Value | vLLM equivalent | Why |
+| --- | --- | --- | --- |
+| `--max-running-requests` | 6 | `max-num-seqs` | the KV pool of a worker holds 435,199 tokens = 6.6 sequences of 64K; 6 cannot overcommit it (88 %). Raising it only triggers retraction and re-prefill |
+| `--chunked-prefill-size` | 4096 | `max-num-batched-tokens` (prefill part) | a long prefill is cut into chunks of 4096 tokens so decode steps of other sequences run between them. The value was kept from the default; the alternatives (1024-8192) were not run (decision [36](../ARCHITECTURE.md#decision-36)) |
+| `--enable-priority-scheduling`, `--schedule-low-priority-values-first`, `--retraction-policy priority` | on | scheduling policy | the engine orders its own waiting queue by priority and retracts the least urgent request first |
+| `--mem-fraction-static` | 0.85 | `gpu-memory-utilization` | share of the 39.5 GiB MIG instance for weights, KV and states |
+| `--mamba-full-memory-ratio` | 0.17 | (hybrid model only) | share of the pool kept for recurrent states; the default 0.9 left 4 sequences of 64K |
+| `--cuda-graph-backend-prefill` | disabled | - | prefill graphs cost 5.4 GB and 209 s per worker and add little with chunked prefill |
+
 Evidence for the interleaving cost: decode per sequence fell from **48.8 tok/s idle to 26.6 (N = 20) and 15.4 (N = 28)**
 (`notes/findings.md`, "Engine configuration review"), i.e. long prefills do slow every decode on the same worker;
 chunked prefill (4096) bounds how long. That is why the capacity limiter turned out to be the per-call cost under load,
@@ -148,7 +166,7 @@ md("""
 ## 4. PagedAttention vs radix cache: which one saved memory, which saved compute?
 
 Paging removes fragmentation (a sequence uses only the blocks it needs): it is always on. The **radix cache** saves
-*compute*, and memory only for what is shared across sessions (system prompt + tools, about 14 % of a prompt). The history
+*compute*, and memory only for what is shared across sessions (system prompt + tool schemas, a small part of a prompt). The history
 is per session. Below, where the prompt tokens of the `affload` run were served from:
 """)
 code("""
@@ -241,8 +259,8 @@ md("""
 ## 7. Client gone (aborted): who frees the KV, and how?
 
 LiteLLM runs with `cancel_on_disconnect: true`: when the client leaves, LiteLLM closes the upstream connection and **SGLang
-aborts the request and frees its KV blocks**. The gateway's place is returned in the failure event, and a reaper recovers
-a leaked place after 330 s. Verified with a probe that watches the engine (`metrics/logs/conn.log`, `conn4.log`):
+aborts the request and frees its KV blocks**. The gateway's place (one of the 14 of LiteLLM's cap) is released when the request ends, because
+the cap is a semaphore held for the life of the request. Verified with a probe that watches the engine (`metrics/logs/conn.log`, `conn4.log`):
 """)
 code("""
 for name in ("conn.log", "conn4.log"):
@@ -392,6 +410,8 @@ queries = {
   "engine running per worker": "sglang:num_running_reqs{priority=\\"\\"}",
   "shed by reason": "sum by (reason, status_code) (litellm_orch_requests_shed_total)",
   "rejected by the cap": "sum by (reason) (litellm_litellm_admission_rejected_requests_total)",
+  "orch_replica_queue_depth (per replica)": "litellm_orch_replica_queue_depth",
+  "orch_replica_running_requests (per replica)": "litellm_orch_replica_running_requests",
   "hops": "sum by (src, dst) (litellm_orch_hops_total)",
   "overflow decisions": "sum by (decision, status) (litellm_orch_overflow_decisions_total)",
   "requests by key": "sum by (api_key_alias, status_code) (litellm_litellm_proxy_total_requests_metric_total)",
@@ -401,7 +421,7 @@ for name, q in queries.items():
     res = live(q)
     if res is None:
         print(f"{name:28s} Prometheus not reachable (open the tunnel to :9090 to scrape live)"); continue
-    print(f"{name:28s}", [(x["metric"].get("worker") or x["metric"].get("reason") or x["metric"].get("decision") or x["metric"].get("src") or x["metric"].get("api_key_alias") or "", x["value"][1]) for x in res][:8])
+    print(f"{name:28s}", [(x["metric"].get("worker") or x["metric"].get("replica") or x["metric"].get("reason") or x["metric"].get("decision") or x["metric"].get("src") or x["metric"].get("api_key_alias") or "", x["value"][1]) for x in res][:8])
 """)
 
 nb["cells"] = cells
