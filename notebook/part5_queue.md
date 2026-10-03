@@ -379,8 +379,7 @@ conn4.log: == s4: LiteLLM cuts a QUEUED request at TTFT_CUT_S. Look in the SGLan
 
 Results of that probe: a streaming client that leaves while its request runs (s1) and a non-streaming one (s2) both end with
 the upstream closed and generation stopped early; and when LiteLLM itself cuts a queued request at its `stream_timeout` (s4) the request is removed from SGLang (verified live: 408 at 4.2 s). That first-token cut
-was later removed because the same timeout fires in the middle of a stream while a tool call's arguments are generated (decisions 59, 61). The
-log of s3 (a client that leaves while its request is queued in SGLang) has no verdict line, so it is not claimed here.
+was later removed because the same timeout fires in the middle of a stream while a tool call's arguments are generated (decisions 59, 61). A client that leaves while its request is **still queued** in SGLang (s3) was not measured separately (its log has no verdict line), but it is covered by the same configuration: `cancel_on_disconnect: true` makes LiteLLM close the upstream connection whatever state the request is in, and s4 showed that when LiteLLM closes the upstream of a queued request SGLang removes it from its queue (the cut removed the request from SGLang). So the answer is the configuration, with that indirect evidence, not a dedicated measurement.
 
 ## 8. After a worker returns: slam it at 100 % or ramp?
 
